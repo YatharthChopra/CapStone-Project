@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathScript : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class DeathScript : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            Debug.Log("newscene");
+            SceneManager.LoadScene("TempFailScene");
         }
     }
 }
