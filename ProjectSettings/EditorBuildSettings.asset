@@ -6,7 +6,50 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/MainMenu.unity
+    guid: c9754eae627b408458d24f5d601b6af0
+  - enabled: 1
+    path: Assets/Scenes/Apt_Bedroom.unity
+    guid: 7f0998113adbb0a4694ed2d42ae3ea4a
+  - enabled: 1
+    path: Assets/Scenes/Apt_Washroom.unity
+    guid: c5fe943649ef73548a0c09ef0877fbbe
+  - enabled: 1
+    path: Assets/Scenes/Apt_Kitchen.unity
+    guid: dede2523938d3944eab024ef54e47ded
+  - enabled: 1
+    path: Assets/Scenes/Apt_Closet.unity
+    guid: eaa404d7d33091a4a80586423edc3545
+  - enabled: 1
+    path: Assets/Scenes/Apt_LivingRoom.unity
+    guid: be068875a5d7b83498d2df0279ab4c1c
+  - enabled: 1
+    path: Assets/Scenes/Floor3_Hall.unity
+    guid: 305579aa7bc385949bf021162a21aa2e
+  - enabled: 1
+    path: Assets/Scenes/Floor3_Stairs.unity
+    guid: 8356c6a01e614bc46a272b491592086b
+  - enabled: 1
+    path: Assets/Scenes/Floor1_Stairs.unity
+    guid: 7f5a3cc2305cced418bb778606b2d487
+  - enabled: 1
+    path: Assets/Scenes/Floor1_Corridor.unity
+    guid: 6e259b27d3442f549a084d4c612ff144
+  - enabled: 1
+    path: Assets/Scenes/Floor1_EyesRoom.unity
+    guid: f52e73d43d41c2741acd68e4b78b3e31
+  - enabled: 1
+    path: Assets/Scenes/Floor1_Lobby.unity
+    guid: e49a013d434af38469365801fa9512a0
+  - enabled: 1
+    path: Assets/Scenes/Floor1_Storage.unity
+    guid: 922e5b898a7ac9842bddd6120ef174b1
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: cf3acef7ffdcb904180e6741635afcdc
+  - enabled: 1
+    path: Assets/Scenes/TheEnd.unity
+    guid: a3ce27f7b4ccc464397df9fff74cdb9f
   m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
