@@ -14,11 +14,15 @@ public class DeathScript : MonoBehaviour
     {
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.tag == "Enemy")
         {
-            SceneManager.LoadScene("TempFailScene");
+            if (!this.GetComponent<HidingScript>().hiding)
+            {
+                SceneManager.LoadScene("TempFailScene");
+            }
+            
         }
     }
 }
