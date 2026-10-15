@@ -15,12 +15,12 @@ public class BasicCharacterFlip : MonoBehaviour
     {
         if(rb.linearVelocityX > 0 && fliped)
         {
-            transform.eulerAngles = new Vector3(0, 180);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180);
             fliped = false;
         }
         else if (rb.linearVelocityX < 0 && !fliped)
         {
-            transform.eulerAngles = Vector3.zero;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0);
             fliped = true;
         }
     }
