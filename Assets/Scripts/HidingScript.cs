@@ -5,12 +5,18 @@ public class HidingScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public bool NearHidingPlace;
+    public bool NearCrouchPlace;
     private GameObject HidingPlace = null;
     public bool hiding = false;
+    private bool crouching = false;
+    //private PlayerMovement movementScript = this.movementScript;
+
     private Color defaultColor;
+    //private bool
     void Start()
     {
         defaultColor = this.GetComponentInChildren<SpriteRenderer>().color;
+        crouching = this.GetComponent<PlayerMovement>().IsCrouching;
     }
 
     // Update is called once per frame
@@ -34,6 +40,28 @@ public class HidingScript : MonoBehaviour
             }
 
         }
+
+        if (NearCrouchPlace)
+        {
+            crouching = this.GetComponent<PlayerMovement>().IsCrouching;
+            if (hiding)
+            {
+                if (!crouching)
+                {
+                    Unhide();
+                }
+            }
+            else
+            {
+                if (crouching)
+                {
+                    this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
+                    hiding = true;
+                }
+                
+            }
+            
+        }
     }
 
 
@@ -50,6 +78,11 @@ public class HidingScript : MonoBehaviour
             NearHidingPlace = true; //when near an alcove this saves that alcove and registers the player as near it.
             HidingPlace = collision.gameObject;
         }
+
+        if(collision.tag == "CrouchingSpot")
+        {
+            NearCrouchPlace = true;
+        }
         
     }
 
@@ -58,6 +91,16 @@ public class HidingScript : MonoBehaviour
         if (collision.tag == "HidingSpot")
         {
             NearHidingPlace = false;
+            HidingPlace = null;
+            if (hiding)
+            {
+                Unhide();
+            }
+        }
+
+        if (collision.tag == "CrouchingSpot")
+        {
+            NearCrouchPlace = false;
             HidingPlace = null;
             if (hiding)
             {

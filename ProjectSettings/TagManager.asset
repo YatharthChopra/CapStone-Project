@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - HidingSpot
+  - CrouchingSpot
   layers:
   - Default
   - TransparentFX
