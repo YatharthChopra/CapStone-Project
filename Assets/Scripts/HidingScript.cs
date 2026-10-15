@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +13,12 @@ public class HidingScript : MonoBehaviour
     [SerializeField] private bool crouching = false;
     [SerializeField] private bool crouchHiding = false;
 
+
+    public bool InView = false;
+    [SerializeField] private List<GameObject> EnemiesList = new List<GameObject>();
+    [SerializeField] private float detection = 0;
+    [SerializeField] private float maxDetection = 100;
+    public float detectionScaling = 1;
     //private PlayerMovement movementScript = this.movementScript;
 
     private Color defaultColor;
@@ -42,7 +50,7 @@ public class HidingScript : MonoBehaviour
             }
 
         }
-
+        
         if (NearCrouchPlace)
         {
             // this checks if their near something they can crouch behind
@@ -59,7 +67,33 @@ public class HidingScript : MonoBehaviour
             }
             
         }
+
+        //detectioncode
+        
+        if (hiding)
+        {
+            if (detection > 0)
+            {
+                detection -= 2 * detectionScaling * Time.deltaTime;
+            }
+        }
+        else if(InView == true)
+        {
+            foreach(GameObject enemyObject in EnemiesList)
+            {
+                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
+                Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+            }
+        }
+        else
+        {
+            if (detection > 0)
+            {
+                detection -= 1 * Time.deltaTime*detectionScaling;
+            }
+        }
     }
+
 
     void Hide()
     {
@@ -84,6 +118,12 @@ public class HidingScript : MonoBehaviour
         {
             NearCrouchPlace = true;
         }
+
+        if(collision.tag == "EnemyView")
+        {
+            InView = true;
+            EnemiesList.Add(collision.GetComponentInParent<Transform>().gameObject);
+        }
         
     }
 
@@ -107,6 +147,14 @@ public class HidingScript : MonoBehaviour
             {
                 crouchHiding = false;
                 Unhide();
+            }
+        }
+        if (collision.tag == "EnemyView")
+        {
+            EnemiesList.Remove(collision.GetComponentInParent<Transform>().gameObject);
+            if (EnemiesList.Count == 0)
+            {
+                InView = false;
             }
         }
     }
