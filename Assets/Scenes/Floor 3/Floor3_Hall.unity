@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 288531141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8, y: 1.8, z: 0}
+  m_LocalPosition: {x: 6.5, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -239,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 379828223}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.24999997, z: 0}
+  m_LocalPosition: {x: 0, y: 0.04, z: 0}
   m_LocalScale: {x: 0.5, y: 0.2777778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -784,7 +784,7 @@ Transform:
   m_GameObject: {fileID: 635001906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.24999997, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 0.5, y: 0.2777778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -890,7 +890,7 @@ Transform:
   m_GameObject: {fileID: 638214927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.28, z: 0}
   m_LocalScale: {x: 0.5, y: 0.2777778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -904,7 +904,11 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638214927}
-  m_Text: Alcove
+  m_Text: 'Door
+
+    (semi transparent)
+
+    LOCKED'
   m_OffsetZ: 0
   m_CharacterSize: 0.125
   m_LineSpacing: 1
@@ -994,7 +998,7 @@ Transform:
   m_GameObject: {fileID: 660719476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.27, z: 0}
   m_LocalScale: {x: 0.14925374, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1008,7 +1012,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660719476}
-  m_Text: Enemy roam zone (grey box on paper)
+  m_Text: Alcove
   m_OffsetZ: 0
   m_CharacterSize: 0.125
   m_LineSpacing: 1
@@ -1135,7 +1139,7 @@ Transform:
   m_GameObject: {fileID: 727991599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 1.8, z: 0}
+  m_LocalPosition: {x: 3.06, y: 1.87, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1292,7 +1296,7 @@ Transform:
   m_GameObject: {fileID: 872906395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.8, z: 0}
+  m_LocalPosition: {x: -0.46, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1732,7 +1736,7 @@ Transform:
   m_GameObject: {fileID: 1252981390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.3, y: 1.8, z: 0}
+  m_LocalPosition: {x: 23.13, y: 1.94, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1902,7 +1906,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253458807}
-  m_Text: Enemy (placeholder)
+  m_Text: Enemy
   m_OffsetZ: 0
   m_CharacterSize: 0.125
   m_LineSpacing: 1
@@ -2132,7 +2136,7 @@ Transform:
   m_GameObject: {fileID: 1547993605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26, y: 1.8, z: 0}
+  m_LocalPosition: {x: 27.43, y: 1.77, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2289,7 +2293,7 @@ Transform:
   m_GameObject: {fileID: 1576384038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.3, y: 1.8, z: 0}
+  m_LocalPosition: {x: 9.87, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2537,8 +2541,8 @@ Transform:
   m_GameObject: {fileID: 1583300168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.65, y: 2, z: 0}
-  m_LocalScale: {x: 6.7, y: 4, z: 1}
+  m_LocalPosition: {x: 16.0317, y: 2, z: 0}
+  m_LocalScale: {x: 7.9950013, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 660719477}
@@ -2898,7 +2902,7 @@ Transform:
   m_GameObject: {fileID: 1789674291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.5, y: 4, z: 0}
+  m_LocalPosition: {x: 39.51, y: 3.67, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

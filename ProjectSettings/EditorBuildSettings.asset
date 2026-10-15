@@ -9,25 +9,25 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: c9754eae627b408458d24f5d601b6af0
   - enabled: 1
-    path: Assets/Scenes/Apt_Bedroom.unity
+    path: Assets/Scenes/Nin's Apartment/Apt_Bedroom.unity
     guid: 7f0998113adbb0a4694ed2d42ae3ea4a
   - enabled: 1
-    path: Assets/Scenes/Apt_Washroom.unity
+    path: Assets/Scenes/Nin's Apartment/Apt_Washroom.unity
     guid: c5fe943649ef73548a0c09ef0877fbbe
   - enabled: 1
-    path: Assets/Scenes/Apt_Kitchen.unity
+    path: Assets/Scenes/Nin's Apartment/Apt_Kitchen.unity
     guid: dede2523938d3944eab024ef54e47ded
   - enabled: 1
-    path: Assets/Scenes/Apt_Closet.unity
+    path: Assets/Scenes/Nin's Apartment/Apt_Closet.unity
     guid: eaa404d7d33091a4a80586423edc3545
   - enabled: 1
-    path: Assets/Scenes/Apt_LivingRoom.unity
+    path: Assets/Scenes/Nin's Apartment/Apt_LivingRoom.unity
     guid: be068875a5d7b83498d2df0279ab4c1c
   - enabled: 1
-    path: Assets/Scenes/Floor3_Hall.unity
+    path: Assets/Scenes/Floor 3/Floor3_Hall.unity
     guid: 305579aa7bc385949bf021162a21aa2e
   - enabled: 1
-    path: Assets/Scenes/Floor3_Stairs.unity
+    path: Assets/Scenes/Staircase/Floor3_Stairs.unity
     guid: 8356c6a01e614bc46a272b491592086b
   - enabled: 1
     path: Assets/Scenes/Floor1_Stairs.unity
