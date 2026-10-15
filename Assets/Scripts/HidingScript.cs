@@ -7,8 +7,10 @@ public class HidingScript : MonoBehaviour
     public bool NearHidingPlace;
     public bool NearCrouchPlace;
     private GameObject HidingPlace = null;
-    public bool hiding = false;
-    private bool crouching = false;
+    [SerializeField] public bool hiding = false;
+    [SerializeField] private bool crouching = false;
+    [SerializeField] private bool crouchHiding = false;
+
     //private PlayerMovement movementScript = this.movementScript;
 
     private Color defaultColor;
@@ -24,17 +26,17 @@ public class HidingScript : MonoBehaviour
     {
         if (NearHidingPlace)
         {
+            // this checks if they are near a hiding place
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
-                
+                // when they press e it toggles their hiding state
                 if (hiding)
                 {
                     Unhide();
                 }
                 else
                 {
-                    this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
-                    hiding = true;
+                    Hide();
                 }
                     
             }
@@ -43,28 +45,27 @@ public class HidingScript : MonoBehaviour
 
         if (NearCrouchPlace)
         {
-            crouching = this.GetComponent<PlayerMovement>().IsCrouching;
-            if (hiding)
+            // this checks if their near something they can crouch behind
+            crouching = this.GetComponent<PlayerMovement>().IsCrouching; // this checks if they are crouching, can be more optomized.
+            if (crouchHiding && !crouching)
             {
-                if (!crouching)
-                {
-                    Unhide();
-                }
+                Unhide();
+                crouchHiding = false;
             }
-            else
+            else if (!crouchHiding && crouching)
             {
-                if (crouching)
-                {
-                    this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
-                    hiding = true;
-                }
-                
+                crouchHiding = true;
+                Hide();
             }
             
         }
     }
 
-
+    void Hide()
+    {
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
+        hiding = true;
+    }
     void Unhide()
     {
         this.GetComponentInChildren<SpriteRenderer>().color = defaultColor;
@@ -92,7 +93,7 @@ public class HidingScript : MonoBehaviour
         {
             NearHidingPlace = false;
             HidingPlace = null;
-            if (hiding)
+            if (hiding && !crouchHiding)
             {
                 Unhide();
             }
@@ -102,8 +103,9 @@ public class HidingScript : MonoBehaviour
         {
             NearCrouchPlace = false;
             HidingPlace = null;
-            if (hiding)
+            if (crouchHiding)
             {
+                crouchHiding = false;
                 Unhide();
             }
         }
