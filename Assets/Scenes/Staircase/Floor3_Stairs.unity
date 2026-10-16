@@ -191,9 +191,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635001906}
-  m_Text: 'Up to Floor 4
+  m_Text: 'Down to Floor 2
 
-    LOCKED'
+    (LOCKED)'
   m_OffsetZ: 0
   m_CharacterSize: 0.125
   m_LineSpacing: 1
@@ -354,7 +354,7 @@ Transform:
   m_GameObject: {fileID: 872906395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.5, y: 4, z: 0}
+  m_LocalPosition: {x: 14.99, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -493,8 +493,8 @@ Transform:
   m_GameObject: {fileID: 919886939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 8.5, z: 0}
-  m_LocalScale: {x: 22, y: 1, z: 1}
+  m_LocalPosition: {x: 9.9099, y: 8.5, z: 0}
+  m_LocalScale: {x: 11.012305, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 727991600}
@@ -689,7 +689,7 @@ Transform:
   m_GameObject: {fileID: 1058028459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 4, z: 0}
+  m_LocalPosition: {x: 4.8, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 1252981393}
   - component: {fileID: 1252981392}
   m_Layer: 0
-  m_Name: Door ST_Hall
+  m_Name: Door to floor 3 hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -952,9 +952,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a610e74cc47d0f44c8a7d8e17a684fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  doorId: ST_Hall
+  doorId: Door to Floor 3 Hall
   targetScene: Floor3_Hall
-  targetDoorId: H3_Stairs
+  targetDoorId: Floor 3 door to staircase
   isLocked: 0
 --- !u!61 &1252981393
 BoxCollider2D:
@@ -1075,7 +1075,7 @@ GameObject:
   - component: {fileID: 1547993608}
   - component: {fileID: 1547993607}
   m_Layer: 0
-  m_Name: Door ST_Down
+  m_Name: Stairs to floor 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,7 +1090,7 @@ Transform:
   m_GameObject: {fileID: 1547993605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 1.8, z: 0}
+  m_LocalPosition: {x: 12.96, y: 1.85, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1109,9 +1109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a610e74cc47d0f44c8a7d8e17a684fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  doorId: ST_Down
-  targetScene: Floor1_Stairs
-  targetDoorId: S1_Up
+  doorId: Stairs to Floor 4
+  targetScene: Floor4_Stairs
+  targetDoorId: Stairs to floor 3
   isLocked: 0
 --- !u!61 &1547993608
 BoxCollider2D:
@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 1576384041}
   - component: {fileID: 1576384040}
   m_Layer: 0
-  m_Name: Door ST_Up
+  m_Name: Stairs to floor 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1247,7 @@ Transform:
   m_GameObject: {fileID: 1576384038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1.8, z: 0}
+  m_LocalPosition: {x: 6.97, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 3.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1266,10 +1266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a610e74cc47d0f44c8a7d8e17a684fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  doorId: ST_Up
-  targetScene: 
-  targetDoorId: 
-  isLocked: 1
+  doorId: Stairs to Floor 2
+  targetScene: Floor2_Stairs
+  targetDoorId: Stairs to Floor 3
+  isLocked: 0
 --- !u!61 &1576384041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1457,6 +1457,10 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 3769986035773866001
+      type: {class: 'Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]', ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_Cache: []
     - rid: 7843735840172540037
       type: {class: Light2DProviderSources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
@@ -1464,7 +1468,7 @@ MonoBehaviour:
         m_SelectedSource:
           rid: -2
         m_Provider2DCache:
-          rid: -2
+          rid: 3769986035773866001
 --- !u!4 &1578429036
 Transform:
   m_ObjectHideFlags: 0
@@ -1507,7 +1511,7 @@ Transform:
   m_GameObject: {fileID: 1604487136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.24999997, z: 0}
+  m_LocalPosition: {x: 0, y: -0.23, z: 0}
   m_LocalScale: {x: 0.5, y: 0.2777778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1612,8 +1616,8 @@ Transform:
   m_GameObject: {fileID: 1625774270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 4, z: 0}
-  m_LocalScale: {x: 20, y: 8, z: 1}
+  m_LocalPosition: {x: 9.8559, y: 4, z: 0}
+  m_LocalScale: {x: 10.704638, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 727991600}
@@ -1688,11 +1692,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1325118365801138785, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 1325118365801138785, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1325118365801138785, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1762,8 +1766,8 @@ Transform:
   m_GameObject: {fileID: 1872429168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -0.5, z: 0}
-  m_LocalScale: {x: 22, y: 1, z: 1}
+  m_LocalPosition: {x: 9.8739, y: -0.5, z: 0}
+  m_LocalScale: {x: 11.155829, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 727991600}
@@ -1915,11 +1919,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040715086}
-  m_Text: 'Down to Floor 1
-
-    (Floor 2 skipped)
-
-    [E]'
+  m_Text: Up to Floor 4
   m_OffsetZ: 0
   m_CharacterSize: 0.125
   m_LineSpacing: 1
