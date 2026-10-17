@@ -12,12 +12,12 @@ public static class RoomCameraFit
     private static void Init()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        Fit();   // the first scene is already loaded by now
+        //Fit();   // the first scene is already loaded by now
     }
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Fit();
+        //Fit();
     }
 
     private static void Fit()
