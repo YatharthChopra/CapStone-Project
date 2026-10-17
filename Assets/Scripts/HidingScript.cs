@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,9 +9,27 @@ public class HidingScript : MonoBehaviour
     public bool NearHidingPlace;
     public bool NearCrouchPlace;
     private GameObject HidingPlace = null;
-    public bool hiding = false;
-    private bool crouching = false;
+    [SerializeField] public bool hiding = false;
+    [SerializeField] private bool crouching = false;
+    [SerializeField] private bool crouchHiding = false;
+
+
+    public bool InView = false;
+    [SerializeField] private List<GameObject> EnemiesList = new List<GameObject>();
+    [SerializeField] private float detection = 0;
+    [SerializeField] private float maxDetection = 100;
+    public float detectionScaling = 1;
     //private PlayerMovement movementScript = this.movementScript;
+
+    // Added so the enemy scripts can read the detection meter (they can't see private variables)
+    public float Detection { get { return detection; } }
+    public float MaxDetection { get { return maxDetection; } }
+
+    // Added so an enemy can push the meter up by itself (Glaring Eyes use this to fill it faster)
+    public void AddDetection(float amount)
+    {
+        detection = Mathf.Min(detection + amount, maxDetection);
+    }
 
     private Color defaultColor;
     //private bool
@@ -24,47 +44,72 @@ public class HidingScript : MonoBehaviour
     {
         if (NearHidingPlace)
         {
+            // this checks if they are near a hiding place
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
-                
+                // when they press e it toggles their hiding state
                 if (hiding)
                 {
                     Unhide();
                 }
                 else
                 {
-                    this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
-                    hiding = true;
+                    Hide();
                 }
                     
             }
 
         }
-
+        
         if (NearCrouchPlace)
         {
-            crouching = this.GetComponent<PlayerMovement>().IsCrouching;
-            if (hiding)
+            // this checks if their near something they can crouch behind
+            crouching = this.GetComponent<PlayerMovement>().IsCrouching; // this checks if they are crouching, can be more optomized.
+            if (crouchHiding && !crouching)
             {
-                if (!crouching)
-                {
-                    Unhide();
-                }
+                Unhide();
+                crouchHiding = false;
             }
-            else
+            else if (!crouchHiding && crouching)
             {
-                if (crouching)
-                {
-                    this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
-                    hiding = true;
-                }
-                
+                crouchHiding = true;
+                Hide();
             }
             
+        }
+
+        //detectioncode
+        
+        if (hiding)
+        {
+            if (detection > 0)
+            {
+                detection -= 2 * detectionScaling * Time.deltaTime;
+            }
+        }
+        else if(InView == true)
+        {
+            foreach(GameObject enemyObject in EnemiesList)
+            {
+                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
+                Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+            }
+        }
+        else
+        {
+            if (detection > 0)
+            {
+                detection -= 1 * Time.deltaTime*detectionScaling;
+            }
         }
     }
 
 
+    void Hide()
+    {
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
+        hiding = true;
+    }
     void Unhide()
     {
         this.GetComponentInChildren<SpriteRenderer>().color = defaultColor;
@@ -83,6 +128,12 @@ public class HidingScript : MonoBehaviour
         {
             NearCrouchPlace = true;
         }
+
+        if(collision.tag == "EnemyView")
+        {
+            InView = true;
+            EnemiesList.Add(collision.GetComponentInParent<Transform>().gameObject);
+        }
         
     }
 
@@ -92,7 +143,7 @@ public class HidingScript : MonoBehaviour
         {
             NearHidingPlace = false;
             HidingPlace = null;
-            if (hiding)
+            if (hiding && !crouchHiding)
             {
                 Unhide();
             }
@@ -102,9 +153,18 @@ public class HidingScript : MonoBehaviour
         {
             NearCrouchPlace = false;
             HidingPlace = null;
-            if (hiding)
+            if (crouchHiding)
             {
+                crouchHiding = false;
                 Unhide();
+            }
+        }
+        if (collision.tag == "EnemyView")
+        {
+            EnemiesList.Remove(collision.GetComponentInParent<Transform>().gameObject);
+            if (EnemiesList.Count == 0)
+            {
+                InView = false;
             }
         }
     }
