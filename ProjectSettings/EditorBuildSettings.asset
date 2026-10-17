@@ -6,50 +6,101 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: c9754eae627b408458d24f5d601b6af0
+    path: Assets/Scenes/TempScenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Apt_Bedroom.unity
+    path: Assets/Scenes/TempScenes/TempFailScene.unity
+    guid: 65e209b31da72424d82ac254b71a6390
+  - enabled: 1
+    path: Assets/Scenes/Floor 3/Nin's Apartment/Apt_Bedroom.unity
     guid: 7f0998113adbb0a4694ed2d42ae3ea4a
   - enabled: 1
-    path: Assets/Scenes/Apt_Washroom.unity
+    path: Assets/Scenes/Floor 3/Nin's Apartment/Apt_Washroom.unity
     guid: c5fe943649ef73548a0c09ef0877fbbe
   - enabled: 1
-    path: Assets/Scenes/Apt_Kitchen.unity
+    path: Assets/Scenes/Floor 3/Nin's Apartment/Apt_Kitchen.unity
     guid: dede2523938d3944eab024ef54e47ded
   - enabled: 1
-    path: Assets/Scenes/Apt_Closet.unity
+    path: Assets/Scenes/Floor 3/Nin's Apartment/Apt_Closet.unity
     guid: eaa404d7d33091a4a80586423edc3545
   - enabled: 1
-    path: Assets/Scenes/Apt_LivingRoom.unity
+    path: Assets/Scenes/Floor 3/Nin's Apartment/Apt_LivingRoom.unity
     guid: be068875a5d7b83498d2df0279ab4c1c
   - enabled: 1
-    path: Assets/Scenes/Floor3_Hall.unity
+    path: Assets/Scenes/Floor 3/Floor3_Hall.unity
     guid: 305579aa7bc385949bf021162a21aa2e
   - enabled: 1
-    path: Assets/Scenes/Floor3_Stairs.unity
+    path: Assets/Scenes/Staircase/Floor3_Stairs.unity
     guid: 8356c6a01e614bc46a272b491592086b
   - enabled: 1
-    path: Assets/Scenes/Floor1_Stairs.unity
-    guid: 7f5a3cc2305cced418bb778606b2d487
-  - enabled: 1
-    path: Assets/Scenes/Floor1_Corridor.unity
+    path: Assets/Scenes/Floor 1/Floor1_Corridor.unity
     guid: 6e259b27d3442f549a084d4c612ff144
   - enabled: 1
-    path: Assets/Scenes/Floor1_EyesRoom.unity
+    path: Assets/Scenes/Floor 1/Floor1_EyesRoom.unity
     guid: f52e73d43d41c2741acd68e4b78b3e31
   - enabled: 1
-    path: Assets/Scenes/Floor1_Lobby.unity
+    path: Assets/Scenes/Floor 1/Lobby & Storage/Floor1_Lobby.unity
     guid: e49a013d434af38469365801fa9512a0
   - enabled: 1
-    path: Assets/Scenes/Floor1_Storage.unity
+    path: Assets/Scenes/Floor 1/Lobby & Storage/Floor1_Storage.unity
     guid: 922e5b898a7ac9842bddd6120ef174b1
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/_Game State Screens/GameOver.unity
     guid: cf3acef7ffdcb904180e6741635afcdc
   - enabled: 1
-    path: Assets/Scenes/TheEnd.unity
+    path: Assets/Scenes/_Game State Screens/TheEnd.unity
     guid: a3ce27f7b4ccc464397df9fff74cdb9f
+  - enabled: 1
+    path: Assets/Scenes/Staircase/Floor1_Stairs.unity
+    guid: a1834f00925556941b06084f8efa94c6
+  - enabled: 1
+    path: Assets/Scenes/Staircase/Floor2_Stairs.unity
+    guid: 60baf2e437b014a448e9ffb36be6531a
+  - enabled: 1
+    path: Assets/Scenes/Staircase/Floor4_Stairs.unity
+    guid: 03f15008f8e6cb64ea23a3dba8896d7e
+  - enabled: 1
+    path: Assets/Scenes/Staircase/Floor5_Stairs.unity
+    guid: 23a2ca2960852f84cb5c50ce5b0454f4
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/Floor5_Hall.unity
+    guid: 0c2f5e71c1c30264abd4972fd29a10e3
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Floor4_Hall.unity
+    guid: deb08eaff36c7cd4097e6b2a4134a897
+  - enabled: 1
+    path: Assets/Scenes/Floor 2/Floor2_Hall.unity
+    guid: 50b6d06410b2f79498bf09e2675a0c11
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Ladder Apartment/Ladder Apt_Bedroom.unity
+    guid: 989b5f9c1151aba4e9eae01b9ac67998
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Ladder Apartment/Ladder Apt_Kitchen.unity
+    guid: 6e221d11b3db080468303b507788ab14
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Ladder Apartment/Ladder Apt_LivingRoom.unity
+    guid: 54c736583853c044dac4f32106e54ee2
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Ladder Apartment/Ladder Apt_Washroom.unity
+    guid: 48552734f81789f4c98ef0a200936174
+  - enabled: 1
+    path: Assets/Scenes/Floor 4/Ladder Apartment/Ladder Apt_Baloncy.unity
+    guid: a7706b86906d5b04081dc5f160438dd5
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_Balcony.unity
+    guid: 0eea8c3f16fe4bb4f83a1af0d3c51b5e
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_LivingRoom 1.unity
+    guid: b83b2c8beb723ad4da49047ff12db954
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_LivingRoom 2.unity
+    guid: 627b3ee30ad48d74ab01e33f3026aaf1
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_LivingRoom 3.unity
+    guid: 48fad30e73608624f9072ddef7f0708c
+  - enabled: 1
+    path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_LivingRoom 4.unity
+    guid: 97c51a4ed3207234bbcd58659c18a4e6
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
