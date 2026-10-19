@@ -9,10 +9,10 @@ public class ScreenButtons : MonoBehaviour
         GameFlow.StartGame();
     }
 
-    // Retry just starts the game scene again
+    // Retry goes back to the last checkpoint (or the start if no checkpoint was reached)
     public void Retry()
     {
-        GameFlow.StartGame();
+        GameFlow.RetryFromCheckpoint();
     }
 
     public void MainMenu()
