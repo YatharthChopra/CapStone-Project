@@ -20,7 +20,7 @@ public class DeathScript : MonoBehaviour
         {
             if (!this.GetComponent<HidingScript>().hiding)
             {
-                SceneManager.LoadScene("TempFailScene");
+                //SceneManager.LoadScene("TempFailScene");
             }
             
         }
