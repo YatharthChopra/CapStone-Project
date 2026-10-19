@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchHeightMultiplier = 0.5f;  // 0.5 = half height
     // Optional: drag the sprite child in here so it also shrinks when crouching
     [SerializeField] private Transform visual;
-    // If the player has a crawl animation (see PlayerAnimator) we don't want to squash the picture
-    private bool squashVisualWhenCrouching = true;
 
     [Header("Ground Check")]
     [SerializeField] private float groundCheckDistance = 0.05f;
@@ -35,12 +33,6 @@ public class PlayerMovement : MonoBehaviour
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
     public Vector2 MoveInput { get; private set; }   // x = A/D, y = S/W
-
-    // PlayerAnimator turns the squashing off, because it plays a crawl animation instead
-    public void SetSquashVisualWhenCrouching(bool squash)
-    {
-        squashVisualWhenCrouching = squash;
-    }
 
     private Rigidbody2D rb;
     private BoxCollider2D box;
@@ -58,9 +50,6 @@ public class PlayerMovement : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         rb.freezeRotation = true;   // so the player doesn't tip over
         originalGravity = rb.gravityScale;
-
-        // Winding levels (see GameFlow.FreeMovementScenes) turn the up/down movement on by themselves
-        if (GameFlow.IsFreeMovementScene) allowVerticalMove = true;
 
         // Remember the standing collider so we can go back to it after crouching
         standingSize = box.size;
@@ -149,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         float feetY = standingOffset.y - standingSize.y / 2f;
         box.offset = new Vector2(standingOffset.x, feetY + newHeight / 2f);
 
-        if (visual != null && squashVisualWhenCrouching)
+        if (visual != null)
         {
             Vector3 s = visual.localScale;
             visual.localScale = new Vector3(s.x, crouch ? Mathf.Abs(s.y) * crouchHeightMultiplier : Mathf.Abs(s.y) / crouchHeightMultiplier, s.z);

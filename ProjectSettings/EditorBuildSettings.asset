@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Floor 1/Floor1_Corridor.unity
     guid: 6e259b27d3442f549a084d4c612ff144
   - enabled: 1
-    path: Assets/Scenes/Floor1_EyesRoom.unity
+    path: Assets/Scenes/Floor 1/Floor1_EyesRoom.unity
     guid: f52e73d43d41c2741acd68e4b78b3e31
   - enabled: 1
     path: Assets/Scenes/Floor 1/Lobby & Storage/Floor1_Lobby.unity
