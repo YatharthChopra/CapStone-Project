@@ -10,6 +10,9 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Vision")]
     [SerializeField] protected Collider2D visionCone;     // the cone object (child, tagged EnemyView)
 
+    // How fast the cone turns, in degrees per second. 0 = turns instantly.
+    [SerializeField] protected float turnSpeedDegrees = 0f;
+
     [Header("Hearing")]
     [SerializeField] protected float hearingRadius = 8f;  // how far away a normal noise can be heard
 
@@ -26,6 +29,10 @@ public abstract class EnemyBase : MonoBehaviour
     private Light2D playerFlashlight;
 
     protected int facing = 1;   // 1 = looking right, -1 = looking left
+
+    private float targetAngle;          // the way the cone should point (degrees)
+    private float currentAngle;         // the way it's pointing right now
+    private bool angleStarted = false;  // false until the first time we point it somewhere
 
     protected virtual void Start()
     {
@@ -71,12 +78,13 @@ public abstract class EnemyBase : MonoBehaviour
         get { return playerHiding != null && playerHiding.hiding; }
     }
 
-    // True when the player is inside the vision cone AND not hiding
+    // True when the player is inside the vision cone, not hiding, and no wall is in the way
     protected bool CanSeePlayer()
     {
         if (player == null || visionCone == null) return false;
         if (PlayerIsHidden) return false;
-        return visionCone.Distance(playerCollider).isOverlapped;
+        if (!visionCone.Distance(playerCollider).isOverlapped) return false;
+        return LineOfSight.CanSeeBody(transform.position, playerCollider);
     }
 
     // Has the player's meter (Alice's detection system) filled all the way?
@@ -97,7 +105,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (player != null && playerFlashlight != null && playerFlashlight.gameObject.activeInHierarchy)
         {
             float d = Vector2.Distance(transform.position, player.transform.position);
-            if (d <= closest)
+            // Light doesn't shine through walls either
+            if (d <= closest && LineOfSight.CanSeeBody(transform.position, playerCollider))
             {
                 closest = d;
                 position = player.transform.position;
@@ -110,7 +119,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             if (!lightSource.IsAttracting) continue;
             float d = Vector2.Distance(transform.position, lightSource.transform.position);
-            if (d <= closest)
+            if (d <= closest && LineOfSight.IsClear(transform.position, lightSource.transform.position))
             {
                 closest = d;
                 position = lightSource.transform.position;
@@ -123,21 +132,55 @@ public abstract class EnemyBase : MonoBehaviour
 
     // ---------------------------------------------------------------- facing
 
-    // Turns the vision cone to look left (-1) or right (1)
-    protected void SetFacing(int direction)
+    // Points the vision cone in a direction (it can point any way, so it follows slanted corridors).
+    // If "Turn Speed Degrees" is above 0 the cone turns smoothly, otherwise it snaps round.
+    protected void LookInDirection(Vector2 direction)
     {
-        facing = direction;
-        if (visionCone != null)
+        if (direction.sqrMagnitude < 0.0001f) return;
+        if (Mathf.Abs(direction.x) > 0.01f) facing = direction.x > 0f ? 1 : -1;
+
+        targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // The very first time, or if there's no turn speed, point straight at it
+        if (!angleStarted || turnSpeedDegrees <= 0f)
         {
-            Vector3 scale = visionCone.transform.localScale;
-            scale.x = Mathf.Abs(scale.x) * direction;   // a negative scale flips the cone around
-            visionCone.transform.localScale = scale;
+            currentAngle = targetAngle;
+            angleStarted = true;
+            ApplyConeAngle();
         }
     }
 
-    protected void FaceToward(float x)
+    // Smooth turning: each frame, move the cone a little closer to where it should point
+    private void LateUpdate()
     {
-        SetFacing(x >= transform.position.x ? 1 : -1);
+        if (turnSpeedDegrees <= 0f || visionCone == null) return;
+        if (Mathf.Approximately(currentAngle, targetAngle)) return;
+
+        currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, turnSpeedDegrees * Time.deltaTime);
+        ApplyConeAngle();
+    }
+
+    private void ApplyConeAngle()
+    {
+        if (visionCone == null) return;
+        Transform cone = visionCone.transform;
+
+        Vector3 scale = cone.localScale;
+        scale.x = Mathf.Abs(scale.x);   // (older versions flipped the cone with a negative scale, so make sure it's the normal way round)
+        cone.localScale = scale;
+        cone.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
+    }
+
+    // Looks at a spot in the world (the player, a noise, a light...)
+    protected void LookAt(Vector2 worldPosition)
+    {
+        LookInDirection(worldPosition - (Vector2)transform.position);
+    }
+
+    // Looks left (-1) or right (1)
+    protected void SetFacing(int direction)
+    {
+        LookInDirection(new Vector2(direction, 0f));
     }
 
     // ---------------------------------------------------------------- signals

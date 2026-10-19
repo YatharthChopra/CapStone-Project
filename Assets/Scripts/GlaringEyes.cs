@@ -1,12 +1,13 @@
 using UnityEngine;
 
 // The Glaring Eyes enemy. Follows the second FSM from Jasmine's write-up:
-//   Idle       -> stays still, watching one spot
+//   Idle       -> stays in place, looking toward the nearby boxes, then looking the other way,
+//                 switching every few seconds
 //   Distracted -> turned toward a noise ("??"), goes back to Idle after 5 seconds
 //   Staring    -> the player is in its vision ("!!"). It can't attack, but the longer the player
 //                 stays in view the more the detection meter fills. A full meter means game over.
 //                 Goes back to Idle when the player leaves its view.
-// The eyes only react to sound (not light) and never move.
+// The eyes only react to sound (not light) and never move. They only turn their gaze.
 public class GlaringEyes : EnemyBase
 {
     public enum State { Idle, Distracted, Staring }
@@ -14,7 +15,13 @@ public class GlaringEyes : EnemyBase
     [SerializeField] private State state = State.Idle;
 
     [Header("Looking")]
-    [SerializeField] private bool restFacesRight = false;   // which way it looks when nothing is happening
+    [SerializeField] private float lookAtBoxesTime = 4f;    // seconds spent looking toward the boxes
+    [SerializeField] private float lookAwayTime = 3f;       // seconds spent looking the other way
+    [SerializeField] private float turnSpeed = 360f;        // how fast the gaze turns (degrees per second)
+    [SerializeField] private float boxSearchRadius = 25f;   // how far to look for boxes to watch
+    // Used only if there are no boxes nearby to look at:
+    [SerializeField] private bool restFacesRight = false;
+    [SerializeField] private Vector2 restLookDirection = Vector2.zero;
 
     [Header("Timers")]
     [SerializeField] private float distractedTime = 5f;     // how long it looks toward a noise
@@ -26,11 +33,66 @@ public class GlaringEyes : EnemyBase
 
     private float stateTimer;
 
+    private Vector2 lookTowardBoxes;   // the direction to the boxes
+    private Vector2 lookAway;          // the same height, but the other side
+    private bool lookingAtBoxes = true;
+    private float gazeTimer;
+
     protected override void Start()
     {
+        // The eyes turn smoothly (this goes before base.Start so the first look is set up properly)
+        turnSpeedDegrees = turnSpeed;
+
         base.Start();
-        SetFacing(restFacesRight ? 1 : -1);
+        WorkOutGazeDirections();
         ChangeState(State.Idle);
+    }
+
+    // Works out the two directions the eyes look between
+    private void WorkOutGazeDirections()
+    {
+        Vector2 toBoxes;
+        if (!TryFindBoxDirection(out toBoxes))
+        {
+            // No boxes nearby, so fall back to the direction set in the Inspector
+            toBoxes = (restLookDirection != Vector2.zero) ? restLookDirection : (restFacesRight ? Vector2.right : Vector2.left);
+        }
+
+        // Make sure there is some left/right in it, so "the other side" is a different direction
+        if (Mathf.Abs(toBoxes.x) < 0.3f)
+        {
+            toBoxes.x = restFacesRight ? 0.3f : -0.3f;
+        }
+
+        lookTowardBoxes = toBoxes.normalized;
+        lookAway = new Vector2(-toBoxes.x, toBoxes.y).normalized;   // flip left/right, keep the same up/down
+    }
+
+    // Finds the boxes close to this eye and gives back the direction to look at them
+    private bool TryFindBoxDirection(out Vector2 direction)
+    {
+        direction = Vector2.zero;
+        Vector2 total = Vector2.zero;
+        int count = 0;
+
+        foreach (GameObject box in GameObject.FindGameObjectsWithTag("CrouchingSpot"))
+        {
+            if (Vector2.Distance(transform.position, box.transform.position) > boxSearchRadius) continue;
+            total += (Vector2)box.transform.position;
+            count++;
+        }
+
+        if (count == 0) return false;
+
+        Vector2 middleOfBoxes = total / count;
+        direction = middleOfBoxes - (Vector2)transform.position;
+        return direction.sqrMagnitude > 0.01f;
+    }
+
+    // Points the cone at whichever side the eye is supposed to be watching right now
+    private void LookAtCurrentGaze()
+    {
+        LookInDirection(lookingAtBoxes ? lookTowardBoxes : lookAway);
     }
 
     protected override void HearNoise(Vector2 position)
@@ -38,7 +100,7 @@ public class GlaringEyes : EnemyBase
         // Already staring at the player, so it ignores noises
         if (state == State.Staring) return;
 
-        FaceToward(position.x);
+        LookAt(position);
         ChangeState(State.Distracted);   // (this restarts the 5 seconds if it was already distracted)
     }
 
@@ -52,6 +114,7 @@ public class GlaringEyes : EnemyBase
         {
             case State.Idle:
                 if (CanSeePlayer()) ChangeState(State.Staring);
+                else SwitchGazeOverTime();
                 break;
 
             case State.Distracted:
@@ -65,9 +128,23 @@ public class GlaringEyes : EnemyBase
         }
     }
 
+    // While idle, swap between looking at the boxes and looking the other way
+    private void SwitchGazeOverTime()
+    {
+        gazeTimer += Time.deltaTime;
+        float timeForThisGaze = lookingAtBoxes ? lookAtBoxesTime : lookAwayTime;
+
+        if (gazeTimer >= timeForThisGaze)
+        {
+            gazeTimer = 0f;
+            lookingAtBoxes = !lookingAtBoxes;
+            LookAtCurrentGaze();
+        }
+    }
+
     private void UpdateStaring()
     {
-        FaceToward(player.transform.position.x);
+        LookAt(player.transform.position);
 
         if (!CanSeePlayer())
         {
@@ -98,7 +175,8 @@ public class GlaringEyes : EnemyBase
         {
             case State.Idle:
                 ClearSignal();
-                SetFacing(restFacesRight ? 1 : -1);   // go back to looking at its spot
+                gazeTimer = 0f;
+                LookAtCurrentGaze();   // go back to watching
                 break;
             case State.Distracted:
                 ShowQuestion();
@@ -112,6 +190,7 @@ public class GlaringEyes : EnemyBase
     // Puts the eyes back to how they started
     public void ResetEnemy()
     {
+        lookingAtBoxes = true;
         ChangeState(State.Idle);
     }
 

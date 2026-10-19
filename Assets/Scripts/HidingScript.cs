@@ -89,10 +89,21 @@ public class HidingScript : MonoBehaviour
         }
         else if(InView == true)
         {
+            bool seenByAnyone = false;   // (added) stays false if every enemy is behind a wall
             foreach(GameObject enemyObject in EnemiesList)
             {
+                // (added) an enemy behind a wall can't see us, so it doesn't fill the meter
+                if (!LineOfSight.CanSeeBody(enemyObject.transform.position, GetComponent<Collider2D>())) continue;
+                seenByAnyone = true;
+
                 detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
                 Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+            }
+
+            // (added) if nobody can actually see us, the meter goes down like it does out of view
+            if (!seenByAnyone && detection > 0)
+            {
+                detection -= 1 * Time.deltaTime * detectionScaling;
             }
         }
         else
