@@ -11,6 +11,9 @@ public class Door : MonoBehaviour
     [SerializeField] private string targetScene;     // the room this door leads to
     [SerializeField] private string targetDoorId;    // the door in that room we come out of
     [SerializeField] private bool isLocked = false;  // locked doors do nothing for now
+    // How far sideways from the door the player appears. Useful when a door is set into a wall,
+    // so the player doesn't appear inside it. (Positive = to the right, negative = to the left.)
+    [SerializeField] private float spawnOffsetX = 0f;
 
     public string DoorId { get { return doorId; } }
 
@@ -20,7 +23,7 @@ public class Door : MonoBehaviour
         get
         {
             float bottom = transform.position.y - transform.lossyScale.y / 2f;
-            return new Vector3(transform.position.x, bottom + 1.05f, 0f);
+            return new Vector3(transform.position.x + spawnOffsetX, bottom + 1.05f, 0f);
         }
     }
 
