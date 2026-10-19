@@ -105,6 +105,11 @@ public class HidingScript : MonoBehaviour
             {
                 detection -= 1 * Time.deltaTime * detectionScaling;
             }
+            foreach(GameObject enemyObject in EnemiesList)
+            {
+                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
+                Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+            }
         }
         else
         {
