@@ -21,6 +21,16 @@ public class HidingScript : MonoBehaviour
     public float detectionScaling = 1;
     //private PlayerMovement movementScript = this.movementScript;
 
+    // Added so the enemy scripts can read the detection meter (they can't see private variables)
+    public float Detection { get { return detection; } }
+    public float MaxDetection { get { return maxDetection; } }
+
+    // Added so an enemy can push the meter up by itself (Glaring Eyes use this to fill it faster)
+    public void AddDetection(float amount)
+    {
+        detection = Mathf.Min(detection + amount, maxDetection);
+    }
+
     private Color defaultColor;
     //private bool
     void Start()
@@ -79,10 +89,21 @@ public class HidingScript : MonoBehaviour
         }
         else if(InView == true)
         {
+            bool seenByAnyone = false;   // (added) stays false if every enemy is behind a wall
             foreach(GameObject enemyObject in EnemiesList)
             {
+                // (added) an enemy behind a wall can't see us, so it doesn't fill the meter
+                if (!LineOfSight.CanSeeBody(enemyObject.transform.position, GetComponent<Collider2D>())) continue;
+                seenByAnyone = true;
+
                 detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
                 Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+            }
+
+            // (added) if nobody can actually see us, the meter goes down like it does out of view
+            if (!seenByAnyone && detection > 0)
+            {
+                detection -= 1 * Time.deltaTime * detectionScaling;
             }
         }
         else
