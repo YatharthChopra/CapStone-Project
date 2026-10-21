@@ -28,9 +28,7 @@ public class CameraFollow : MonoBehaviour
             {
                 Vector3 raycastTarget = ((target.position+offset) - transform.position);
                 RaycastHit2D hit;
-                //Debug.Log(raycastTarget.);
                 LayerMask mask = LayerMask.GetMask("CameraColliders");
-                //Debug.Log(mask);
 
                
 
@@ -54,11 +52,26 @@ public class CameraFollow : MonoBehaviour
             firstrun = false;
             
         }
+        Vector3 newoffset = offset;
+        //offset.
+        if (target.eulerAngles.z != 0f) // this adjusts the camera for the rotation.
+        {
+            newoffset = RotatePosition(offset, target.eulerAngles.z);
+            
+        }
 
-        
-        
-
-        Vector3 targetpos = target.position + offset;
+        Vector3 targetpos = target.position + newoffset;
         rb.linearVelocity = (targetpos - transform.position) * speed;
     }
+
+    Vector3 RotatePosition(Vector3 origin, float rotation)
+    {
+        Vector3 newPos = Vector3.zero;
+        float radRotation = rotation* Mathf.PI / 180;
+        newPos.x =origin.x *Mathf.Cos(radRotation) - origin.y *Mathf.Sin(radRotation);
+        newPos.y =origin.y * Mathf.Cos(radRotation) + origin.x * Mathf.Sin(radRotation);
+        return newPos;
+        
+    }
+
 }
