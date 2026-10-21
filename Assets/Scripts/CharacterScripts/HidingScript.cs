@@ -97,7 +97,7 @@ public class HidingScript : MonoBehaviour
                 seenByAnyone = true;
 
                 detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
-                Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+                //Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
             }
 
             // (added) if nobody can actually see us, the meter goes down like it does out of view
@@ -108,7 +108,7 @@ public class HidingScript : MonoBehaviour
             foreach(GameObject enemyObject in EnemiesList)
             {
                 detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
-                Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
+                //Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
             }
         }
         else
