@@ -2,16 +2,29 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
-// Stuff that both enemy types need: finding the player, the vision cone,
-// hearing noises, and the "??" / "!!" signals.
-// WanderingShadow and GlaringEyes both build on this, so we only write it once.
+// The stuff that both enemy types need, so we only write it once:
+// finding the player, the vision cone, hearing noises, noticing lights, and the "??" / "!!" signals.
+// WanderingShadow and GlaringEyes both build on this.
 public abstract class EnemyBase : MonoBehaviour
 {
-    [Header("Vision")]
-    [SerializeField] protected Collider2D visionCone;     // the cone object (child, tagged EnemyView)
+    // ---------------------------------------------------------------- settings you can change in the Inspector
 
+    [Header("Vision cone")]
+    [SerializeField] protected Collider2D visionCone;     // the cone object (a child of the enemy, tagged EnemyView)
     // How fast the cone turns, in degrees per second. 0 = turns instantly.
     [SerializeField] protected float turnSpeedDegrees = 0f;
+    // How far in front of the enemy's middle the cone starts. 0.5 puts the point of the cone
+    // at the front edge of the body, so it looks like it comes out of the enemy.
+    [SerializeField] private float coneStartOffset = 0.5f;
+    // How visible the cone picture is (0 = invisible, 1 = solid). The picture fades out toward the far end,
+    // so it shows roughly which way the enemy is looking without making a hard edge.
+    [SerializeField, Range(0f, 1f)] private float coneVisibility = 0.5f;
+
+    [Header("Sight line")]
+    // A thin line from the enemy to the player, shown only while the enemy can actually see the player
+    [SerializeField] private bool showSightLine = true;
+    [SerializeField] private float sightLineThickness = 0.08f;
+    [SerializeField] private Color sightLineColor = new Color(1f, 0.25f, 0.25f, 0.75f);
 
     [Header("Hearing")]
     [SerializeField] protected float hearingRadius = 8f;  // how far away a normal noise can be heard
@@ -22,6 +35,8 @@ public abstract class EnemyBase : MonoBehaviour
     // The audio person can hook the music stings up to these later
     public UnityEvent onQuestionSignal;                   // plays when an enemy gets curious (??)
     public UnityEvent onAlertSignal;                      // plays when an enemy spots the player (!!)
+
+    // ---------------------------------------------------------------- things the enemies share
 
     protected PlayerMovement player;
     protected HidingScript playerHiding;
@@ -34,8 +49,16 @@ public abstract class EnemyBase : MonoBehaviour
     private float currentAngle;         // the way it's pointing right now
     private bool angleStarted = false;  // false until the first time we point it somewhere
 
+    private SpriteRenderer sightLine;   // the line to the player (made in code, so no prefab has to change)
+    private const int SightLineSortingOrder = 4;   // draws on top of the cone and the enemy's body
+
+    // ---------------------------------------------------------------- setting up and tidying up
+
     protected virtual void Start()
     {
+        SetConeVisibility();
+        CreateSightLine();
+
         player = FindFirstObjectByType<PlayerMovement>();
         if (player == null)
         {
@@ -57,6 +80,20 @@ public abstract class EnemyBase : MonoBehaviour
     {
         NoiseSystem.NoiseMade -= OnNoiseMade;
     }
+
+    private void OnDestroy()
+    {
+        if (sightLine != null) Destroy(sightLine.gameObject);
+    }
+
+    // Runs every frame after everything else has moved
+    private void LateUpdate()
+    {
+        UpdateSightLine();
+        TurnConeTowardTarget();
+    }
+
+    // ---------------------------------------------------------------- hearing
 
     private void OnNoiseMade(Vector2 position, float loudness)
     {
@@ -101,14 +138,13 @@ public abstract class EnemyBase : MonoBehaviour
         float closest = radius;
         bool found = false;
 
-        // The flashlight counts while it's switched on
+        // The flashlight counts while it's switched on (and light doesn't shine through walls)
         if (player != null && playerFlashlight != null && playerFlashlight.gameObject.activeInHierarchy)
         {
-            float d = Vector2.Distance(transform.position, player.transform.position);
-            // Light doesn't shine through walls either
-            if (d <= closest && LineOfSight.CanSeeBody(transform.position, playerCollider))
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if (distance <= closest && LineOfSight.CanSeeBody(transform.position, playerCollider))
             {
-                closest = d;
+                closest = distance;
                 position = player.transform.position;
                 found = true;
             }
@@ -118,10 +154,11 @@ public abstract class EnemyBase : MonoBehaviour
         foreach (LightSource lightSource in LightSource.All)
         {
             if (!lightSource.IsAttracting) continue;
-            float d = Vector2.Distance(transform.position, lightSource.transform.position);
-            if (d <= closest && LineOfSight.IsClear(transform.position, lightSource.transform.position))
+
+            float distance = Vector2.Distance(transform.position, lightSource.transform.position);
+            if (distance <= closest && LineOfSight.IsClear(transform.position, lightSource.transform.position))
             {
-                closest = d;
+                closest = distance;
                 position = lightSource.transform.position;
                 found = true;
             }
@@ -130,7 +167,7 @@ public abstract class EnemyBase : MonoBehaviour
         return found;
     }
 
-    // ---------------------------------------------------------------- facing
+    // ---------------------------------------------------------------- looking (the vision cone)
 
     // Points the vision cone in a direction (it can point any way, so it follows slanted corridors).
     // If "Turn Speed Degrees" is above 0 the cone turns smoothly, otherwise it snaps round.
@@ -150,27 +187,6 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    // Smooth turning: each frame, move the cone a little closer to where it should point
-    private void LateUpdate()
-    {
-        if (turnSpeedDegrees <= 0f || visionCone == null) return;
-        if (Mathf.Approximately(currentAngle, targetAngle)) return;
-
-        currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, turnSpeedDegrees * Time.deltaTime);
-        ApplyConeAngle();
-    }
-
-    private void ApplyConeAngle()
-    {
-        if (visionCone == null) return;
-        Transform cone = visionCone.transform;
-
-        Vector3 scale = cone.localScale;
-        scale.x = Mathf.Abs(scale.x);   // (older versions flipped the cone with a negative scale, so make sure it's the normal way round)
-        cone.localScale = scale;
-        cone.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
-    }
-
     // Looks at a spot in the world (the player, a noise, a light...)
     protected void LookAt(Vector2 worldPosition)
     {
@@ -183,7 +199,88 @@ public abstract class EnemyBase : MonoBehaviour
         LookInDirection(new Vector2(direction, 0f));
     }
 
-    // ---------------------------------------------------------------- signals
+    // Smooth turning: each frame, move the cone a little closer to where it should point
+    private void TurnConeTowardTarget()
+    {
+        if (turnSpeedDegrees <= 0f || visionCone == null) return;
+        if (Mathf.Approximately(currentAngle, targetAngle)) return;
+
+        currentAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, turnSpeedDegrees * Time.deltaTime);
+        ApplyConeAngle();
+    }
+
+    // Turns the cone object to the current angle and puts its point at the front of the body
+    private void ApplyConeAngle()
+    {
+        if (visionCone == null) return;
+        Transform cone = visionCone.transform;
+
+        cone.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
+
+        float radians = currentAngle * Mathf.Deg2Rad;
+        cone.localPosition = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0f) * coneStartOffset;
+    }
+
+    // Applies the "Cone Visibility" setting to the cone's picture
+    private void SetConeVisibility()
+    {
+        if (visionCone == null) return;
+
+        SpriteRenderer picture = visionCone.GetComponent<SpriteRenderer>();
+        if (picture == null) return;
+
+        Color colour = picture.color;
+        colour.a = coneVisibility;
+        picture.color = colour;
+    }
+
+    // ---------------------------------------------------------------- the sight line
+
+    // Makes the sight line: a thin stretched square that we move between the enemy and the player
+    private void CreateSightLine()
+    {
+        if (!showSightLine) return;
+
+        GameObject lineObject = new GameObject(name + " Sight Line");
+        sightLine = lineObject.AddComponent<SpriteRenderer>();
+        sightLine.sprite = GetWhiteSprite();
+        sightLine.color = sightLineColor;
+        sightLine.sortingOrder = SightLineSortingOrder;
+        sightLine.enabled = false;
+    }
+
+    // Shows the line from the enemy to the player while the enemy can see them, and hides it otherwise
+    private void UpdateSightLine()
+    {
+        if (sightLine == null) return;
+
+        bool seen = player != null && CanSeePlayer();
+        sightLine.enabled = seen;
+        if (!seen) return;
+
+        Vector2 from = transform.position;
+        Vector2 to = playerCollider.bounds.center;
+        Vector2 between = to - from;
+
+        // Stretch the square so it reaches from the enemy to the player
+        sightLine.transform.position = (from + to) / 2f;
+        sightLine.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(between.y, between.x) * Mathf.Rad2Deg);
+        sightLine.transform.localScale = new Vector3(between.magnitude, sightLineThickness, 1f);
+    }
+
+    // A plain white 1x1 unit picture, made from Unity's built-in white texture
+    private static Sprite whiteSprite;
+    private static Sprite GetWhiteSprite()
+    {
+        if (whiteSprite == null)
+        {
+            Texture2D white = Texture2D.whiteTexture;
+            whiteSprite = Sprite.Create(white, new Rect(0, 0, white.width, white.height), new Vector2(0.5f, 0.5f), white.width);
+        }
+        return whiteSprite;
+    }
+
+    // ---------------------------------------------------------------- signals ("??" and "!!")
 
     protected void ShowQuestion()
     {

@@ -105,11 +105,6 @@ public class HidingScript : MonoBehaviour
             {
                 detection -= 1 * Time.deltaTime * detectionScaling;
             }
-            foreach(GameObject enemyObject in EnemiesList)
-            {
-                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
-                //Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
-            }
         }
         else
         {
@@ -155,6 +150,8 @@ public class HidingScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision == null) return;   // (added) when a scene unloads the thing we were touching is already gone
+
         if (collision.tag == "HidingSpot")
         {
             NearHidingPlace = false;

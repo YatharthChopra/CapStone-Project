@@ -1,0 +1,431 @@
+fileFormatVersion: 2
+guid: 8adbda337a4b8b446aee9e0a82cfb129
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3557629954568838336
+    second: Wandering_Shadow_Walk_Neutral_0
+  - first:
+      213: 9150334545496482723
+    second: Wandering_Shadow_Walk_Neutral_1
+  - first:
+      213: -1857990720128617212
+    second: Wandering_Shadow_Walk_Neutral_2
+  - first:
+      213: -9070660997663351549
+    second: Wandering_Shadow_Walk_Neutral_3
+  - first:
+      213: -8472524263822441958
+    second: Wandering_Shadow_Walk_Neutral_4
+  - first:
+      213: -709820461078300967
+    second: Wandering_Shadow_Walk_Neutral_5
+  - first:
+      213: 3489678435513530847
+    second: Wandering_Shadow_Walk_Neutral_6
+  - first:
+      213: -5487272747862691306
+    second: Wandering_Shadow_Walk_Neutral_7
+  - first:
+      213: 1378354190285116377
+    second: Wandering_Shadow_Walk_Neutral_8
+  - first:
+      213: -89484001537674402
+    second: Wandering_Shadow_Walk_Neutral_9
+  - first:
+      213: 5483366460110599361
+    second: Wandering_Shadow_Walk_Neutral_10
+  - first:
+      213: -4757468621174341574
+    second: Wandering_Shadow_Walk_Neutral_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 9
+        width: 20
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043a2abc762c0aec0800000000000000
+      internalID: -3557629954568838336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 9
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3ad40e9c48cfe70800000000000000
+      internalID: 9150334545496482723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 9
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 405f2cab8471736e0800000000000000
+      internalID: -1857990720128617212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 9
+        width: 20
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30d194c81e98e1280800000000000000
+      internalID: -9070660997663351549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 9
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a124cf7421c8b6a80800000000000000
+      internalID: -8472524263822441958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 9
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d6bf1b2d063626f0800000000000000
+      internalID: -709820461078300967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_6
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 9
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9ff194c04dd6030800000000000000
+      internalID: 3489678435513530847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 10
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61276f5328a49d3b0800000000000000
+      internalID: -5487272747862691306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_8
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 9
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d39d9e45d5e02310800000000000000
+      internalID: 1378354190285116377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_9
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 9
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e53344356c612cef0800000000000000
+      internalID: -89484001537674402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_10
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 9
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4fe2c4eb4d81c40800000000000000
+      internalID: 5483366460110599361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wandering_Shadow_Walk_Neutral_11
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 9
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3006d4ce731afdb0800000000000000
+      internalID: -4757468621174341574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Wandering_Shadow_Walk_Neutral_0: -3557629954568838336
+      Wandering_Shadow_Walk_Neutral_1: 9150334545496482723
+      Wandering_Shadow_Walk_Neutral_10: 5483366460110599361
+      Wandering_Shadow_Walk_Neutral_11: -4757468621174341574
+      Wandering_Shadow_Walk_Neutral_2: -1857990720128617212
+      Wandering_Shadow_Walk_Neutral_3: -9070660997663351549
+      Wandering_Shadow_Walk_Neutral_4: -8472524263822441958
+      Wandering_Shadow_Walk_Neutral_5: -709820461078300967
+      Wandering_Shadow_Walk_Neutral_6: 3489678435513530847
+      Wandering_Shadow_Walk_Neutral_7: -5487272747862691306
+      Wandering_Shadow_Walk_Neutral_8: 1378354190285116377
+      Wandering_Shadow_Walk_Neutral_9: -89484001537674402
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -38,7 +38,7 @@ public class WanderingShadow : EnemyBase
     [Header("Timers")]
     [SerializeField] private float idleTime = 5f;        // Idle -> Stalk
     [SerializeField] private float loseSightTime = 5f;   // Alert -> Idle
-    // Extra rule (not in the doc): if the player stays hidden this long during Attack,
+    // Extra rule (not in the doc): if the player stays hidden (or behind a wall) this long during Attack,
     // the shadow loses them and drops back to Alert. Set to 0 to turn it off.
     [SerializeField] private float giveUpTime = 4f;
 
@@ -53,32 +53,50 @@ public class WanderingShadow : EnemyBase
     [Header("Look")]
     [SerializeField] private SpriteRenderer bodySprite;  // just used to flash during the attack windup
 
+    // Small numbers we use in a few places, named so it's clear what they are
+    private const float ArriveDistance = 0.3f;          // closer than this to a target counts as "arrived"
+    private const float FlatZoneTolerance = 0.5f;       // flat levels: how far outside the zone before we walk back in
+    private const float WindingZoneTolerance = 1.5f;    // winding levels: same thing
+    private const float LightCooldownTime = 3f;         // after checking out a light, ignore lights for this long
+    private const float BackOffTime = 3f;               // after backing away from a crouch spot, ignore the player this long
+    private const float NoMeterAttackDelay = 1.5f;      // if the player has no detection meter, attack this long after spotting them
+    private const float VerticalReach = 2.5f;           // flat levels: how far above or below we can still hit the player
+    private const float ExtraReachDuringSwing = 0.4f;   // the player may move a little while the swing winds up
+    private const float StuckSpeed = 0.2f;              // moving slower than this while trying to move means we're stuck
+    private const float StuckTime = 0.6f;               // stuck for this long means we give up on the walk
+    private const float CrouchCheckDistance = 0.9f;     // how far ahead we look for a crouch spot
+    private const float CrouchCheckRadius = 0.25f;
+
     private Rigidbody2D rb;
     private Collider2D bodyCollider;
     private bool freeMovement;     // true in winding levels (no gravity, can move up and down)
     private Vector2 home;
     private Vector2 zoneA, zoneB;  // the two ends of the wander zone
 
-    private float stateTimer;
-    private float lostSightTimer;
-    private float hiddenTimer;
+    // Timers
+    private float stateTimer;      // how long we've been in the current state
+    private float lostSightTimer;  // Alert: how long the player has been out of sight
+    private float lostTrackTimer;  // Attack: how long the player has been hidden or behind a wall
+    private float lightCooldown;
+    private float backOffTimer;
+    private float windupTimer;
+    private float cooldownTimer;
+    private float stuckTimer;
+
+    // Targets
     private Vector2 stalkTarget;
     private Vector2 inspectTarget;
-
-    private float lightCooldown;   // after checking out a light, ignore lights for a bit so it doesn't loop forever
     private bool heardNoise;
     private Vector2 noisePosition;
 
+    // Movement
     private Vector2 moveDirection; // which way we want to walk this frame (zero = stand still)
     private float currentSpeed;
     private bool isBlocked;        // true if we're hitting a crouch spot or a wall
     private bool crouchBlocked;    // true if specifically a crouch spot is in the way (we're too tall to go in)
-    private float backOffTimer;    // after backing away from a crouch spot, ignore the player for a moment
-    private float stuckTimer;
 
-    private bool winding;
-    private float windupTimer;
-    private float cooldownTimer;
+    // Attacking
+    private bool isWindingUp;      // true during the warning before a swing lands
     private Color normalColor;
 
     protected override void Start()
@@ -93,15 +111,7 @@ public class WanderingShadow : EnemyBase
         if (freeMovement) rb.gravityScale = 0f;
 
         bodyCollider = GetComponent<Collider2D>();
-
-        // The enemy shouldn't physically push the player around
-        if (playerCollider != null) Physics2D.IgnoreCollision(bodyCollider, playerCollider);
-
-        // Shadows shouldn't block each other either (the lobby has 8 in one zone)
-        foreach (WanderingShadow other in FindObjectsByType<WanderingShadow>(FindObjectsInactive.Exclude))
-        {
-            if (other != this) Physics2D.IgnoreCollision(bodyCollider, other.GetComponent<Collider2D>());
-        }
+        IgnoreCollisionsWithPlayerAndOtherShadows();
 
         home = transform.position;
         SetUpZone();
@@ -110,6 +120,17 @@ public class WanderingShadow : EnemyBase
 
         SetFacing(1);
         ChangeState(State.Idle);
+    }
+
+    // Shadows shouldn't push the player around, or block each other (the lobby has 8 in one zone)
+    private void IgnoreCollisionsWithPlayerAndOtherShadows()
+    {
+        if (playerCollider != null) Physics2D.IgnoreCollision(bodyCollider, playerCollider);
+
+        foreach (WanderingShadow other in FindObjectsByType<WanderingShadow>(FindObjectsInactive.Exclude))
+        {
+            if (other != this) Physics2D.IgnoreCollision(bodyCollider, other.GetComponent<Collider2D>());
+        }
     }
 
     // Works out the two ends of the wander zone
@@ -147,14 +168,14 @@ public class WanderingShadow : EnemyBase
         }
     }
 
-    // ---------------------------------------------------------------- the FSM
+    // ---------------------------------------------------------------- the state machine
 
     private void Update()
     {
         if (player == null) return;
 
         stateTimer += Time.deltaTime;
-        moveDirection = Vector2.zero;
+        moveDirection = Vector2.zero;   // each state sets this again if it wants to walk
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
         if (lightCooldown > 0f) lightCooldown -= Time.deltaTime;
         if (backOffTimer > 0f) backOffTimer -= Time.deltaTime;
@@ -175,12 +196,12 @@ public class WanderingShadow : EnemyBase
 
         // If it got pulled out of its zone (by an Inspect or Attack), walk back in first
         Vector2 nearest = NearestPointOnZone(transform.position);
-        float away = freeMovement
+        float distanceOutside = freeMovement
             ? Vector2.Distance(transform.position, nearest)
             : Mathf.Abs(transform.position.x - nearest.x);
-        float allowed = freeMovement ? 1.5f : 0.5f;
+        float tolerance = freeMovement ? WindingZoneTolerance : FlatZoneTolerance;
 
-        if (away > allowed)
+        if (distanceOutside > tolerance)
         {
             MoveToward(nearest, walkSpeed);
             stateTimer = 0f;   // the 5 seconds only count once it's back home
@@ -208,18 +229,17 @@ public class WanderingShadow : EnemyBase
     private void UpdateInspect()
     {
         bool arrived = MoveToward(inspectTarget, inspectSpeed);
-        if (arrived || isBlocked)
+        if (!arrived && !isBlocked) return;
+
+        // Got to the light / noise. Is the player there?
+        if (CanSeePlayer())
         {
-            // Got to the light / noise. Is the player there?
-            if (CanSeePlayer())
-            {
-                ChangeState(State.Alert);
-            }
-            else
-            {
-                lightCooldown = 3f;   // don't get pulled back to the same light straight away
-                ChangeState(State.Idle);
-            }
+            ChangeState(State.Alert);
+        }
+        else
+        {
+            lightCooldown = LightCooldownTime;   // don't get pulled back to the same light straight away
+            ChangeState(State.Idle);
         }
     }
 
@@ -227,20 +247,20 @@ public class WanderingShadow : EnemyBase
     {
         LookAt(player.transform.position);
 
-        if (CanSeePlayer())
+        if (!CanSeePlayer())
         {
-            lostSightTimer = 0f;
-
-            // Alice's detection meter decides when it turns into an Attack
-            // (if the player has no meter, just attack after a short delay)
-            bool readyToAttack = DetectionMeterFull() || (playerHiding == null && stateTimer >= 1.5f);
-            if (readyToAttack) ChangeState(State.Attack);
-        }
-        else
-        {
+            // Lost sight of the player. Go back to Idle if it stays that way.
             lostSightTimer += Time.deltaTime;
             if (lostSightTimer >= loseSightTime) ChangeState(State.Idle);
+            return;
         }
+
+        lostSightTimer = 0f;
+
+        // Alice's detection meter decides when it turns into an Attack
+        // (if the player has no meter, just attack after a short delay)
+        bool readyToAttack = DetectionMeterFull() || (playerHiding == null && stateTimer >= NoMeterAttackDelay);
+        if (readyToAttack) ChangeState(State.Attack);
     }
 
     private void UpdateAttack()
@@ -248,9 +268,9 @@ public class WanderingShadow : EnemyBase
         Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
 
         // The player went into a crouch spot, and we're too tall to follow. Back off to our zone.
-        if (crouchBlocked && !winding)
+        if (crouchBlocked && !isWindingUp)
         {
-            backOffTimer = 3f;   // for a few seconds, don't go straight back to chasing
+            backOffTimer = BackOffTime;   // for a few seconds, don't go straight back to chasing
             ChangeState(State.Idle);
             return;
         }
@@ -260,63 +280,76 @@ public class WanderingShadow : EnemyBase
         // Can the shadow actually see the player? (walls block sight)
         bool wallInTheWay = !LineOfSight.CanSeeBody(transform.position, playerCollider);
 
-        // Lose track of the player if they stay hidden, or out of sight behind a wall, long enough
-        if ((PlayerIsHidden || wallInTheWay) && giveUpTime > 0f)
+        if (HasLostTrackOfPlayer(wallInTheWay))
         {
-            hiddenTimer += Time.deltaTime;
-            if (hiddenTimer >= giveUpTime)
-            {
-                ChangeState(State.Alert);
-                return;
-            }
-        }
-        else
-        {
-            hiddenTimer = 0f;
-        }
-
-        // Is the player close enough to hit?
-        bool inReach = freeMovement
-            ? toPlayer.magnitude <= attackRange
-            : Mathf.Abs(toPlayer.x) <= attackRange && Mathf.Abs(toPlayer.y) < 2.5f;
-        inReach = inReach && !wallInTheWay;   // no swinging through walls
-
-        // In the middle of a swing: wait for the windup, then see if it hits
-        if (winding)
-        {
-            windupTimer -= Time.deltaTime;
-            if (windupTimer <= 0f)
-            {
-                winding = false;
-                cooldownTimer = attackCooldown;
-                if (bodySprite != null) bodySprite.color = normalColor;
-
-                // Give the player a little extra distance, since they may have moved during the windup
-                bool stillInReach = freeMovement
-                    ? toPlayer.magnitude <= attackRange + 0.4f
-                    : Mathf.Abs(toPlayer.x) <= attackRange + 0.4f && Mathf.Abs(toPlayer.y) < 2.5f;
-                if (stillInReach && !PlayerIsHidden && !wallInTheWay)
-                {
-                    GameFlow.PlayerDied();   // the swing connected
-                }
-            }
+            ChangeState(State.Alert);
             return;
         }
 
-        if (inReach)
+        // In the middle of a swing: wait for the windup, then see if it hits
+        if (isWindingUp)
         {
-            // Close enough to swing
-            if (cooldownTimer <= 0f)
-            {
-                winding = true;
-                windupTimer = attackWindup;
-                if (bodySprite != null) bodySprite.color = Color.white;   // flash as a warning
-            }
+            UpdateSwing(toPlayer, wallInTheWay);
+            return;
+        }
+
+        // Close enough to swing (and no wall in the way)? Otherwise keep chasing.
+        if (IsWithinReach(toPlayer, 0f) && !wallInTheWay)
+        {
+            if (cooldownTimer <= 0f) StartSwing();
         }
         else
         {
             MoveToward(player.transform.position, chaseSpeed);
         }
+    }
+
+    // The shadow gives up if the player stays hidden, or out of sight behind a wall, long enough
+    private bool HasLostTrackOfPlayer(bool wallInTheWay)
+    {
+        bool outOfSight = PlayerIsHidden || wallInTheWay;
+        if (outOfSight && giveUpTime > 0f)
+        {
+            lostTrackTimer += Time.deltaTime;
+            return lostTrackTimer >= giveUpTime;
+        }
+
+        lostTrackTimer = 0f;
+        return false;
+    }
+
+    private void StartSwing()
+    {
+        isWindingUp = true;
+        windupTimer = attackWindup;
+        if (bodySprite != null) bodySprite.color = Color.white;   // flash as a warning
+    }
+
+    // Counts down the windup, then checks whether the swing hits
+    private void UpdateSwing(Vector2 toPlayer, bool wallInTheWay)
+    {
+        windupTimer -= Time.deltaTime;
+        if (windupTimer > 0f) return;
+
+        isWindingUp = false;
+        cooldownTimer = attackCooldown;
+        if (bodySprite != null) bodySprite.color = normalColor;
+
+        // The player gets a little extra distance, since they may have moved during the windup
+        bool stillInReach = IsWithinReach(toPlayer, ExtraReachDuringSwing);
+        if (stillInReach && !PlayerIsHidden && !wallInTheWay)
+        {
+            GameFlow.PlayerDied();   // the swing connected
+        }
+    }
+
+    // Is the player close enough to hit? (extraReach makes the reach a bit bigger)
+    private bool IsWithinReach(Vector2 toPlayer, float extraReach)
+    {
+        float reach = attackRange + extraReach;
+
+        if (freeMovement) return toPlayer.magnitude <= reach;
+        return Mathf.Abs(toPlayer.x) <= reach && Mathf.Abs(toPlayer.y) < VerticalReach;
     }
 
     // Idle and Stalk both check for the same things
@@ -352,14 +385,15 @@ public class WanderingShadow : EnemyBase
         state = newState;
         stateTimer = 0f;
         lostSightTimer = 0f;
-        hiddenTimer = 0f;
+        lostTrackTimer = 0f;
         stuckTimer = 0f;
-        winding = false;
+        isWindingUp = false;
         heardNoise = false;
         if (bodySprite != null) bodySprite.color = normalColor;
 
         SetStateLabel(newState.ToString());
 
+        // Show the right signal above the head
         switch (newState)
         {
             case State.Idle:
@@ -370,8 +404,6 @@ public class WanderingShadow : EnemyBase
                 ShowQuestion();
                 break;
             case State.Alert:
-                ShowAlert();
-                break;
             case State.Attack:
                 ShowAlert();
                 break;
@@ -384,7 +416,8 @@ public class WanderingShadow : EnemyBase
         }
     }
 
-    // Puts the enemy back to how it started (for when the player respawns without reloading the scene)
+    // Puts the enemy back to how it started. Nothing calls this yet, it's here for if we ever
+    // respawn the player without reloading the scene.
     public void ResetEnemy()
     {
         transform.position = home;
@@ -402,7 +435,7 @@ public class WanderingShadow : EnemyBase
         Vector2 difference = target - (Vector2)transform.position;
         if (!freeMovement) difference.y = 0f;
 
-        if (difference.magnitude < 0.3f) return true;
+        if (difference.magnitude < ArriveDistance) return true;
 
         moveDirection = difference.normalized;
         currentSpeed = speed;
@@ -415,10 +448,12 @@ public class WanderingShadow : EnemyBase
     {
         Vector2 line = zoneB - zoneA;
         if (line.sqrMagnitude < 0.0001f) return zoneA;
+
         float t = Mathf.Clamp01(Vector2.Dot(point - zoneA, line) / line.sqrMagnitude);
         return zoneA + line * t;
     }
 
+    // Movement is done here (not in Update) because it uses physics
     private void FixedUpdate()
     {
         if (rb == null) return;
@@ -443,27 +478,29 @@ public class WanderingShadow : EnemyBase
 
         // If we want to move but aren't getting anywhere, we've hit a wall. Give up so we don't freeze there.
         float actualSpeed = freeMovement ? rb.linearVelocity.magnitude : Mathf.Abs(rb.linearVelocity.x);
-        if (wanted != Vector2.zero && actualSpeed < 0.2f) stuckTimer += Time.fixedDeltaTime;
+        if (wanted != Vector2.zero && actualSpeed < StuckSpeed) stuckTimer += Time.fixedDeltaTime;
         else stuckTimer = 0f;
-        if (stuckTimer > 0.6f) isBlocked = true;
+        if (stuckTimer > StuckTime) isBlocked = true;
 
         // On flat levels gravity handles up/down. In winding levels we set both ourselves.
         if (freeMovement) rb.linearVelocity = wanted;
         else rb.linearVelocity = new Vector2(wanted.x, rb.linearVelocity.y);
     }
 
+    // Is there a crouch spot just ahead? Shadows are too tall to go into those.
     private bool CrouchSpotAhead()
     {
         Vector2 direction = freeMovement ? moveDirection : new Vector2(Mathf.Sign(moveDirection.x), 0f);
-        Vector2 ahead = (Vector2)transform.position + direction * 0.9f;
-        foreach (Collider2D hit in Physics2D.OverlapCircleAll(ahead, 0.25f))
+        Vector2 ahead = (Vector2)transform.position + direction * CrouchCheckDistance;
+
+        foreach (Collider2D hit in Physics2D.OverlapCircleAll(ahead, CrouchCheckRadius))
         {
             if (hit.CompareTag("CrouchingSpot")) return true;
         }
         return false;
     }
 
-    // Draws the wander zone and the hearing/light circles in the Scene view when selected
+    // Draws the wander zone and the hearing/light circles in the Scene view when the enemy is selected
     private void OnDrawGizmosSelected()
     {
         Vector2 a = zoneA, b = zoneB;
@@ -473,6 +510,7 @@ public class WanderingShadow : EnemyBase
             b = (Vector2)transform.position + Vector2.right * wanderHalfWidth;
             if (useZoneEnds) { a = zoneEndA; b = zoneEndB; }
         }
+
         Gizmos.color = Color.grey;
         Gizmos.DrawLine(a, b);
         Gizmos.color = Color.cyan;

@@ -28,7 +28,8 @@ public static class GameFlow
 
     // Which door / spawn point the player should appear at in the next room.
     // "Start" is the default spawn point for a fresh game.
-    public static string NextSpawnId = "Start";
+    // Other scripts can read this (PlayerRoomSpawn does), but only GameFlow changes it.
+    public static string NextSpawnId { get; private set; } = "Start";
 
     // The last checkpoint the player reached (an empty scene name means none yet).
     // When the player dies and presses Retry, they come back here.
