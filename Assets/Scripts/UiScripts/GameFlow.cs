@@ -80,12 +80,14 @@ public static class GameFlow
     // Call this when the player gets caught
     public static void PlayerDied()
     {
+        AudioManager.Play(SoundId.PlayerDeath);
         LoadScene(GameOverScene);
     }
 
     // Call this when the end cutscene / ending is reached
     public static void LevelComplete()
     {
+        AudioManager.Play(SoundId.LevelComplete);
         LoadScene(EndScene);
     }
 

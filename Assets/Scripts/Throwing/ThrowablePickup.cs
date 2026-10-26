@@ -11,6 +11,7 @@ public class ThrowablePickup : MonoBehaviour
 
         if (thrower.TryAddThrowable())
         {
+            AudioManager.Play(SoundId.ThrowablePickup);
             Destroy(gameObject);
         }
     }

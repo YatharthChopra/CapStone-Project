@@ -85,7 +85,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -153,19 +153,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 9
-        width: 20
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b41bb509a4d13d570800000000000000
+      spriteID: 078a55107eced254fa3cdcc9df22090b
       internalID: 8490161928610230603
       vertices: []
       indices: 
@@ -175,19 +175,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 9
-        width: 22
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 62
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bdce08d6aca9849b0800000000000000
+      spriteID: 11238e349a4f3794c9613a7b2782d7bd
       internalID: -5095652784158479141
       vertices: []
       indices: 
@@ -197,19 +197,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 9
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 124
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ee3da53b850b4daf0800000000000000
+      spriteID: 2983c14dd618bcf4c848cb1710796540
       internalID: -372478974152223762
       vertices: []
       indices: 
@@ -219,19 +219,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_3
       rect:
         serializedVersion: 2
-        x: 207
-        y: 9
-        width: 15
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 186
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3dba6c0d917955e40800000000000000
+      spriteID: cb07142f0afaefb4cb72897abaeb5b3c
       internalID: 5644583845111442387
       vertices: []
       indices: 
@@ -241,19 +241,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_4
       rect:
         serializedVersion: 2
-        x: 267
-        y: 9
-        width: 18
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 248
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bb2de2ccad6e2f2f0800000000000000
+      spriteID: 760c07e470cc98d459cf39b52262e3cf
       internalID: -940435544764132677
       vertices: []
       indices: 
@@ -263,19 +263,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_5
       rect:
         serializedVersion: 2
-        x: 332
-        y: 9
-        width: 15
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 310
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c72ddd8c58b6e4f80800000000000000
+      spriteID: fd103aff5aaa7b74e829468fb62796e3
       internalID: -8120434855757622660
       vertices: []
       indices: 
@@ -285,19 +285,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_6
       rect:
         serializedVersion: 2
-        x: 394
-        y: 9
-        width: 17
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 372
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7b727ee22b736a080800000000000000
+      spriteID: 311991eaafdefa14ab64aabfda098d45
       internalID: -9176585952290199625
       vertices: []
       indices: 
@@ -307,19 +307,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_7
       rect:
         serializedVersion: 2
-        x: 456
-        y: 9
-        width: 25
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 434
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 524119a7b75dbfbb0800000000000000
+      spriteID: 66bc1f77768ff4a41803ccba322e26c8
       internalID: -4901089043148631003
       vertices: []
       indices: 
@@ -329,19 +329,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_8
       rect:
         serializedVersion: 2
-        x: 518
-        y: 9
-        width: 30
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 496
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 72351f350c3e64c20800000000000000
+      spriteID: 9d8d13a2dbe64bf4dac5795a7aa32f01
       internalID: 3190487801220125479
       vertices: []
       indices: 
@@ -351,19 +351,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_9
       rect:
         serializedVersion: 2
-        x: 580
-        y: 9
-        width: 37
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 558
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b18f9c63105d623a0800000000000000
+      spriteID: c7adbc21fafb3e54c855e2d78e2eefd7
       internalID: -6690425995221403621
       vertices: []
       indices: 
@@ -373,19 +373,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_10
       rect:
         serializedVersion: 2
-        x: 642
-        y: 9
-        width: 31
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 620
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 00d46f0c067c97430800000000000000
+      spriteID: 145b80bd63b113143a41f9b604530901
       internalID: 3781272580522396928
       vertices: []
       indices: 
@@ -395,19 +395,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_11
       rect:
         serializedVersion: 2
-        x: 704
-        y: 9
-        width: 22
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 682
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 51a7c89b0d08a2680800000000000000
+      spriteID: 671f8342f66cb5e4a900a6df7b1dc19b
       internalID: -8779062889650816491
       vertices: []
       indices: 
@@ -417,19 +417,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_12
       rect:
         serializedVersion: 2
-        x: 766
-        y: 9
-        width: 21
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 744
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7330b7b3dc6858720800000000000000
+      spriteID: f91c6dafe7688564aa456f8f00b65b44
       internalID: 2847830555406041911
       vertices: []
       indices: 
@@ -439,19 +439,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_13
       rect:
         serializedVersion: 2
-        x: 828
-        y: 9
-        width: 20
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 806
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0ef5d4d58f58c8cf0800000000000000
+      spriteID: b3fd9b21bd402aa47b8984cdcedd646a
       internalID: -248676577648484384
       vertices: []
       indices: 
@@ -461,19 +461,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_14
       rect:
         serializedVersion: 2
-        x: 890
-        y: 9
-        width: 18
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 868
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9f11b4aeea3c46230800000000000000
+      spriteID: 7c25a3924a92d564faf8ef727e4c8086
       internalID: 3631242355589976569
       vertices: []
       indices: 
@@ -483,19 +483,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_15
       rect:
         serializedVersion: 2
-        x: 952
-        y: 9
-        width: 17
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 930
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 10fc5664925dba4e0800000000000000
+      spriteID: 7494aa388add6d84bb710653146a0f3d
       internalID: -1969246038793007359
       vertices: []
       indices: 
@@ -505,19 +505,19 @@ TextureImporter:
       name: Wandering_Shadow_Attack_16
       rect:
         serializedVersion: 2
-        x: 1014
-        y: 9
-        width: 18
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 992
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7771c76a14f7c6bf0800000000000000
+      spriteID: 01d545f199a49f246aaa75ded11ec3b3
       internalID: -329748752762136713
       vertices: []
       indices: 
@@ -527,7 +527,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 512159ccf75f5d243ad7d11c1cf7c46b
     internalID: 0
     vertices: []
     indices: 

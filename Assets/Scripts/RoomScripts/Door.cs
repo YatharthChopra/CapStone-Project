@@ -53,9 +53,11 @@ public class Door : MonoBehaviour
         if (isLocked || string.IsNullOrEmpty(targetScene))
         {
             Debug.Log(doorId + " is locked / not connected yet");
+            AudioManager.Play(SoundId.DoorLocked);
             return;
         }
 
+        AudioManager.Play(SoundId.DoorOpen);
         GameFlow.GoToRoom(targetScene, targetDoorId);
     }
 }

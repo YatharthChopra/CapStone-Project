@@ -18,6 +18,10 @@ public class WanderingShadow : EnemyBase
 
     [SerializeField] private State state = State.Idle;
 
+    // The sprite animator and the audio manager read these
+    public State CurrentState { get { return state; } }
+    public bool IsWindingUp { get { return isWindingUp; } }
+
     [Header("Speeds")]
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private float inspectSpeed = 3f;
@@ -322,6 +326,7 @@ public class WanderingShadow : EnemyBase
     {
         isWindingUp = true;
         windupTimer = attackWindup;
+        AudioManager.Play(SoundId.EnemySwing, transform.position);
         if (bodySprite != null) bodySprite.color = Color.white;   // flash as a warning
     }
 
@@ -382,6 +387,7 @@ public class WanderingShadow : EnemyBase
 
     private void ChangeState(State newState)
     {
+        State oldState = state;
         state = newState;
         stateTimer = 0f;
         lostSightTimer = 0f;
@@ -404,8 +410,11 @@ public class WanderingShadow : EnemyBase
                 ShowQuestion();
                 break;
             case State.Alert:
-            case State.Attack:
                 ShowAlert();
+                break;
+            case State.Attack:
+                // Going from Alert to Attack keeps the same "!!", so the alert sound doesn't play twice
+                if (oldState != State.Alert) ShowAlert();
                 break;
         }
 

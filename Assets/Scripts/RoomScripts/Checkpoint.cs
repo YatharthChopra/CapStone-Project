@@ -24,7 +24,10 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!saveWhenPlayerWalksIn) return;
-        if (other.GetComponentInParent<PlayerMovement>() != null) Save();
+        if (other.GetComponentInParent<PlayerMovement>() == null) return;
+
+        Save();
+        AudioManager.Play(SoundId.Checkpoint);
     }
 
     private void Save()

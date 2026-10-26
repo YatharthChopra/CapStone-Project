@@ -49,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -117,19 +117,19 @@ TextureImporter:
       name: Wandering_Shad0w_Idle_Inspect_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 9
-        width: 20
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a4291873eade14a00800000000000000
+      spriteID: bc48be14485d9794c8188857b026c410
       internalID: 739133146376802890
       vertices: []
       indices: 
@@ -139,19 +139,19 @@ TextureImporter:
       name: Wandering_Shad0w_Idle_Inspect_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 9
-        width: 20
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 62
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 27ebf9f94a10a6970800000000000000
+      spriteID: 41990b5fa45e8ae4bb78c4d9bcd657eb
       internalID: 8748807032684920434
       vertices: []
       indices: 
@@ -161,19 +161,19 @@ TextureImporter:
       name: Wandering_Shad0w_Idle_Inspect_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 9
-        width: 20
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 124
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 887ad64fe7b841980800000000000000
+      spriteID: 563d505b119f91e4d845d609555a54af
       internalID: -8569070813596244088
       vertices: []
       indices: 
@@ -183,19 +183,19 @@ TextureImporter:
       name: Wandering_Shad0w_Idle_Inspect_3
       rect:
         serializedVersion: 2
-        x: 208
-        y: 9
-        width: 20
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 186
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5281177d1ee555690800000000000000
+      spriteID: c5f897a9b73f3ee4f814d5a06daad8a6
       internalID: -7614075270924789723
       vertices: []
       indices: 
@@ -205,19 +205,19 @@ TextureImporter:
       name: Wandering_Shad0w_Idle_Inspect_4
       rect:
         serializedVersion: 2
-        x: 270
-        y: 9
-        width: 20
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 248
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16129032}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d0b32c550898a10e0800000000000000
+      spriteID: f19d2ee3085b1ad4d8385f91594111e6
       internalID: -2298373475531605235
       vertices: []
       indices: 
@@ -227,7 +227,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d1f0a410ef4fbe84c8fc19ce666db108
     internalID: 0
     vertices: []
     indices: 

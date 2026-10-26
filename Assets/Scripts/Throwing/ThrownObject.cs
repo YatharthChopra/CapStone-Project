@@ -33,6 +33,7 @@ public class ThrownObject : MonoBehaviour
 
         landed = true;
         NoiseSystem.MakeNoise(transform.position, loudness);   // enemies close enough will hear it
+        AudioManager.Play(SoundId.ThrowableLand, transform.position);
 
         // Stop, flash white for a moment so you can see where it landed, then disappear
         body.linearVelocity = Vector2.zero;

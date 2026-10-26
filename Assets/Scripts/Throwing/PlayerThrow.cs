@@ -149,6 +149,7 @@ public class PlayerThrow : MonoBehaviour
         ThrownObject thrown = Instantiate(throwablePrefab, origin, Quaternion.identity);
         float loudness = Mathf.Lerp(quietNoise, loudNoise, power);   // a harder throw makes more noise
         thrown.Launch(velocity, loudness, myCollider);
+        AudioManager.Play(SoundId.Throw);
 
         throwablesLeft--;
     }

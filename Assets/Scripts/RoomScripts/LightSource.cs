@@ -44,7 +44,9 @@ public class LightSource : MonoBehaviour
     {
         timer += Time.deltaTime;
         float cycle = timeBetweenFlickers + flickerLength;
+        bool wasFlickering = IsAttracting;
         IsAttracting = (timer % cycle) >= timeBetweenFlickers;
+        if (IsAttracting && !wasFlickering) AudioManager.Play(SoundId.LightFlicker, transform.position);
 
         // Blink quickly while flickering
         bool blinkOn = Mathf.Sin(Time.time * 30f) > 0f;

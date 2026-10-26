@@ -45,6 +45,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected int facing = 1;   // 1 = looking right, -1 = looking left
 
+    // The sprite animator reads this to know which way to face the picture
+    public int Facing { get { return facing; } }
+
     private float targetAngle;          // the way the cone should point (degrees)
     private float currentAngle;         // the way it's pointing right now
     private bool angleStarted = false;  // false until the first time we point it somewhere
@@ -285,12 +288,14 @@ public abstract class EnemyBase : MonoBehaviour
     protected void ShowQuestion()
     {
         SetSignal("??");
+        AudioManager.Play(SoundId.EnemyQuestion, transform.position);
         if (onQuestionSignal != null) onQuestionSignal.Invoke();
     }
 
     protected void ShowAlert()
     {
         SetSignal("!!");
+        AudioManager.Play(SoundId.EnemyAlert, transform.position);
         if (onAlertSignal != null) onAlertSignal.Invoke();
     }
 

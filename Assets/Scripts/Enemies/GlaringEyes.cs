@@ -14,6 +14,9 @@ public class GlaringEyes : EnemyBase
 
     [SerializeField] private State state = State.Idle;
 
+    // The audio manager reads this to decide when to play the tense music
+    public State CurrentState { get { return state; } }
+
     [Header("Looking")]
     [SerializeField] private float lookAtBoxesTime = 4f;    // seconds spent looking toward the boxes
     [SerializeField] private float lookAwayTime = 3f;       // seconds spent looking the other way
