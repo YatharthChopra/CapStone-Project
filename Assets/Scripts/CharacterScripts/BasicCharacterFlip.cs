@@ -5,9 +5,11 @@ public class BasicCharacterFlip : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Rigidbody2D rb;
     bool fliped = false;
+    private Vector3 baseRotation;
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = this.GetComponentInParent<Rigidbody2D>();
+        baseRotation = transform.rotation.eulerAngles;
     }
 
     // Update is called once per frame
@@ -15,12 +17,12 @@ public class BasicCharacterFlip : MonoBehaviour
     {
         if(rb.linearVelocityX > 0 && fliped)
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180);
+            transform.eulerAngles = baseRotation;
             fliped = false;
         }
         else if (rb.linearVelocityX < 0 && !fliped)
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0);
+            transform.eulerAngles = baseRotation + new Vector3(0, 180, 0);
             fliped = true;
         }
     }
