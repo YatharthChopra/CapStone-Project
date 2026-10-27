@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 // Handles moving between the main menu, the game, the death screen and the end screen.
 // It's "static", so any script can call it without needing to find an object first.
-// Example (for Alice's fail state):  GameFlow.PlayerDied();
 public static class GameFlow
 {
     // These must match the scene file names exactly.

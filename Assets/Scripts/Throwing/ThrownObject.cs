@@ -1,11 +1,12 @@
 using UnityEngine;
 
 // The thing Nin throws. It flies through the air, and when it lands it makes a noise
-// that nearby enemies can hear (see NoiseSystem). Needs a Rigidbody2D and a Collider2D.
-[RequireComponent(typeof(Rigidbody2D))]
+// that nearby enemies can hear (see NoiseSystem).
 public class ThrownObject : MonoBehaviour
 {
     [SerializeField] private float lifetime = 6f;   // removed after this long even if it never lands
+
+    private const float EnemyHearingRadius = 12f;   // the same as the enemies' Hearing Radius (a normal noise)
 
     private float loudness = 1f;
     private bool landed;
@@ -38,7 +39,12 @@ public class ThrownObject : MonoBehaviour
         // Stop, flash white for a moment so you can see where it landed, then disappear
         body.linearVelocity = Vector2.zero;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        if (sr != null) sr.color = Color.white;
+        if (sr != null)
+        {
+            sr.color = Color.white;
+            // A ring spreads out to show how far the noise carries
+            NoiseRing.Create(transform.position, EnemyHearingRadius * loudness, sr.sprite);
+        }
         Destroy(gameObject, 0.2f);
     }
 }

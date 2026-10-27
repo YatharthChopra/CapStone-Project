@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// The Wandering Shadow enemy. Follows the first FSM from Jasmine's write-up:
+// The Wandering Shadow enemy:
 //   Idle    -> stands still, goes to Stalk after 5 seconds
 //   Stalk   -> walks to one end of its wander zone, then back to Idle
 //   Inspect -> walks to a light or noise ("??"), then goes to Idle (or Alert if the player is there)
@@ -24,8 +24,9 @@ public class WanderingShadow : EnemyBase
 
     [Header("Speeds")]
     [SerializeField] private float walkSpeed = 2f;
-    [SerializeField] private float inspectSpeed = 3f;
+    [SerializeField] private float inspectSpeed = 4f;
     [SerializeField] private float chaseSpeed = 5f;
+    [SerializeField] private float alertApproachSpeed = 3f;   // how fast it walks toward the player while Alert
 
     [Header("Wander zone (the grey box on the paper map)")]
     // The zone is centred on wherever the enemy is placed, and goes this far each way
@@ -47,12 +48,23 @@ public class WanderingShadow : EnemyBase
     [SerializeField] private float giveUpTime = 4f;
 
     [Header("Detection")]
-    [SerializeField] private float lightRadius = 6f;     // how close a light has to be to catch its attention
+    [SerializeField] private float lightRadius = 12f;    // how close a light has to be to catch its attention
 
     [Header("Attack")]
     [SerializeField] private float attackRange = 1.8f;
     [SerializeField] private float attackWindup = 0.5f;  // warning time before the swing lands
     [SerializeField] private float attackCooldown = 1f;
+    // If the player lets an Alert shadow get this close and stay there, it attacks even if the meter isn't full.
+    // (Otherwise you could just walk past one.) The delay gives the player a moment to back off or hide.
+    [SerializeField] private float closeAttackRange = 4f;
+    [SerializeField] private float closeAttackDelay = 1.5f;
+
+    [Header("Searching")]
+    [SerializeField] private float searchTime = 3f;           // how long it looks around after reaching a noise or light
+    [SerializeField] private float searchTurnTime = 1f;       // it looks the other way this often while searching
+    // Wandering shadows normally stop at crouch boxes. Tick this to let one walk right along a row of boxes
+    // when it is wandering or investigating (it still can't chase into them).
+    [SerializeField] private bool wanderThroughCrouchSpots = false;
 
     [Header("Look")]
     [SerializeField] private SpriteRenderer bodySprite;  // just used to flash during the attack windup
@@ -81,6 +93,10 @@ public class WanderingShadow : EnemyBase
     private float stateTimer;      // how long we've been in the current state
     private float lostSightTimer;  // Alert: how long the player has been out of sight
     private float lostTrackTimer;  // Attack: how long the player has been hidden or behind a wall
+    private float closeTimer;      // Alert: how long the player has been close by
+    private float searchTimer;     // Inspect: how long we've been looking around at the spot
+    private float searchTurnTimer;
+    private bool isSearching;      // Inspect: true once we've reached the spot
     private float lightCooldown;
     private float backOffTimer;
     private float windupTimer;
@@ -164,11 +180,18 @@ public class WanderingShadow : EnemyBase
 
     protected override void HearNoise(Vector2 position)
     {
-        // Only Idle and Stalk shadows get distracted by noise
+        // Idle and Stalk shadows get distracted by noise
         if (state == State.Idle || state == State.Stalk)
         {
             heardNoise = true;
             noisePosition = position;
+        }
+        // One that is already investigating goes to the new noise instead (it's trying to work out what's going on)
+        else if (state == State.Inspect)
+        {
+            inspectTarget = position;
+            isSearching = false;
+            searchTimer = 0f;
         }
     }
 
@@ -232,15 +255,31 @@ public class WanderingShadow : EnemyBase
 
     private void UpdateInspect()
     {
-        bool arrived = MoveToward(inspectTarget, inspectSpeed);
-        if (!arrived && !isBlocked) return;
+        if (!isSearching)
+        {
+            bool arrived = MoveToward(inspectTarget, inspectSpeed);
+            if (!arrived && !isBlocked) return;
+            isSearching = true;   // got to the light / noise, now look around for what caused it
+        }
 
-        // Got to the light / noise. Is the player there?
-        if (CanSeePlayer())
+        // Is the player there?
+        // (Not while we're backing off from a crouch spot, or we'd flip between Inspect and Attack forever)
+        if (backOffTimer <= 0f && CanSeePlayer())
         {
             ChangeState(State.Alert);
+            return;
         }
-        else
+
+        // Stand still and look left and right for a few seconds before giving up
+        searchTimer += Time.deltaTime;
+        searchTurnTimer += Time.deltaTime;
+        if (searchTurnTimer >= searchTurnTime)
+        {
+            searchTurnTimer = 0f;
+            SetFacing(-facing);
+        }
+
+        if (searchTimer >= searchTime)
         {
             lightCooldown = LightCooldownTime;   // don't get pulled back to the same light straight away
             ChangeState(State.Idle);
@@ -263,8 +302,21 @@ public class WanderingShadow : EnemyBase
 
         // Alice's detection meter decides when it turns into an Attack
         // (if the player has no meter, just attack after a short delay)
-        bool readyToAttack = DetectionMeterFull() || (playerHiding == null && stateTimer >= NoMeterAttackDelay);
-        if (readyToAttack) ChangeState(State.Attack);
+        // It also attacks if the player stays close to it for a moment, whatever the meter says
+        Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
+        if (IsWithinReach(toPlayer, closeAttackRange - attackRange)) closeTimer += Time.deltaTime;
+        else closeTimer = 0f;
+
+        bool readyToAttack = DetectionMeterFull() || closeTimer >= closeAttackDelay
+            || (playerHiding == null && stateTimer >= NoMeterAttackDelay);
+        if (readyToAttack)
+        {
+            ChangeState(State.Attack);
+            return;
+        }
+
+        // Not just standing and staring: it closes in on the player while the meter fills
+        MoveToward(player.transform.position, alertApproachSpeed);
     }
 
     private void UpdateAttack()
@@ -275,6 +327,7 @@ public class WanderingShadow : EnemyBase
         if (crouchBlocked && !isWindingUp)
         {
             backOffTimer = BackOffTime;   // for a few seconds, don't go straight back to chasing
+            lightCooldown = BackOffTime;  // ...or get pulled toward a light, which sent it straight back here
             ChangeState(State.Idle);
             return;
         }
@@ -393,6 +446,10 @@ public class WanderingShadow : EnemyBase
         lostSightTimer = 0f;
         lostTrackTimer = 0f;
         stuckTimer = 0f;
+        closeTimer = 0f;
+        searchTimer = 0f;
+        searchTurnTimer = 0f;
+        isSearching = false;
         isWindingUp = false;
         heardNoise = false;
         if (bodySprite != null) bodySprite.color = normalColor;
@@ -473,7 +530,10 @@ public class WanderingShadow : EnemyBase
 
         if (moveDirection != Vector2.zero)
         {
-            if (CrouchSpotAhead())
+            bool canWalkThroughSpots = wanderThroughCrouchSpots
+                && (state == State.Idle || state == State.Stalk || state == State.Inspect);
+
+            if (!canWalkThroughSpots && CrouchSpotAhead())
             {
                 // too tall to follow into a crouch spot
                 isBlocked = true;

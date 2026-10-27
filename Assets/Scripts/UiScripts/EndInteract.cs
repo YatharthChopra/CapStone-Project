@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 // Goes on Nin's storage in the storage room. Stand next to it and press E to finish the game.
 // For now it goes straight to the end screen. Later this is where the end cutscene would start.
-// Needs a Collider2D with "Is Trigger" ticked.
 public class EndInteract : MonoBehaviour
 {
     private Collider2D myCollider;

@@ -5,20 +5,25 @@ using UnityEngine.InputSystem;
 //   - Hold the left mouse button to charge a throw. A line of dots shows where it will land.
 //   - Let go to throw. A quick click is a short, quiet throw. Holding longer throws further, and louder.
 //   - The object is thrown toward the mouse. Moving the mouse up or down changes how high the arc is.
-// Nin carries a limited number of throwables (see Max Throwables). Throwable pickups refill them.
-// Put this on the Player.
+// There is no ammo. After a throw she has to wait for a short cooldown before she can throw again.
 public class PlayerThrow : MonoBehaviour
 {
     [Header("What gets thrown")]
     [SerializeField] private ThrownObject throwablePrefab;
-    [SerializeField] private int maxThrowables = 3;
+    [SerializeField] private float throwCooldown = 3f;   // seconds to wait after a throw before the next one
 
     [Header("Throw strength")]
-    [SerializeField] private float chargeTime = 1f;      // seconds of holding to reach a full-power throw
+    [SerializeField] private float chargeTime = 2f;      // seconds of holding to reach a full-power throw
     [SerializeField] private float minSpeed = 10f;       // speed of the shortest throw
     [SerializeField] private float maxSpeed = 22f;       // speed of a full-power throw
     [SerializeField] private float minAngle = 30f;       // the lowest the arc can go (degrees above flat)
     [SerializeField] private float maxAngle = 65f;       // the highest the arc can go
+
+    [Header("Quick tap (a short lob right in front of Nin)")]
+    [SerializeField] private float tapTime = 0.2f;       // let go before this long and it counts as a tap
+    [SerializeField] private float tapSpeed = 7f;        // a gentle throw, lands about 2 units away
+    [SerializeField] private float tapAngle = 45f;       // arc of the lob (degrees above flat)
+    [SerializeField] private float tapNoise = 0.4f;      // quiet
 
     [Header("Noise when it lands")]
     // 1 = a normal noise. Enemies hear a noise from (their hearing radius x loudness) away.
@@ -35,7 +40,7 @@ public class PlayerThrow : MonoBehaviour
     private const float DotTimeGap = 0.08f;          // seconds of flight between one dot and the next
     private const int DotSortingOrder = 20;          // draws on top of everything else
 
-    private int throwablesLeft;
+    private float cooldownLeft;   // seconds until Nin can throw again (0 = ready)
     private bool charging;
     private float chargeTimer;
     private float throwableGravityScale = 3f;
@@ -45,7 +50,6 @@ public class PlayerThrow : MonoBehaviour
 
     private void Start()
     {
-        throwablesLeft = maxThrowables;
         myCollider = GetComponent<Collider2D>();
 
         // Shout in the Console if something is missing, so throwing never fails quietly
@@ -85,11 +89,13 @@ public class PlayerThrow : MonoBehaviour
 
     private void Update()
     {
+        if (cooldownLeft > 0f) cooldownLeft -= Time.deltaTime;
+
         Mouse mouse = Mouse.current;
         if (mouse == null || Time.timeScale == 0f || throwablePrefab == null || Camera.main == null) return;
 
         // Start charging
-        if (mouse.leftButton.wasPressedThisFrame && throwablesLeft > 0)
+        if (mouse.leftButton.wasPressedThisFrame && cooldownLeft <= 0f)
         {
             charging = true;
             chargeTimer = 0f;
@@ -112,15 +118,28 @@ public class PlayerThrow : MonoBehaviour
 
         Vector2 origin;
         Vector2 velocity = GetLaunchVelocity(power, out origin);
-        ShowDots(origin, velocity);
+
+        // A quick click is a short lob just in front of Nin, so we only show the aiming dots once she's held it a bit
+        bool isTap = chargeTimer < tapTime;
+        if (isTap) HideDots();
+        else ShowDots(origin, velocity);
 
         // Let go to throw
         if (mouse.leftButton.wasReleasedThisFrame)
         {
-            Throw(origin, velocity, power);
+            if (isTap) Throw(origin, MakeTapVelocity(velocity.x), tapNoise);
+            else Throw(origin, velocity, Mathf.Lerp(quietNoise, loudNoise, power));
             charging = false;
             HideDots();
         }
+    }
+
+    // A tap always makes the same small, high lob toward whichever side the mouse is on
+    private Vector2 MakeTapVelocity(float sideways)
+    {
+        float directionX = sideways >= 0f ? 1f : -1f;
+        float radians = tapAngle * Mathf.Deg2Rad;
+        return new Vector2(directionX * Mathf.Cos(radians), Mathf.Sin(radians)) * tapSpeed;
     }
 
     // Works out where the throw starts and how fast it leaves, from the mouse position and how long we've charged
@@ -144,14 +163,13 @@ public class PlayerThrow : MonoBehaviour
         return new Vector2(directionX * Mathf.Cos(radians), Mathf.Sin(radians)) * speed;
     }
 
-    private void Throw(Vector2 origin, Vector2 velocity, float power)
+    private void Throw(Vector2 origin, Vector2 velocity, float loudness)
     {
         ThrownObject thrown = Instantiate(throwablePrefab, origin, Quaternion.identity);
-        float loudness = Mathf.Lerp(quietNoise, loudNoise, power);   // a harder throw makes more noise
         thrown.Launch(velocity, loudness, myCollider);
         AudioManager.Play(SoundId.Throw);
 
-        throwablesLeft--;
+        cooldownLeft = throwCooldown;
     }
 
     // Draws the dotted line showing the path of the throw
@@ -195,19 +213,20 @@ public class PlayerThrow : MonoBehaviour
         return false;
     }
 
-    // Used by pickups. Gives back false if Nin is already carrying the most she can.
+    // Used by the old pickups. With no ammo there is nothing to refill, so a pickup just skips the
+    // cooldown. Gives back false (and stays put) if Nin can already throw.
     public bool TryAddThrowable()
     {
-        if (throwablesLeft >= maxThrowables) return false;
-        throwablesLeft++;
+        if (cooldownLeft <= 0f) return false;
+        cooldownLeft = 0f;
         return true;
     }
 
     // A simple on-screen counter for testing (bottom-left)
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, Screen.height - 32, 450, 25),
-            "Throwables: " + throwablesLeft + " / " + maxThrowables + "     (hold left mouse to throw further)");
+        string status = cooldownLeft > 0f ? "Throw: recharging " + cooldownLeft.ToString("0.0") + "s" : "Throw: ready";
+        GUI.Label(new Rect(10, Screen.height - 32, 450, 25), status + "     (hold left mouse to throw further)");
 
         if (charging)
         {

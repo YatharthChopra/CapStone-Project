@@ -235,6 +235,7 @@ MonoBehaviour:
   walkSpeed: 5
   crouchSpeed: 2
   jumpForce: 12
+  allowJump: 0
   allowVerticalMove: 0
   verticalSpeed: 3
   crouchHeightMultiplier: 0.5

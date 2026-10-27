@@ -27,12 +27,20 @@ public class PlayerAnimator : MonoBehaviour
     private const float FullWalkSpeed = 5f;        // same as the walk speed in PlayerMovement
     private const float FullCrouchSpeed = 2f;      // same as the crouch speed in PlayerMovement
     private const float FacingSpeed = 0.05f;       // moving slower than this doesn't change which way she faces
+    private const float CrouchTransitionTime = 0.36f;   // the crouch-down / stand-up animation: 5 pictures at 14 per second
+
+    private const int NoTransition = 0;
+    private const int CrouchingDown = 1;
+    private const int StandingUp = 2;
 
     private PlayerMovement movement;
     private Rigidbody2D body;
     private HidingScript hiding;
     private float airTimer;
     private bool facingRight = true;
+    private bool wasCrouching;
+    private float transitionTimer;   // counts down while the crouch-down or stand-up animation plays
+    private int transition;          // 0 = none, 1 = crouching down, 2 = standing up
 
     private void Awake()
     {
@@ -43,7 +51,7 @@ public class PlayerAnimator : MonoBehaviour
         if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
 
-        // We have a crawl animation now, so the movement script shouldn't squash the picture
+        // crawl animation, so the movement script shouldn't squash the picture
         movement.SetSquashVisualWhenCrouching(false);
 
         PlaceThePicture();
@@ -59,6 +67,23 @@ public class PlayerAnimator : MonoBehaviour
         Transform picture = spriteRenderer.transform;
         picture.localScale = new Vector3(spriteScale, spriteScale, 1f);
         picture.localPosition = new Vector3(0f, feetY + feetNudgeY, 0f);
+    }
+
+    // When Nin starts or stops crouching, plays the one-off crouch-down or stand-up animation first.
+    // While it plays, the Animator waits (the "Transition" number stops it switching to walk/idle).
+    private void UpdateCrouchTransition(bool crouching)
+    {
+        if (crouching != wasCrouching)
+        {
+            transition = crouching ? CrouchingDown : StandingUp;
+            transitionTimer = CrouchTransitionTime;
+            wasCrouching = crouching;
+        }
+
+        if (transition == NoTransition) return;
+
+        transitionTimer -= Time.deltaTime;
+        if (transitionTimer <= 0f) transition = NoTransition;
     }
 
     private void LateUpdate()
@@ -79,7 +104,10 @@ public class PlayerAnimator : MonoBehaviour
         float fullSpeed = crouching ? FullCrouchSpeed : FullWalkSpeed;
         float jumpProgress = Mathf.InverseLerp(FullJumpSpeed, -FullJumpSpeed, velocity.y);   // 0 = going up, 1 = coming down
 
+        UpdateCrouchTransition(crouching);
+
         animator.SetBool("Moving", moving);
+        animator.SetInteger("Transition", transition);
         animator.SetBool("Crouching", crouching);
         animator.SetBool("InAir", inAir);
         animator.SetFloat("WalkRate", Mathf.Clamp(speed / fullSpeed, 0.5f, 1.5f));

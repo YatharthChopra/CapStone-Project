@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-// The Glaring Eyes enemy. Follows the second FSM from Jasmine's write-up:
+// The Glaring Eyes enemy
 //   Idle       -> stays in place, looking toward the nearby boxes, then looking the other way,
 //                 switching every few seconds
 //   Distracted -> turned toward a noise ("??"), goes back to Idle after 5 seconds
@@ -54,42 +55,62 @@ public class GlaringEyes : EnemyBase
     // Works out the two directions the eyes look between
     private void WorkOutGazeDirections()
     {
-        Vector2 toBoxes;
-        if (!TryFindBoxDirection(out toBoxes))
+        Vector2 first;
+        Vector2 second;
+        if (!TryFindGapDirections(out first, out second))
         {
             // No boxes nearby, so fall back to the direction set in the Inspector
-            toBoxes = (restLookDirection != Vector2.zero) ? restLookDirection : (restFacesRight ? Vector2.right : Vector2.left);
+            first = (restLookDirection != Vector2.zero) ? restLookDirection : (restFacesRight ? Vector2.right : Vector2.left);
+            second = new Vector2(-first.x, first.y);   // flip left/right, keep the same up/down
         }
 
-        // Make sure there is some left/right in it, so "the other side" is a different direction
-        if (Mathf.Abs(toBoxes.x) < 0.3f)
-        {
-            toBoxes.x = restFacesRight ? 0.3f : -0.3f;
-        }
+        // Make sure there is some left/right in each one, so the two directions are really different
+        if (Mathf.Abs(first.x) < 0.3f) first.x = restFacesRight ? 0.3f : -0.3f;
+        if (Mathf.Abs(second.x) < 0.3f) second.x = -Mathf.Sign(first.x) * 0.3f;
 
-        lookTowardBoxes = toBoxes.normalized;
-        lookAway = new Vector2(-toBoxes.x, toBoxes.y).normalized;   // flip left/right, keep the same up/down
+        lookTowardBoxes = first.normalized;
+        lookAway = second.normalized;
     }
 
-    // Finds the boxes close to this eye and gives back the direction to look at them
-    private bool TryFindBoxDirection(out Vector2 direction)
+    // Finds the two gaps between boxes that are closest to this eye, and gives back the direction to each.
+    // The eye switches between watching one gap and the other, so the player can cross a gap while the eye is
+    // looking at the other one. (Looking right at a box would be pointless, Nin is hidden behind it.)
+    // With only one gap (or one box) the second direction is the same one mirrored to the other side.
+    private bool TryFindGapDirections(out Vector2 nearestGap, out Vector2 secondGap)
     {
-        direction = Vector2.zero;
-        Vector2 total = Vector2.zero;
-        int count = 0;
+        nearestGap = Vector2.zero;
+        secondGap = Vector2.zero;
+        Vector2 eyePosition = transform.position;
 
+        // All the boxes close to this eye, from left to right
+        List<Vector2> boxes = new List<Vector2>();
         foreach (GameObject box in GameObject.FindGameObjectsWithTag("CrouchingSpot"))
         {
-            if (Vector2.Distance(transform.position, box.transform.position) > boxSearchRadius) continue;
-            total += (Vector2)box.transform.position;
-            count++;
+            Vector2 boxPosition = box.transform.position;
+            if (Vector2.Distance(eyePosition, boxPosition) <= boxSearchRadius) boxes.Add(boxPosition);
         }
 
-        if (count == 0) return false;
+        if (boxes.Count == 0) return false;
+        boxes.Sort((a, b) => a.x.CompareTo(b.x));
 
-        Vector2 middleOfBoxes = total / count;
-        direction = middleOfBoxes - (Vector2)transform.position;
-        return direction.sqrMagnitude > 0.01f;
+        // The middle of each space between two boxes that are next to each other
+        List<Vector2> gaps = new List<Vector2>();
+        for (int i = 0; i < boxes.Count - 1; i++)
+        {
+            gaps.Add((boxes[i] + boxes[i + 1]) / 2f);
+        }
+
+        // Only one box: just look at it
+        if (gaps.Count == 0) gaps.Add(boxes[0]);
+
+        // The two gaps closest to the eye
+        gaps.Sort((a, b) => Vector2.Distance(eyePosition, a).CompareTo(Vector2.Distance(eyePosition, b)));
+
+        nearestGap = gaps[0] - eyePosition;
+        if (gaps.Count >= 2) secondGap = gaps[1] - eyePosition;
+        else secondGap = new Vector2(-nearestGap.x, nearestGap.y);
+
+        return nearestGap.sqrMagnitude > 0.01f;
     }
 
     // Points the cone at whichever side the eye is supposed to be watching right now

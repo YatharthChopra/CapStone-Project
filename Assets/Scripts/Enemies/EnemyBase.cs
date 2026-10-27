@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 // WanderingShadow and GlaringEyes both build on this.
 public abstract class EnemyBase : MonoBehaviour
 {
-    // ---------------------------------------------------------------- settings you can change in the Inspector
+    // ---------------------------------------------------------------- settings we can change in the Inspector
 
     [Header("Vision cone")]
     [SerializeField] protected Collider2D visionCone;     // the cone object (a child of the enemy, tagged EnemyView)
@@ -22,12 +22,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     [Header("Sight line")]
     // A thin line from the enemy to the player, shown only while the enemy can actually see the player
-    [SerializeField] private bool showSightLine = true;
+    [SerializeField] private bool showSightLine = false;
     [SerializeField] private float sightLineThickness = 0.08f;
     [SerializeField] private Color sightLineColor = new Color(1f, 0.25f, 0.25f, 0.75f);
 
     [Header("Hearing")]
-    [SerializeField] protected float hearingRadius = 8f;  // how far away a normal noise can be heard
+    [SerializeField] protected float hearingRadius = 12f;  // how far away a normal noise can be heard
 
     [Header("Signals (placeholder text for now)")]
     [SerializeField] private TextMesh signalText;         // shows ?? or !! above the head

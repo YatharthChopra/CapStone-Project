@@ -375,10 +375,10 @@ MonoBehaviour:
   turnSpeedDegrees: 0
   coneStartOffset: 0.5
   coneVisibility: 0.5
-  showSightLine: 1
+  showSightLine: 0
   sightLineThickness: 0.08
   sightLineColor: {r: 1, g: 0.25, b: 0.25, a: 0.75}
-  hearingRadius: 8
+  hearingRadius: 12
   signalText: {fileID: 2732709351573658047}
   stateText: {fileID: 4534100851898886742}
   onQuestionSignal:
@@ -389,7 +389,7 @@ MonoBehaviour:
       m_Calls: []
   state: 0
   walkSpeed: 2
-  inspectSpeed: 3
+  inspectSpeed: 4
   chaseSpeed: 5
   wanderHalfWidth: 5
   useZoneEdges: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
   idleTime: 5
   loseSightTime: 5
   giveUpTime: 4
-  lightRadius: 6
+  lightRadius: 12
   attackRange: 1.8
   attackWindup: 0.5
   attackCooldown: 1

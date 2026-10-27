@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Tells a Wandering Shadow's Animator what it is doing, so it plays the right animation.
-// The look of the shadow changes with its mood (Jasmine's three sets of pictures):
+// The look of the shadow changes with its mood:
 //   Neutral (Idle, Stalk)   Inspect (Inspect)   Hostile (Alert, Attack)
 // and the Attack animation plays when it swings.
 // The Animator Controller (Assets/Animation/Shadow) decides how the animations blend into each other.
