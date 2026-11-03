@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 // Goes on the lights on the walls. Every so often the light flickers,
 // and while it flickers the Wandering Shadows are drawn toward it.
@@ -48,5 +49,11 @@ public class LightSource : MonoBehaviour
             bool blinkOn = Mathf.Sin(Time.time * 30f) > 0f;
             glow.color = (IsAttracting && blinkOn) ? Color.white : normalColor;
         }
+    }
+
+    // Alice Adition to affect light
+    private void toggleLight(bool value)
+    {
+        this.GetComponent<Light2D>().enabled = value;
     }
 }

@@ -100,8 +100,10 @@ public class PlayerMovement : MonoBehaviour
 
         float speed = IsCrouching ? crouchSpeed : walkSpeed;
         Vector2 velocity = rb.linearVelocity;
+        //float verticalVel = velocity.y;
+        //velocity.y = 0;
         velocity.x = MoveInput.x * speed;
-
+        
         if (allowVerticalMove)
         {
             // Turn gravity off so W/S can move us up and down freely
@@ -120,9 +122,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         jumpPressed = false;
+        velocity = RotateVelocity(velocity);
+        //velocity.y = verticalVel;
         rb.linearVelocity = velocity;
     }
-
+    
     private void HandleCrouch(bool ctrlHeld)
     {
         if (ctrlHeld && !IsCrouching)
@@ -187,5 +191,20 @@ public class PlayerMovement : MonoBehaviour
             if (hits[i] != box) return true;
         }
         return false;
+    }
+
+
+    // alice addition
+    // this will rotatate the velocity so characer can move with rotated gravity
+    private Vector2 RotateVelocity(Vector2 velocity)
+    {
+        Vector3 newVel = Vector3.zero;
+        
+        float radRotation = transform.eulerAngles.z * Mathf.PI /90; // this gets the rotation amount
+        newVel.x = velocity.x * Mathf.Cos(radRotation) - velocity.y* Mathf.Sin(radRotation);
+        newVel.y =velocity.y* Mathf.Cos(radRotation) + velocity.x* Mathf.Sin(radRotation);
+        newVel.x *= -1;
+        newVel.y *= -1;
+        return newVel;
     }
 }

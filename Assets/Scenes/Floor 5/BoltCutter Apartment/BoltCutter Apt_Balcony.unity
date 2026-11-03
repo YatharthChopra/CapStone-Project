@@ -448,6 +448,7 @@ MonoBehaviour:
   targetScene: 
   targetDoorId: 
   isLocked: 0
+  spawnOffsetX: 0
 --- !u!61 &200259314
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1696,6 +1697,7 @@ MonoBehaviour:
   targetScene: Boltcutter Apt_LivingRoom 1
   targetDoorId: Door to Boltcutter Balcony 2
   isLocked: 0
+  spawnOffsetX: 0
 --- !u!61 &2096917893
 BoxCollider2D:
   m_ObjectHideFlags: 0

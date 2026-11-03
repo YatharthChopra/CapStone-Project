@@ -177,7 +177,11 @@ public class HidingScript : MonoBehaviour
         }
         if (collision.tag == "EnemyView")
         {
-            EnemiesList.Remove(collision.GetComponentInParent<Transform>().gameObject);
+            if (EnemiesList.Contains(collision.GetComponentInParent<Transform>().gameObject))
+            {
+                EnemiesList.Remove(collision.GetComponentInParent<Transform>().gameObject);
+            }
+            
             if (EnemiesList.Count == 0)
             {
                 InView = false;
