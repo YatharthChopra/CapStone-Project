@@ -4,12 +4,11 @@ using UnityEngine;
 public enum ItemKind { Weapon, Tool }
 
 // Something Nin can pick up and carry: a hockey stick, a wrench, bolt cutters...
-// Put it on an object with a SpriteRenderer and a Collider2D with "Is Trigger" ticked
 // (make the collider a bit bigger than the picture so it's easy to stand in).
 // Nin stands in it and presses E to pick it up (see PlayerCarry).
 //   Weapon -> Nin swings it to stun a Wandering Shadow. It can break after a few hits.
 //   Tool   -> Nin uses it on something in the level (see ToolLock).
-// To make a new item: duplicate the HockeyStick or Wrench prefab, change the name, picture and numbers.
+// (Note for self) To make a new item: duplicate the HockeyStick or Wrench prefab, change the name, picture and numbers.
 public class PickupItem : MonoBehaviour
 {
     [Header("What it is")]

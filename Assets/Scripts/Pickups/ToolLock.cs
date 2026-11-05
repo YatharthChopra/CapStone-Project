@@ -4,7 +4,6 @@ using UnityEngine.Events;
 // Something in the level that needs a tool, like a panel that needs the wrench.
 // Nin stands in it holding the right item and presses E. It then unlocks a door, and/or runs whatever
 // is hooked up to "On Unlocked" in the Inspector (open a gate, turn a light on...).
-// Needs a Collider2D with "Is Trigger" ticked.
 public class ToolLock : MonoBehaviour
 {
     [SerializeField] private string requiredItemName = "Wrench";   // must match the item's Item Name exactly

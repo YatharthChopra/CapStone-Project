@@ -183,7 +183,7 @@ public class PlayerCarry : MonoBehaviour
 
     // ---------------------------------------------------------------- checkpoints
     // When Nin reaches a checkpoint we remember what she is carrying (and which items have been picked up).
-    // If she dies and retries, she gets back exactly that: what she held at the checkpoint, and nothing she grabbed since.
+    // If she dies and retries, she gets back exactly that. What she held at the checkpoint, and nothing she grabbed since.
 
     private static PickupItem checkpointCopy;                                // a spare copy of the item she held at the checkpoint
     private static HashSet<string> checkpointTaken = new HashSet<string>();
