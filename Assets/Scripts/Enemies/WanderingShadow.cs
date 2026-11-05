@@ -14,13 +14,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class WanderingShadow : EnemyBase
 {
-    public enum State { Idle, Stalk, Inspect, Alert, Attack }
+    // (Stunned is only ever set by Stun(), when Nin hits it with a weapon)
+    public enum State { Idle, Stalk, Inspect, Alert, Attack, Stunned }
 
     [SerializeField] private State state = State.Idle;
 
     // The sprite animator and the audio manager read these
     public State CurrentState { get { return state; } }
     public bool IsWindingUp { get { return isWindingUp; } }
+    public bool IsStunned { get { return state == State.Stunned; } }
 
     [Header("Speeds")]
     [SerializeField] private float walkSpeed = 2f;
@@ -102,6 +104,7 @@ public class WanderingShadow : EnemyBase
     private float windupTimer;
     private float cooldownTimer;
     private float stuckTimer;
+    private float stunTimer;       // Stunned: seconds left
 
     // Targets
     private Vector2 stalkTarget;
@@ -214,7 +217,26 @@ public class WanderingShadow : EnemyBase
             case State.Inspect: UpdateInspect(); break;
             case State.Alert: UpdateAlert(); break;
             case State.Attack: UpdateAttack(); break;
+            case State.Stunned: UpdateStunned(); break;
         }
+    }
+
+    // Nin hit it with a weapon: it freezes (and can't see) for a few seconds, from any state
+    public void Stun(float seconds)
+    {
+        stunTimer = seconds;
+        ChangeState(State.Stunned);
+    }
+
+    private void UpdateStunned()
+    {
+        stunTimer -= Time.deltaTime;
+        if (stunTimer > 0f) return;
+
+        // Wakes up. Give Nin a few seconds to get away before it notices her or goes to a light.
+        backOffTimer = BackOffTime;
+        lightCooldown = BackOffTime;
+        ChangeState(State.Idle);
     }
 
     private void UpdateIdle()
@@ -456,9 +478,15 @@ public class WanderingShadow : EnemyBase
 
         SetStateLabel(newState.ToString());
 
+        // A stunned shadow can't see, so its vision cone goes away until it wakes up
+        SetConeActive(newState != State.Stunned);
+
         // Show the right signal above the head
         switch (newState)
         {
+            case State.Stunned:
+                ShowStunnedSignal();
+                break;
             case State.Idle:
             case State.Stalk:
                 ClearSignal();

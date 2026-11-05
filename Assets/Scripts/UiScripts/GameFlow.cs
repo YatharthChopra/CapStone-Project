@@ -41,6 +41,7 @@ public static class GameFlow
         checkpointScene = "";
         checkpointSpawnId = "";
         NextSpawnId = "Start";
+        PlayerCarry.ForgetCarriedItem();   // a new game starts empty-handed
         LoadScene(GameScene);
     }
 
@@ -49,6 +50,7 @@ public static class GameFlow
     {
         checkpointScene = sceneName;
         checkpointSpawnId = spawnId;
+        PlayerCarry.SaveCheckpoint();   // remember what Nin is carrying right now
     }
 
     // Retry after dying: go back to the last checkpoint, or the very start if there isn't one
@@ -60,6 +62,7 @@ public static class GameFlow
             return;
         }
 
+        PlayerCarry.RestoreCheckpoint();   // she gets back what she was carrying at the checkpoint
         NextSpawnId = checkpointSpawnId;
         LoadScene(checkpointScene);
     }
@@ -77,9 +80,25 @@ public static class GameFlow
     }
 
     // Call this when the player gets caught
+    // Nin plays her death animation first, then ShowGameOverScreen is called
     public static void PlayerDied()
     {
+        PlayerAnimator animator = Object.FindFirstObjectByType<PlayerAnimator>();
+        if (animator != null && animator.IsDead) return;   // already dying (the enemy may call this again)
+
         AudioManager.Play(SoundId.PlayerDeath);
+
+        if (animator == null)
+        {
+            ShowGameOverScreen();   // no animated Nin in this scene, so go straight to the screen
+            return;
+        }
+
+        animator.PlayDeath();
+    }
+
+    public static void ShowGameOverScreen()
+    {
         LoadScene(GameOverScene);
     }
 

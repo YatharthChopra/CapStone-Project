@@ -29,6 +29,8 @@ public class PlayerAnimator : MonoBehaviour
     private const float FacingSpeed = 0.05f;       // moving slower than this doesn't change which way she faces
     private const float CrouchTransitionTime = 0.36f;   // the crouch-down / stand-up animation: 5 pictures at 14 per second
 
+    private const float DeathScreenDelay = 1.6f;   // how long the death animation gets before the Game Over screen
+
     private const int NoTransition = 0;
     private const int CrouchingDown = 1;
     private const int StandingUp = 2;
@@ -41,6 +43,42 @@ public class PlayerAnimator : MonoBehaviour
     private bool wasCrouching;
     private float transitionTimer;   // counts down while the crouch-down or stand-up animation plays
     private int transition;          // 0 = none, 1 = crouching down, 2 = standing up
+    private bool dead;               // true once she has been caught
+    private float deathTimer;        // counts down while the death animation plays
+    private bool gameOverShown;
+
+    // The item she carries (PlayerCarry) reads this to know which side to hold it on
+    public bool FacingRight { get { return facingRight; } }
+    public bool IsDead { get { return dead; } }
+
+    // Called by GameFlow when Nin is caught. She freezes and plays her death animation (the crawling one if she
+    // was crouching), and the Game Over screen comes up a moment later.
+    public void PlayDeath()
+    {
+        if (dead) return;
+        dead = true;
+        deathTimer = DeathScreenDelay;
+
+        movement.enabled = false;   // no more walking
+        body.linearVelocity = new Vector2(0f, body.linearVelocity.y);
+        spriteRenderer.color = Color.white;
+
+        animator.SetBool("Crouching", movement.IsCrouching);   // picks which death animation plays
+        animator.SetBool("Moving", false);
+        animator.SetBool("InAir", false);
+        animator.SetInteger("Transition", NoTransition);
+        animator.SetBool("Dead", true);
+    }
+
+    // Waits for the death animation to play, then shows the Game Over screen
+    private void UpdateDeath()
+    {
+        deathTimer -= Time.deltaTime;
+        if (deathTimer > 0f || gameOverShown) return;
+
+        gameOverShown = true;
+        GameFlow.ShowGameOverScreen();
+    }
 
     private void Awake()
     {
@@ -88,6 +126,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (dead)
+        {
+            UpdateDeath();
+            return;
+        }
+
         Vector2 velocity = body.linearVelocity;
         bool winding = GameFlow.IsFreeMovementScene;   // winding levels have no jumping, and up/down counts as walking
 

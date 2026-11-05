@@ -17,6 +17,12 @@ public class Door : MonoBehaviour
 
     public string DoorId { get { return doorId; } }
 
+    // A ToolLock calls this when the right tool has been used (e.g. the wrench on the panel)
+    public void Unlock()
+    {
+        isLocked = false;
+    }
+
     // Where the player should stand when they arrive through this door
     public Vector3 SpawnPosition
     {

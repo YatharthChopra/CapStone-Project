@@ -6470,6 +6470,7 @@ MonoBehaviour:
   targetScene: Floor1_Stairs
   targetDoorId: S1_Hall
   isLocked: 0
+  spawnOffsetX: 0
 --- !u!61 &359694393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17905,6 +17906,7 @@ MonoBehaviour:
   targetScene: 
   targetDoorId: 
   isLocked: 1
+  spawnOffsetX: 0
 --- !u!61 &1239473763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21702,6 +21704,63 @@ MeshRenderer:
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1543332750
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.168898
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2951536
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454182594825618107, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375999490364252577, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
+      propertyPath: m_Name
+      value: HockeyStick
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d576b61f50cf1f45a34a6282c13e56d, type: 3}
 --- !u!1001 &1569829570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25490,6 +25549,7 @@ MonoBehaviour:
   targetScene: Floor1_Corridor
   targetDoorId: Door to Floor 1
   isLocked: 0
+  spawnOffsetX: 0
 --- !u!61 &1826688603
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30677,3 +30737,4 @@ SceneRoots:
   - {fileID: 1169218664}
   - {fileID: 1361753844}
   - {fileID: 1486910075}
+  - {fileID: 1543332750}

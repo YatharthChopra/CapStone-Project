@@ -33,5 +33,13 @@ public enum SoundId
 
     // Menus
     ButtonClick,
-    LevelComplete
+    LevelComplete,
+
+    // Items (added at the end so the sounds already set up on the AudioManager keep their names)
+    ItemPickup,
+    ItemDrop,
+    ItemSwing,       // swinging a weapon
+    ItemHit,         // the weapon hits a shadow
+    ItemBreak,       // the weapon breaks
+    ToolUse          // a tool is used on something (the wrench on a panel)
 }

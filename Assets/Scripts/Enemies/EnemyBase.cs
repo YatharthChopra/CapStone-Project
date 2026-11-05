@@ -304,6 +304,22 @@ public abstract class EnemyBase : MonoBehaviour
         SetSignal("");
     }
 
+    // Shows "zz" above the head while the enemy is stunned
+    protected void ShowStunnedSignal()
+    {
+        SetSignal("zz");
+    }
+
+    // Switches the vision cone (the picture and what it sees with) on or off. It's off while the enemy is stunned.
+    protected void SetConeActive(bool active)
+    {
+        if (visionCone == null) return;
+
+        visionCone.enabled = active;
+        SpriteRenderer picture = visionCone.GetComponent<SpriteRenderer>();
+        if (picture != null) picture.enabled = active;
+    }
+
     protected void SetStateLabel(string stateName)
     {
         if (stateText != null) stateText.text = stateName;

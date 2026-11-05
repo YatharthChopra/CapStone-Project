@@ -132,6 +132,30 @@ MonoBehaviour:
     clips: []
     volume: 1
     pitchVariation: 0.05
+  - id: 21
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
+  - id: 22
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
+  - id: 23
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
+  - id: 24
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
+  - id: 25
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
+  - id: 26
+    clips: []
+    volume: 1
+    pitchVariation: 0.05
   hearDistance: 25
   sceneMusic:
   - sceneName: MainMenu

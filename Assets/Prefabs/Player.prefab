@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 1928004005279841321}
   - component: {fileID: 1356460873463634287}
   - component: {fileID: 3752602831162025357}
+  - component: {fileID: 5207492948652600209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -343,6 +344,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   walkStepTime: 0.4
   crouchStepTime: 0.65
+--- !u!114 &5207492948652600209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977200668896066323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb408253f4441b448023294240a5d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCarry
+  handOffset: {x: 0.5, y: 0.2}
+  restAngle: 25
 --- !u!1 &6436484500461715606
 GameObject:
   m_ObjectHideFlags: 0
