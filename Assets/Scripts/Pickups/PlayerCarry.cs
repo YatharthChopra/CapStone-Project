@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // Lets Nin carry one item at a time (see PickupItem).
 //   E (while standing in an item) = pick it up. If her hands are full she drops what she has and swaps.
@@ -8,7 +6,7 @@ using UnityEngine.SceneManagement;
 //   Space = swing a weapon. A Wandering Shadow in front of her is stunned for a few seconds.
 // She can't swing while crouching. A swing makes a bit of noise, so other enemies may come and look.
 // Tools (wrench...) are used on things in the level with E (see ToolLock).
-// The item stays with her when she goes through a door. Put this on the Player.
+// The item stays with her when she goes through a door (the GameManager looks after it). Put this on the Player.
 public class PlayerCarry : MonoBehaviour
 {
     [Header("In her hand")]
@@ -22,9 +20,6 @@ public class PlayerCarry : MonoBehaviour
     private const float HitHeight = 2.4f;          // how tall the swing's hit area is
     private const float HitStartDistance = 0.3f;   // the hit area starts this far in front of her middle
     private const float MessageTime = 2f;          // how long an on-screen message stays
-
-    // The item she is carrying. It is kept here between rooms, so walking through a door doesn't lose it.
-    private static PickupItem carriedAcrossRooms;
 
     private PickupItem held;
     private PlayerMovement movement;
@@ -53,7 +48,8 @@ public class PlayerCarry : MonoBehaviour
     private void Start()
     {
         // Came through a door carrying something? Pick it back up.
-        if (carriedAcrossRooms != null) Hold(carriedAcrossRooms);
+        PickupItem carried = GameManager.Instance.CarriedItem;
+        if (carried != null) Hold(carried);
     }
 
     // Makes the little object that shows the item in her hand
@@ -135,13 +131,7 @@ public class PlayerCarry : MonoBehaviour
     private void Hold(PickupItem item)
     {
         held = item;
-        carriedAcrossRooms = item;
-        if (!string.IsNullOrEmpty(item.Id)) PickupItem.Taken.Add(item.Id);   // it's not lying in its room any more
-
-        // Switch the item off and keep it safe, so it survives a change of room
-        item.gameObject.SetActive(false);
-        item.transform.SetParent(null);
-        DontDestroyOnLoad(item.gameObject);
+        GameManager.Instance.HoldItem(item);   // the GameManager keeps it safe, so it survives a change of room
 
         handPicture.sprite = item.HeldSprite;
         handPicture.color = item.HeldColor;
@@ -157,16 +147,12 @@ public class PlayerCarry : MonoBehaviour
     {
         PickupItem item = held;
         held = null;
-        carriedAcrossRooms = null;
-        if (!string.IsNullOrEmpty(item.Id)) PickupItem.Taken.Remove(item.Id);   // it's lying on the floor again
 
         // Put it back in this room, on the floor in front of her
         float halfHeight = item.HeldSprite != null ? item.HeldSprite.bounds.extents.y * item.transform.lossyScale.y : 0.5f;
         float x = transform.position.x + FacingSide() * 0.8f;
         float y = body.bounds.min.y + halfHeight;
-        item.transform.position = new Vector3(x, y, 0f);
-        SceneManager.MoveGameObjectToScene(item.gameObject, SceneManager.GetActiveScene());
-        item.gameObject.SetActive(true);
+        GameManager.Instance.DropItem(item, new Vector3(x, y, 0f));
 
         AudioManager.Play(SoundId.ItemDrop);
     }
@@ -176,55 +162,8 @@ public class PlayerCarry : MonoBehaviour
     {
         if (held == null) return;
 
-        Destroy(held.gameObject);
+        GameManager.Instance.DestroyCarriedItem();
         held = null;
-        carriedAcrossRooms = null;
-    }
-
-    // ---------------------------------------------------------------- checkpoints
-    // When Nin reaches a checkpoint we remember what she is carrying (and which items have been picked up).
-    // If she dies and retries, she gets back exactly that. What she held at the checkpoint, and nothing she grabbed since.
-
-    private static PickupItem checkpointCopy;                                // a spare copy of the item she held at the checkpoint
-    private static HashSet<string> checkpointTaken = new HashSet<string>();
-
-    // Called by GameFlow.SetCheckpoint
-    public static void SaveCheckpoint()
-    {
-        if (checkpointCopy != null) Destroy(checkpointCopy.gameObject);
-        checkpointCopy = MakeCopy(carriedAcrossRooms);
-        checkpointTaken = new HashSet<string>(PickupItem.Taken);
-    }
-
-    // Called by GameFlow.RetryFromCheckpoint
-    public static void RestoreCheckpoint()
-    {
-        if (carriedAcrossRooms != null) Destroy(carriedAcrossRooms.gameObject);
-        carriedAcrossRooms = MakeCopy(checkpointCopy);
-        PickupItem.Taken = new HashSet<string>(checkpointTaken);
-    }
-
-    // Called when a new game starts, so Nin doesn't begin it carrying something from the last one
-    public static void ForgetCarriedItem()
-    {
-        if (carriedAcrossRooms != null) Destroy(carriedAcrossRooms.gameObject);
-        if (checkpointCopy != null) Destroy(checkpointCopy.gameObject);
-        carriedAcrossRooms = null;
-        checkpointCopy = null;
-        checkpointTaken = new HashSet<string>();
-        PickupItem.Taken = new HashSet<string>();
-    }
-
-    // A switched-off copy of an item that survives room changes (null if there's nothing to copy)
-    private static PickupItem MakeCopy(PickupItem original)
-    {
-        if (original == null) return null;
-
-        PickupItem copy = Instantiate(original);
-        copy.gameObject.SetActive(false);
-        DontDestroyOnLoad(copy.gameObject);
-        copy.SetUsesLeft(original.UsesLeft);
-        return copy;
     }
 
     // ---------------------------------------------------------------- swinging

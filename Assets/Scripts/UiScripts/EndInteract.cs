@@ -21,7 +21,7 @@ public class EndInteract : MonoBehaviour
         // Find the player the first time we need it
         if (playerCollider == null)
         {
-            PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+            PlayerMovement player = GameManager.Player;
             if (player == null) return;
             playerCollider = player.GetComponent<Collider2D>();
         }

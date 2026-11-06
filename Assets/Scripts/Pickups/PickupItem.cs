@@ -35,10 +35,6 @@ public class PickupItem : MonoBehaviour
     public float SwingNoise { get { return swingNoise; } }
     public int UsesLeft { get; private set; }
 
-    // Items Nin has picked up (by id). When a room reloads, an item that was picked up doesn't come back.
-    // PlayerCarry saves and restores this at checkpoints, so dying puts things back how they were at the checkpoint.
-    public static HashSet<string> Taken = new HashSet<string>();
-
     private Collider2D pickupCollider;
     private SpriteRenderer picture;
     private bool usesSet;
@@ -56,9 +52,9 @@ public class PickupItem : MonoBehaviour
 
         // The same item in the same room has the same id every time the room loads
         Id = gameObject.scene.name + "|" + name + "|" + transform.position.ToString("F1");
-        if (Taken.Contains(Id))
+        if (GameManager.Instance != null && GameManager.Instance.TakenItems.Contains(Id))
         {
-            // Already picked up earlier, so it isn't lying here any more
+            // Already picked up earlier (the GameManager remembers), so it isn't lying here any more
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

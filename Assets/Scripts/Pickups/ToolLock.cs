@@ -27,7 +27,7 @@ public class ToolLock : MonoBehaviour
         // Find the player the first time we need it
         if (carry == null)
         {
-            carry = FindFirstObjectByType<PlayerCarry>();
+            carry = GameManager.PlayerCarry;
             if (carry == null) return;
         }
 

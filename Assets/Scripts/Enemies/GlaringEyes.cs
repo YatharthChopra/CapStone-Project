@@ -48,6 +48,10 @@ public class GlaringEyes : EnemyBase
         turnSpeedDegrees = turnSpeed;
 
         base.Start();
+
+        // The drawings (loaded from Resources, so the prefab doesn't need changing)
+        if (GetComponent<GlaringEyeAnimator>() == null) gameObject.AddComponent<GlaringEyeAnimator>();
+
         WorkOutGazeDirections();
         ChangeState(State.Idle);
     }

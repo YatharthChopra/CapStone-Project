@@ -21,8 +21,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float coneVisibility = 0.5f;
 
     [Header("Sight line")]
-    // A thin line from the enemy to the player, shown only while the enemy can actually see the player
-    [SerializeField] private bool showSightLine = false;
+    // A thin red line from the enemy to the player (a testing aid). Off for the real game: the cone is enough.
+    // (Renamed from "showSightLine" so no old saved value in a prefab or scene can switch it on.)
+    [SerializeField] private bool debugSightLine = false;
     [SerializeField] private float sightLineThickness = 0.08f;
     [SerializeField] private Color sightLineColor = new Color(1f, 0.25f, 0.25f, 0.75f);
 
@@ -47,6 +48,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     // The sprite animator reads this to know which way to face the picture
     public int Facing { get { return facing; } }
+    public float GazeAngle { get { return currentAngle; } }   // the way it is pointing right now, in degrees
 
     private float targetAngle;          // the way the cone should point (degrees)
     private float currentAngle;         // the way it's pointing right now
@@ -62,7 +64,7 @@ public abstract class EnemyBase : MonoBehaviour
         SetConeVisibility();
         CreateSightLine();
 
-        player = FindFirstObjectByType<PlayerMovement>();
+        player = GameManager.Player;
         if (player == null)
         {
             Debug.LogWarning(name + " can't find the player, so it won't do anything.");
@@ -242,7 +244,7 @@ public abstract class EnemyBase : MonoBehaviour
     // Makes the sight line: a thin stretched square that we move between the enemy and the player
     private void CreateSightLine()
     {
-        if (!showSightLine) return;
+        if (!debugSightLine) return;
 
         GameObject lineObject = new GameObject(name + " Sight Line");
         sightLine = lineObject.AddComponent<SpriteRenderer>();

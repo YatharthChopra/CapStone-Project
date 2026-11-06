@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1356460873463634287}
   - component: {fileID: 3752602831162025357}
   - component: {fileID: 5207492948652600209}
+  - component: {fileID: 9100000000000000001}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -473,3 +474,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9100000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977200668896066323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba960242aac37c47b8396cf62a9e5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerThrow
+  throwablePrefab: {fileID: 8202559014846146718, guid: a621382ce1dafc540a3ef2f32a85aea3, type: 3}
+  throwCooldown: 3
+  chargeTime: 2
+  minSpeed: 10
+  maxSpeed: 22
+  minAngle: 30
+  maxAngle: 65
+  tapTime: 0.2
+  tapSpeed: 7
+  tapAngle: 45
+  tapNoise: 0.4
+  quietNoise: 0.5
+  loudNoise: 1.5
+  dotSprite: {fileID: -2675244452250869674, guid: 04c7634b02944f448b5f96128bbeabd0, type: 3}
+  dotCount: 16

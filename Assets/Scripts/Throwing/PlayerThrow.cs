@@ -48,6 +48,18 @@ public class PlayerThrow : MonoBehaviour
     private Collider2D myCollider;
     private SpriteRenderer[] dots;
 
+    private void Awake()
+    {
+        // The Player prefab now carries this script. The playtest scene also has its own copy added on top,
+        // so if there are two, the later one switches itself off (otherwise every throw would happen twice).
+        PlayerThrow[] all = GetComponents<PlayerThrow>();
+        if (all[0] != this)
+        {
+            enabled = false;
+            Destroy(this);
+        }
+    }
+
     private void Start()
     {
         myCollider = GetComponent<Collider2D>();
