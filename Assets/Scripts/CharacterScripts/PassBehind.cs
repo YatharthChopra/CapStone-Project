@@ -33,7 +33,7 @@ public class PassBehind : MonoBehaviour
         // Find the player the first time we need it
         if (player == null)
         {
-            player = FindFirstObjectByType<PlayerMovement>();
+            player = GameManager.Player;
             if (player == null) return;
             playerBody = player.GetComponent<Rigidbody2D>();
             playerCollider = player.GetComponent<Collider2D>();

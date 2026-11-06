@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlaringEyes
   visionCone: {fileID: 5562090499248062684}
-  hearingRadius: 8
+  hearingRadius: 12
   signalText: {fileID: 997200635297449879}
   stateText: {fileID: 5986444088961001800}
   onQuestionSignal:

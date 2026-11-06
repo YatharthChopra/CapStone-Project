@@ -17,6 +17,12 @@ public class Door : MonoBehaviour
 
     public string DoorId { get { return doorId; } }
 
+    // A ToolLock calls this when the right tool has been used (e.g. the wrench on the panel)
+    public void Unlock()
+    {
+        isLocked = false;
+    }
+
     // Where the player should stand when they arrive through this door
     public Vector3 SpawnPosition
     {
@@ -43,7 +49,7 @@ public class Door : MonoBehaviour
         // Find the player the first time we need it
         if (playerCollider == null)
         {
-            PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+            PlayerMovement player = GameManager.Player;
             if (player == null) return;
             playerCollider = player.GetComponent<Collider2D>();
         }
@@ -53,9 +59,11 @@ public class Door : MonoBehaviour
         if (isLocked || string.IsNullOrEmpty(targetScene))
         {
             Debug.Log(doorId + " is locked / not connected yet");
+            AudioManager.Play(SoundId.DoorLocked);
             return;
         }
 
+        AudioManager.Play(SoundId.DoorOpen);
         GameFlow.GoToRoom(targetScene, targetDoorId);
     }
 }

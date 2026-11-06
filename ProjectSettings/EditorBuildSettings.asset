@@ -101,6 +101,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Floor 5/BoltCutter Apartment/BoltCutter Apt_LivingRoom 4.unity
     guid: 97c51a4ed3207234bbcd58659c18a4e6
+  - enabled: 1
+    path: Assets/Scenes/Playtest/Playtest_Playground.unity
+    guid: a8f0d9d4fb26cd94fab7608e567cb2b3
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

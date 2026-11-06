@@ -8,6 +8,7 @@ public class HidingScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public bool NearHidingPlace;
     public bool NearCrouchPlace;
+    private int crouchSpotsTouching;   // (just added) how many crouch boxes Nin is touching right now
     private GameObject HidingPlace = null;
     [SerializeField] public bool hiding = false;
     [SerializeField] private bool crouching = false;
@@ -105,11 +106,6 @@ public class HidingScript : MonoBehaviour
             {
                 detection -= 1 * Time.deltaTime * detectionScaling;
             }
-            foreach(GameObject enemyObject in EnemiesList)
-            {
-                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
-                //Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
-            }
         }
         else
         {
@@ -142,6 +138,7 @@ public class HidingScript : MonoBehaviour
 
         if(collision.tag == "CrouchingSpot")
         {
+            crouchSpotsTouching++;   // (just added) boxes can touch each other, so we count them instead of using one on/off flag
             NearCrouchPlace = true;
         }
 
@@ -155,6 +152,8 @@ public class HidingScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision == null) return;   // (added) when a scene unloads the thing we were touching is already gone
+
         if (collision.tag == "HidingSpot")
         {
             NearHidingPlace = false;
@@ -167,12 +166,17 @@ public class HidingScript : MonoBehaviour
 
         if (collision.tag == "CrouchingSpot")
         {
-            NearCrouchPlace = false;
-            HidingPlace = null;
-            if (crouchHiding)
+            // (added) walking from one box into the box next to it: still inside a box, so stay hidden
+            crouchSpotsTouching = Mathf.Max(0, crouchSpotsTouching - 1);
+            if (crouchSpotsTouching == 0)
             {
-                crouchHiding = false;
-                Unhide();
+                NearCrouchPlace = false;
+                HidingPlace = null;
+                if (crouchHiding)
+                {
+                    crouchHiding = false;
+                    Unhide();
+                }
             }
         }
         if (collision.tag == "EnemyView")
