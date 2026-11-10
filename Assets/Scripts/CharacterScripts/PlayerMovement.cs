@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Basic side-scroller movement for Nin.
-// Controls: A/D = left/right, W/S = up/down, Space = jump, Left Ctrl = crouch
-// Put this on the player object together with a Rigidbody2D and a BoxCollider2D.
+// Controls: A/D = left/right, W/S = up/down, Space = jump (turned off, see Allow Jump), Left Ctrl = crouch
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
@@ -12,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float crouchSpeed = 2f;   // slower while crouching so sneaking feels different
     [SerializeField] private float jumpForce = 12f;
+    // Jumping is turned off
+    // Tick this to bring it back.
+    [SerializeField] private bool allowJump = false;
 
     [Header("Up / Down (W and S)")]
     // W/S are always read (see MoveInput), but the player only moves up/down
@@ -25,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchHeightMultiplier = 0.5f;  // 0.5 = half height
     // Optional: drag the sprite child in here so it also shrinks when crouching
     [SerializeField] private Transform visual;
-    // If the player has a crawl animation (see PlayerAnimator) we don't want to squash the picture
+    // If the player has a crawl animation, we don't want to squash the picture
     private bool squashVisualWhenCrouching = true;
 
     [Header("Ground Check")]
@@ -107,7 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
             horizontalDir *= MoveInput.x;
             Vector2 GravityDir = verticalDir * -9.81f/2;
-            Debug.Log("vertical" + verticalDir + "Gravity" + GravityDir);
             //verticalDir *= -9.8f*Time.deltaTime;
             
             if (allowVerticalMove)
@@ -134,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Vector2 velocity = rb.linearVelocity;
-            Debug.Log("Gravity" + Physics2D.gravity);
             velocity.x = MoveInput.x * speed;
             //float verticalVel = velocity.y;
             //velocity.y = 0;

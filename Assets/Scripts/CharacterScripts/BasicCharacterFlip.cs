@@ -25,9 +25,7 @@ public class BasicCharacterFlip : MonoBehaviour
             Flipping(visual);
             Flipping(flashlight);
         }
-        else if (rb.linearVelocityX < 0 && !fliped)
         {
-            
             fliped = true;
             Flipping(visual);
             Flipping(flashlight);

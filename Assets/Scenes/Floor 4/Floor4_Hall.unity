@@ -3862,7 +3862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &518992847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10955,14 +10955,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1091763419428012756, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1241795031897312003, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1325118365801138785, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.83
@@ -11007,42 +10999,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4712044968708432868, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712044968708432868, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 3529666824492183103, guid: e367a75c09fd18f459a6ff39ba329d72, type: 3}
-    - target: {fileID: 4870097148572864798, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: allowVerticalMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830129025229562141, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: GravityFlip
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830129025229562141, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+    - target: {fileID: 2450265085233999037, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: rotationPoint
       value: 
       objectReference: {fileID: 1851887514}
-    - target: {fileID: 5830129025229562141, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: gravityFlipNum
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830129025229562141, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+    - target: {fileID: 2450265085233999037, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: rotationPoint2
       value: 
       objectReference: {fileID: 1677974593}
-    - target: {fileID: 7377610329131104276, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7377610329131104276, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

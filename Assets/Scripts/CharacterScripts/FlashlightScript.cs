@@ -23,5 +23,11 @@ public class FlashlightScript : MonoBehaviour
             flashlightOn = !flashlightOn;
             flashlightObject.SetActive(flashlightOn);
         }
+        float x = 0f;
+        if (kb.aKey.isPressed) x -= 1f;
+        if (kb.dKey.isPressed) x += 1f;
+        if (x < 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -270);
+        else if (x > 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -90);
+
     }
 }
