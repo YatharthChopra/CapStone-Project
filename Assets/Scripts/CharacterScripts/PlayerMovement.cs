@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpPressed;
     private float originalGravity;
 
+    public bool GravityFlip = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         originalGravity = rb.gravityScale;
 
         // Winding levels (see GameFlow.FreeMovementScenes) turn the up/down movement on by themselves
-        if (GameFlow.IsFreeMovementScene) allowVerticalMove = true;
+        if (GameFlow.IsFreeMovementScene) allowVerticalMove = false; // turned to false so gravity sections can function -Alice
 
         // Remember the standing collider so we can go back to it after crouching
         standingSize = box.size;
@@ -99,32 +100,67 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded = CheckGrounded();
 
         float speed = IsCrouching ? crouchSpeed : walkSpeed;
-        Vector2 velocity = rb.linearVelocity;
-        //float verticalVel = velocity.y;
-        //velocity.y = 0;
-        velocity.x = MoveInput.x * speed;
-        
-        if (allowVerticalMove)
+        if (GravityFlip)
         {
-            // Turn gravity off so W/S can move us up and down freely
-            rb.gravityScale = 0f;
-            velocity.y = MoveInput.y * verticalSpeed;
+            Vector2 verticalDir = transform.up;
+            Vector2 horizontalDir = transform.right;
+
+            horizontalDir *= MoveInput.x;
+            Vector2 GravityDir = verticalDir * -9.81f/2;
+            Debug.Log("vertical" + verticalDir + "Gravity" + GravityDir);
+            //verticalDir *= -9.8f*Time.deltaTime;
+            
+            if (allowVerticalMove)
+            {
+                // Turn gravity off so W/S can move us up and down freely
+                rb.gravityScale = 0f;
+                verticalDir = verticalDir * MoveInput.y * verticalSpeed;
+
+            }
+            else
+            {
+                //rb.gravityScale = originalGravity;
+
+                // Can only jump on the ground, and not while crouching
+                if (jumpPressed && IsGrounded && !IsCrouching)
+                {
+                    verticalDir = (Vector2)transform.up * jumpForce;
+                }
+            }
+
+            rb.linearVelocity = horizontalDir * speed+ GravityDir + verticalDir;
+
         }
         else
         {
-            rb.gravityScale = originalGravity;
-
-            // Can only jump on the ground, and not while crouching
-            if (jumpPressed && IsGrounded && !IsCrouching)
+            Vector2 velocity = rb.linearVelocity;
+            Debug.Log("Gravity" + Physics2D.gravity);
+            velocity.x = MoveInput.x * speed;
+            //float verticalVel = velocity.y;
+            //velocity.y = 0;
+            if (allowVerticalMove)
             {
-                velocity.y = jumpForce;
+                // Turn gravity off so W/S can move us up and down freely
+                rb.gravityScale = 0f;
+                velocity.y = MoveInput.y * verticalSpeed;
             }
+            else
+            {
+                rb.gravityScale = originalGravity;
+
+                // Can only jump on the ground, and not while crouching
+                if (jumpPressed && IsGrounded && !IsCrouching)
+                {
+                    velocity.y = jumpForce;
+                }
+            }
+            //velocity.y = verticalVel;
+            Debug.Log("vertical" + velocity + "Gravity" + Physics2D.gravity);
+            rb.linearVelocity = velocity;
         }
 
         jumpPressed = false;
-        velocity = RotateVelocity(velocity);
-        //velocity.y = verticalVel;
-        rb.linearVelocity = velocity;
+
     }
     
     private void HandleCrouch(bool ctrlHeld)
@@ -194,17 +230,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    // alice addition
-    // this will rotatate the velocity so characer can move with rotated gravity
-    private Vector2 RotateVelocity(Vector2 velocity)
-    {
-        Vector3 newVel = Vector3.zero;
-        
-        float radRotation = transform.eulerAngles.z * Mathf.PI /90; // this gets the rotation amount
-        newVel.x = velocity.x * Mathf.Cos(radRotation) - velocity.y* Mathf.Sin(radRotation);
-        newVel.y =velocity.y* Mathf.Cos(radRotation) + velocity.x* Mathf.Sin(radRotation);
-        newVel.x *= -1;
-        newVel.y *= -1;
-        return newVel;
-    }
+ 
 }

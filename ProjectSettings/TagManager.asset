@@ -8,6 +8,7 @@ TagManager:
   - HidingSpot
   - CrouchingSpot
   - EnemyView
+  - GravityFlipSegment
   layers:
   - Default
   - TransparentFX
