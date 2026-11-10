@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BasicCharacterFlip : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Rigidbody2D rb;
-    bool fliped = false;
-    private Vector3 baseRotation;
+    public bool fliped = false;
+    private Transform visual;
+    private Transform flashlight;
     void Start()
     {
-        rb = this.GetComponentInParent<Rigidbody2D>();
-        baseRotation = transform.rotation.eulerAngles;
+        rb = this.GetComponent<Rigidbody2D>();
+        visual = GetComponentInChildren<SpriteRenderer>().transform;
+        flashlight = GetComponentInChildren<Light2D>().transform;
     }
 
     // Update is called once per frame
@@ -17,13 +20,32 @@ public class BasicCharacterFlip : MonoBehaviour
     {
         if(rb.linearVelocityX > 0 && fliped)
         {
-            transform.eulerAngles = baseRotation;
+            
             fliped = false;
+            Flipping(visual);
+            Flipping(flashlight);
         }
-        else if (rb.linearVelocityX < 0 && !fliped)
         {
-            transform.eulerAngles = baseRotation + new Vector3(0, 180, 0);
             fliped = true;
+            Flipping(visual);
+            Flipping(flashlight);
         }
     }
+
+    private void Flipping(Transform ToBeFLipped)
+    {
+        if (fliped)
+        {
+            visual.localEulerAngles = new Vector3(visual.localEulerAngles.x, 0, visual.localEulerAngles.z);
+            flashlight.localEulerAngles = new Vector3(flashlight.localEulerAngles.x, 0, flashlight.localEulerAngles.z);
+            
+        }
+        else
+        {
+            visual.localEulerAngles = new Vector3(visual.localEulerAngles.x, 180, visual.localEulerAngles.z);
+            flashlight.localEulerAngles = new Vector3(flashlight.localEulerAngles.x, 180, flashlight.localEulerAngles.z);
+        }
+        
+    }
+
 }

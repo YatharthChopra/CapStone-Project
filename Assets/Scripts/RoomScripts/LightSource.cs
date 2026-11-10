@@ -62,4 +62,10 @@ public class LightSource : MonoBehaviour
             lamp.intensity = (IsAttracting && !blinkOn) ? normalIntensity * 0.15f : normalIntensity;
         }
     }
+
+    // Alice Adition to affect light
+    private void toggleLight(bool value)
+    {
+        this.GetComponent<Light2D>().enabled = value;
+    }
 }
