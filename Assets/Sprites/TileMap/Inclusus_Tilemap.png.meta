@@ -1,0 +1,1993 @@
+fileFormatVersion: 2
+guid: 2a0dc3e95442234488c034e5c498985d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4326218355859252703
+    second: Inclusus_Tilemap_0
+  - first:
+      213: -8408549937989427771
+    second: Inclusus_Tilemap_1
+  - first:
+      213: 5628317086447182844
+    second: Inclusus_Tilemap_2
+  - first:
+      213: 9018114305670710450
+    second: Inclusus_Tilemap_3
+  - first:
+      213: 2488812291629805696
+    second: Inclusus_Tilemap_4
+  - first:
+      213: 5011737220804547228
+    second: Inclusus_Tilemap_5
+  - first:
+      213: 2024623334781089084
+    second: Inclusus_Tilemap_6
+  - first:
+      213: 9172468366471590827
+    second: Inclusus_Tilemap_7
+  - first:
+      213: -517962400911835360
+    second: Inclusus_Tilemap_8
+  - first:
+      213: -4620433428965033638
+    second: Inclusus_Tilemap_9
+  - first:
+      213: -7404755778373467962
+    second: Inclusus_Tilemap_10
+  - first:
+      213: 9041400032069704304
+    second: Inclusus_Tilemap_11
+  - first:
+      213: -7264711644485280689
+    second: Inclusus_Tilemap_12
+  - first:
+      213: -1050254587218514588
+    second: Inclusus_Tilemap_13
+  - first:
+      213: 2892579169956554748
+    second: Inclusus_Tilemap_14
+  - first:
+      213: -6517047002977189453
+    second: Inclusus_Tilemap_15
+  - first:
+      213: -3674167574919117441
+    second: Inclusus_Tilemap_16
+  - first:
+      213: 8125680121377651127
+    second: Inclusus_Tilemap_17
+  - first:
+      213: 7630957411619631802
+    second: Inclusus_Tilemap_18
+  - first:
+      213: 8030049670440613379
+    second: Inclusus_Tilemap_19
+  - first:
+      213: -456118213413055292
+    second: Inclusus_Tilemap_20
+  - first:
+      213: -9154296784770287889
+    second: Inclusus_Tilemap_21
+  - first:
+      213: 2248199214544341814
+    second: Inclusus_Tilemap_22
+  - first:
+      213: -1074363572446438228
+    second: Inclusus_Tilemap_23
+  - first:
+      213: -8983457819474298874
+    second: Inclusus_Tilemap_24
+  - first:
+      213: -457168179265411475
+    second: Inclusus_Tilemap_25
+  - first:
+      213: -4153601618010382344
+    second: Inclusus_Tilemap_26
+  - first:
+      213: 4267662881432166473
+    second: Inclusus_Tilemap_27
+  - first:
+      213: 828112436052119450
+    second: Inclusus_Tilemap_28
+  - first:
+      213: -2196702118044363114
+    second: Inclusus_Tilemap_29
+  - first:
+      213: 2484800373500254297
+    second: Inclusus_Tilemap_30
+  - first:
+      213: 1449301198700087083
+    second: Inclusus_Tilemap_31
+  - first:
+      213: 1406985543637531037
+    second: Inclusus_Tilemap_32
+  - first:
+      213: 399901081150082010
+    second: Inclusus_Tilemap_33
+  - first:
+      213: 4616909149404393916
+    second: Inclusus_Tilemap_34
+  - first:
+      213: 2883655366603749043
+    second: Inclusus_Tilemap_35
+  - first:
+      213: 4033018660223905465
+    second: Inclusus_Tilemap_36
+  - first:
+      213: -5083161275894274193
+    second: Inclusus_Tilemap_37
+  - first:
+      213: -8715781145124607650
+    second: Inclusus_Tilemap_38
+  - first:
+      213: -5017192828648101585
+    second: Inclusus_Tilemap_39
+  - first:
+      213: 5060896020326294953
+    second: Inclusus_Tilemap_40
+  - first:
+      213: 5019738922024019438
+    second: Inclusus_Tilemap_41
+  - first:
+      213: -5910905865365872325
+    second: Inclusus_Tilemap_42
+  - first:
+      213: 7440681533674707932
+    second: Inclusus_Tilemap_43
+  - first:
+      213: -2231238744285267642
+    second: Inclusus_Tilemap_44
+  - first:
+      213: -6313839185643549894
+    second: Inclusus_Tilemap_45
+  - first:
+      213: -296595855097818032
+    second: Inclusus_Tilemap_46
+  - first:
+      213: 2538079066202610082
+    second: Inclusus_Tilemap_47
+  - first:
+      213: 2749319511713747719
+    second: Inclusus_Tilemap_48
+  - first:
+      213: -8028255540807683490
+    second: Inclusus_Tilemap_49
+  - first:
+      213: -6587247989019956110
+    second: Inclusus_Tilemap_50
+  - first:
+      213: -2382023252702915166
+    second: Inclusus_Tilemap_51
+  - first:
+      213: -1936435182290828562
+    second: Inclusus_Tilemap_52
+  - first:
+      213: 8768807733256734300
+    second: Inclusus_Tilemap_53
+  - first:
+      213: 5813557784462229085
+    second: Inclusus_Tilemap_54
+  - first:
+      213: -3491927082610379379
+    second: Inclusus_Tilemap_55
+  - first:
+      213: 7959454495433307790
+    second: Inclusus_Tilemap_56
+  - first:
+      213: -3573477123887419340
+    second: Inclusus_Tilemap_57
+  - first:
+      213: 1747273317933263738
+    second: Inclusus_Tilemap_58
+  - first:
+      213: 1960011705964711023
+    second: Inclusus_Tilemap_59
+  - first:
+      213: 5964284133482812870
+    second: Inclusus_Tilemap_60
+  - first:
+      213: -9106471745490497712
+    second: Inclusus_Tilemap_61
+  - first:
+      213: -8896314332863229268
+    second: Inclusus_Tilemap_62
+  - first:
+      213: -3667697076467831796
+    second: Inclusus_Tilemap_63
+  - first:
+      213: 1693351959524135801
+    second: Inclusus_Tilemap_64
+  - first:
+      213: 6827931169451307630
+    second: Inclusus_Tilemap_65
+  - first:
+      213: -8782282971528317536
+    second: Inclusus_Tilemap_66
+  - first:
+      213: 4528054009178024520
+    second: Inclusus_Tilemap_67
+  - first:
+      213: -6296846038334615516
+    second: Inclusus_Tilemap_68
+  - first:
+      213: 6728513951221185120
+    second: Inclusus_Tilemap_69
+  - first:
+      213: 9144362638414198106
+    second: Inclusus_Tilemap_70
+  - first:
+      213: 3347576049538222365
+    second: Inclusus_Tilemap_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd5e3c16ca0d90c30800000000000000
+      internalID: 4326218355859252703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cdd10eb164de4b80800000000000000
+      internalID: -8408549937989427771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf322fce19ccb1e40800000000000000
+      internalID: 5628317086447182844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b40f555e27c62d70800000000000000
+      internalID: 9018114305670710450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 080783bc7990a8220800000000000000
+      internalID: 2488812291629805696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9298a1f2744d8540800000000000000
+      internalID: 5011737220804547228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c35f7913238e81c10800000000000000
+      internalID: 2024623334781089084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_7
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba3fb09a1672b4f70800000000000000
+      internalID: 9172468366471590827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02f34aec0f3dfc8f0800000000000000
+      internalID: -517962400911835360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59f236c64ce0efb0800000000000000
+      internalID: -4620433428965033638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_10
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c047850ad50d3990800000000000000
+      internalID: -7404755778373467962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a58bffc61897d70800000000000000
+      internalID: 9041400032069704304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_12
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c9fcadf3f8e2b90800000000000000
+      internalID: -7264711644485280689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46dad15740fbc61f0800000000000000
+      internalID: -1050254587218514588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_14
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf764f5fd61842820800000000000000
+      internalID: 2892579169956554748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b14503974cce85a0800000000000000
+      internalID: -6517047002977189453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7500b3ae0cb20dc0800000000000000
+      internalID: -3674167574919117441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_17
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9fa29c40734c070800000000000000
+      internalID: 8125680121377651127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_18
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab2f8b7d55b96e960800000000000000
+      internalID: 7630957411619631802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 306fa5751a7707f60800000000000000
+      internalID: 8030049670440613379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_20
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4dde9c6ea8ba9f0800000000000000
+      internalID: -456118213413055292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_21
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 432
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe63447639765f080800000000000000
+      internalID: -9154296784770287889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63b4a3f2645333f10800000000000000
+      internalID: 2248199214544341814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_23
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cacd5b8e5081711f0800000000000000
+      internalID: -1074363572446438228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_24
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6087787a5b8545380800000000000000
+      internalID: -8983457819474298874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_25
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d66e54096ffc7a9f0800000000000000
+      internalID: -457168179265411475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ffd00cc5517b56c0800000000000000
+      internalID: -4153601618010382344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_27
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94062e497c8c93b30800000000000000
+      internalID: 4267662881432166473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_28
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f48f08fdb0e7b00800000000000000
+      internalID: 828112436052119450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_29
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6961e90ff0fb381e0800000000000000
+      internalID: -2196702118044363114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9589d3056c8cb7220800000000000000
+      internalID: 2484800373500254297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_31
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b270111f2c3fc1410800000000000000
+      internalID: 1449301198700087083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_32
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99ff9cb5ed968310800000000000000
+      internalID: 1406985543637531037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adbce3f1aebbc8500800000000000000
+      internalID: 399901081150082010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_34
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1ff72f86e821040800000000000000
+      internalID: 4616909149404393916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_35
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b6b015174dc40820800000000000000
+      internalID: 2883655366603749043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_36
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9beea278a1928f730800000000000000
+      internalID: 4033018660223905465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_37
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f67ec4650cbf479b0800000000000000
+      internalID: -5083161275894274193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_38
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59ecc80a335b0780800000000000000
+      internalID: -8715781145124607650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_39
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f29eace54b95f5ab0800000000000000
+      internalID: -5017192828648101585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_40
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a5acb0ed1aeb3640800000000000000
+      internalID: 5060896020326294953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_41
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee5a17034f1b9a540800000000000000
+      internalID: 5019738922024019438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_42
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b31281ace6e38fda0800000000000000
+      internalID: -5910905865365872325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_43
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdb5d75be6c924760800000000000000
+      internalID: 7440681533674707932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_44
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 649b9c50f2c0901e0800000000000000
+      internalID: -2231238744285267642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_45
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3b46ca76bcb068a0800000000000000
+      internalID: -6313839185643549894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_46
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0549a0724a742ebf0800000000000000
+      internalID: -296595855097818032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_47
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a99cd0a671193320800000000000000
+      internalID: 2538079066202610082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_48
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7039fb5878b872620800000000000000
+      internalID: 2749319511713747719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_49
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e52b8140f18e59090800000000000000
+      internalID: -8028255540807683490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_50
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27c2f0fcad46594a0800000000000000
+      internalID: -6587247989019956110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_51
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a51cefd87a51fed0800000000000000
+      internalID: -2382023252702915166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_52
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee28cfc16766025e0800000000000000
+      internalID: -1936435182290828562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_53
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c56477c9c2011b970800000000000000
+      internalID: 8768807733256734300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_54
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5ef310e008eda050800000000000000
+      internalID: 5813557784462229085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d853173c1de2a8fc0800000000000000
+      internalID: -3491927082610379379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_56
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e86303e41b9a57e60800000000000000
+      internalID: 7959454495433307790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_57
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 430b4b92d75786ec0800000000000000
+      internalID: -3573477123887419340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_58
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b2ee043df8f3810800000000000000
+      internalID: 1747273317933263738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_59
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c42a1134c533b10800000000000000
+      internalID: 1960011705964711023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_60
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5ddbbb1d465c250800000000000000
+      internalID: 5964284133482812870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_61
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f48e412305f9180800000000000000
+      internalID: -9106471745490497712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_62
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca2987bbf31f98480800000000000000
+      internalID: -8896314332863229268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_63
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c6565f0f8b91dc0800000000000000
+      internalID: -3667697076467831796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_64
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973d52ba2aeff7710800000000000000
+      internalID: 1693351959524135801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_65
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6276f1093fa1ce50800000000000000
+      internalID: 6827931169451307630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_66
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a5b71dfa201f1680800000000000000
+      internalID: -8782282971528317536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_67
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ae6d47121e6de30800000000000000
+      internalID: 4528054009178024520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_68
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4205db7e3eb1d98a0800000000000000
+      internalID: -6296846038334615516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_69
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a7cc81acb706d50800000000000000
+      internalID: 6728513951221185120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_70
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a553808ee5d47ee70800000000000000
+      internalID: 9144362638414198106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inclusus_Tilemap_71
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19c45b4eaaf47e20800000000000000
+      internalID: 3347576049538222365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c26f1173b283a7349bd094b584e71260
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Inclusus_Tilemap_0: 4326218355859252703
+      Inclusus_Tilemap_1: -8408549937989427771
+      Inclusus_Tilemap_10: -7404755778373467962
+      Inclusus_Tilemap_11: 9041400032069704304
+      Inclusus_Tilemap_12: -7264711644485280689
+      Inclusus_Tilemap_13: -1050254587218514588
+      Inclusus_Tilemap_14: 2892579169956554748
+      Inclusus_Tilemap_15: -6517047002977189453
+      Inclusus_Tilemap_16: -3674167574919117441
+      Inclusus_Tilemap_17: 8125680121377651127
+      Inclusus_Tilemap_18: 7630957411619631802
+      Inclusus_Tilemap_19: 8030049670440613379
+      Inclusus_Tilemap_2: 5628317086447182844
+      Inclusus_Tilemap_20: -456118213413055292
+      Inclusus_Tilemap_21: -9154296784770287889
+      Inclusus_Tilemap_22: 2248199214544341814
+      Inclusus_Tilemap_23: -1074363572446438228
+      Inclusus_Tilemap_24: -8983457819474298874
+      Inclusus_Tilemap_25: -457168179265411475
+      Inclusus_Tilemap_26: -4153601618010382344
+      Inclusus_Tilemap_27: 4267662881432166473
+      Inclusus_Tilemap_28: 828112436052119450
+      Inclusus_Tilemap_29: -2196702118044363114
+      Inclusus_Tilemap_3: 9018114305670710450
+      Inclusus_Tilemap_30: 2484800373500254297
+      Inclusus_Tilemap_31: 1449301198700087083
+      Inclusus_Tilemap_32: 1406985543637531037
+      Inclusus_Tilemap_33: 399901081150082010
+      Inclusus_Tilemap_34: 4616909149404393916
+      Inclusus_Tilemap_35: 2883655366603749043
+      Inclusus_Tilemap_36: 4033018660223905465
+      Inclusus_Tilemap_37: -5083161275894274193
+      Inclusus_Tilemap_38: -8715781145124607650
+      Inclusus_Tilemap_39: -5017192828648101585
+      Inclusus_Tilemap_4: 2488812291629805696
+      Inclusus_Tilemap_40: 5060896020326294953
+      Inclusus_Tilemap_41: 5019738922024019438
+      Inclusus_Tilemap_42: -5910905865365872325
+      Inclusus_Tilemap_43: 7440681533674707932
+      Inclusus_Tilemap_44: -2231238744285267642
+      Inclusus_Tilemap_45: -6313839185643549894
+      Inclusus_Tilemap_46: -296595855097818032
+      Inclusus_Tilemap_47: 2538079066202610082
+      Inclusus_Tilemap_48: 2749319511713747719
+      Inclusus_Tilemap_49: -8028255540807683490
+      Inclusus_Tilemap_5: 5011737220804547228
+      Inclusus_Tilemap_50: -6587247989019956110
+      Inclusus_Tilemap_51: -2382023252702915166
+      Inclusus_Tilemap_52: -1936435182290828562
+      Inclusus_Tilemap_53: 8768807733256734300
+      Inclusus_Tilemap_54: 5813557784462229085
+      Inclusus_Tilemap_55: -3491927082610379379
+      Inclusus_Tilemap_56: 7959454495433307790
+      Inclusus_Tilemap_57: -3573477123887419340
+      Inclusus_Tilemap_58: 1747273317933263738
+      Inclusus_Tilemap_59: 1960011705964711023
+      Inclusus_Tilemap_6: 2024623334781089084
+      Inclusus_Tilemap_60: 5964284133482812870
+      Inclusus_Tilemap_61: -9106471745490497712
+      Inclusus_Tilemap_62: -8896314332863229268
+      Inclusus_Tilemap_63: -3667697076467831796
+      Inclusus_Tilemap_64: 1693351959524135801
+      Inclusus_Tilemap_65: 6827931169451307630
+      Inclusus_Tilemap_66: -8782282971528317536
+      Inclusus_Tilemap_67: 4528054009178024520
+      Inclusus_Tilemap_68: -6296846038334615516
+      Inclusus_Tilemap_69: 6728513951221185120
+      Inclusus_Tilemap_7: 9172468366471590827
+      Inclusus_Tilemap_70: 9144362638414198106
+      Inclusus_Tilemap_71: 3347576049538222365
+      Inclusus_Tilemap_8: -517962400911835360
+      Inclusus_Tilemap_9: -4620433428965033638
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
