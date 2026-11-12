@@ -4,9 +4,10 @@ using UnityEngine;
 //   Idle    -> stands still, goes to Stalk after 5 seconds
 //   Stalk   -> walks to one end of its wander zone, then back to Idle
 //   Inspect -> walks to a light or noise ("??"), then goes to Idle (or Alert if the player is there)
-//   Alert   -> has seen the player ("!!"), goes to Attack when the detection meter is full,
-//              or back to Idle if the player is out of sight for 5 seconds
-//   Attack  -> chases the player and swings at them. A hit means game over.
+//   Alert   -> has seen the player ("!!"), goes to Attack when the detection meter is full.
+//              If the player stays out of sight for 3 seconds it goes to Inspect, at the spot it last saw them
+//   Attack  -> chases the player and swings at them. A hit means game over. If the player hides for
+//              2.5 seconds it stops and goes to Inspect at the last-seen spot (searches, then back to Idle).
 // Needs: Rigidbody2D, a body Collider2D, and a vision cone (set in the Inspector).
 //
 // On flat levels it only walks left and right. On winding levels (see GameFlow.FreeMovementScenes)
@@ -44,10 +45,10 @@ public class WanderingShadow : EnemyBase
 
     [Header("Timers")]
     [SerializeField] private float idleTime = 5f;        // Idle -> Stalk
-    [SerializeField] private float loseSightTime = 5f;   // Alert -> Idle
+    [SerializeField] private float loseSightTime = 3f;   // Alert: out of sight this long -> goes to search where the player was last seen
     // Extra rule (not in the doc): if the player stays hidden (or behind a wall) this long during Attack,
-    // the shadow loses them and drops back to Alert. Set to 0 to turn it off.
-    [SerializeField] private float giveUpTime = 4f;
+    // the shadow loses them and goes to search where they were last seen. Set to 0 to turn it off.
+    [SerializeField] private float giveUpTime = 2.5f;
 
     [Header("Detection")]
     [SerializeField] private float lightRadius = 12f;    // how close a light has to be to catch its attention
@@ -105,6 +106,7 @@ public class WanderingShadow : EnemyBase
     private float cooldownTimer;
     private float stuckTimer;
     private float stunTimer;       // Stunned: seconds left
+    private Vector2 lastSeenPlayerPosition;   // where it last saw the player (it goes there to search)
 
     // Targets
     private Vector2 stalkTarget;
@@ -314,13 +316,16 @@ public class WanderingShadow : EnemyBase
 
         if (!CanSeePlayer())
         {
-            // Lost sight of the player. Go back to Idle if it stays that way.
+            // Lost sight of the player (they ran out of view or hid). Head to where they were last seen,
+            // and if they stay gone, go and search there for a bit before giving up.
             lostSightTimer += Time.deltaTime;
-            if (lostSightTimer >= loseSightTime) ChangeState(State.Idle);
+            MoveToward(lastSeenPlayerPosition, alertApproachSpeed);
+            if (lostSightTimer >= loseSightTime) SearchWhereLastSeen();
             return;
         }
 
         lostSightTimer = 0f;
+        lastSeenPlayerPosition = player.transform.position;
 
         // Alice's detection meter decides when it turns into an Attack
         // (if the player has no meter, just attack after a short delay)
@@ -359,9 +364,12 @@ public class WanderingShadow : EnemyBase
         // Can the shadow actually see the player? (walls block sight)
         bool wallInTheWay = !LineOfSight.CanSeeBody(transform.position, playerCollider);
 
+        if (!PlayerIsHidden && !wallInTheWay) lastSeenPlayerPosition = player.transform.position;
+
+        // The player hid (or got behind a wall) long enough: stop chasing and go and search where they were
         if (HasLostTrackOfPlayer(wallInTheWay))
         {
-            ChangeState(State.Alert);
+            SearchWhereLastSeen();
             return;
         }
 
@@ -381,6 +389,15 @@ public class WanderingShadow : EnemyBase
         {
             MoveToward(player.transform.position, chaseSpeed);
         }
+    }
+
+    // The end of the chase: walk to the spot where the player was last seen and look around for a few seconds
+    // (the Inspect state does exactly that). If the player has hidden, it finds nothing and goes back to its
+    // zone. If they step out in view while it searches, it spots them again.
+    private void SearchWhereLastSeen()
+    {
+        inspectTarget = lastSeenPlayerPosition;
+        ChangeState(State.Inspect);
     }
 
     // The shadow gives up if the player stays hidden, or out of sight behind a wall, long enough
@@ -495,6 +512,7 @@ public class WanderingShadow : EnemyBase
                 ShowQuestion();
                 break;
             case State.Alert:
+                lastSeenPlayerPosition = player.transform.position;   // it was just spotted
                 ShowAlert();
                 break;
             case State.Attack:

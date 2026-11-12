@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Basic side-scroller movement for Nin.
-// Controls: A/D = left/right, W/S = up/down, Space = jump (turned off, see Allow Jump), Left Ctrl = crouch
+// Controls: see GameControls (arrow keys to move, Down or Left Ctrl to crouch). Jumping is turned off (see Allow Jump).
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 4f;   // was 5: slower so shadows can actually catch her
     [SerializeField] private float crouchSpeed = 2f;   // slower while crouching so sneaking feels different
     [SerializeField] private float jumpForce = 12f;
     // Jumping is turned off
@@ -76,25 +76,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Keyboard kb = Keyboard.current;
-        if (kb == null) return;
+        // The keys and buttons are all set in GameControls (left / right, and up / down in the winding levels)
+        MoveInput = new Vector2(GameControls.MoveX, GameControls.MoveY);
 
-        // Left / right
-        float x = 0f;
-        if (kb.aKey.isPressed) x -= 1f;
-        if (kb.dKey.isPressed) x += 1f;
+        // Jumping is turned off (see Allow Jump). Space is now "swing the weapon", so it no longer jumps.
 
-        // Up / down
-        float y = 0f;
-        if (kb.sKey.isPressed) y -= 1f;
-        if (kb.wKey.isPressed) y += 1f;
-
-        MoveInput = new Vector2(x, y);
-
-        // Jump - we save it here and use it in FixedUpdate so we don't miss a press
-        if (kb.spaceKey.wasPressedThisFrame) jumpPressed = true;
-
-        HandleCrouch(kb.leftCtrlKey.isPressed);
+        HandleCrouch(GameControls.CrouchHeld);
     }
 
     private void FixedUpdate()

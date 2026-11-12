@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcdb94a55833454e89bd1f704e3d8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  walkSpeed: 5
+  walkSpeed: 4
   crouchSpeed: 2
   jumpForce: 12
   allowJump: 0

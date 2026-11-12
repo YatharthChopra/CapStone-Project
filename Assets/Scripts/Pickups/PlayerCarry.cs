@@ -258,7 +258,7 @@ public class PlayerCarry : MonoBehaviour
         GUI.Label(new Rect(10, Screen.height - 84, 600, 25), status);
 
         PickupItem here = FindItemHere();
-        if (here != null) GUI.Label(new Rect(Screen.width / 2f - 150f, Screen.height - 110f, 300, 25), "E = pick up " + here.ItemName);
+        if (here != null) GUI.Label(new Rect(Screen.width / 2f - 150f, Screen.height - 110f, 300, 25), "C = pick up " + here.ItemName);
 
         if (messageTimer > 0f) GUI.Label(new Rect(Screen.width / 2f - 150f, Screen.height - 136f, 300, 25), message);
     }
