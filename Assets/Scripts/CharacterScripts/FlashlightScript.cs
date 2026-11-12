@@ -22,11 +22,15 @@ public class FlashlightScript : MonoBehaviour
         }
 
         // "Change flashlight type" is on the control list (S / R2) but we only have one kind of flashlight so far.
-        // When there is a second one, switch to it here.
         if (GameControls.FlashlightTypePressed)
         {
             ChangeFlashlightType();
         }
+
+        // Point the flashlight the way Nin is walking (left / right)
+        float x = GameControls.MoveX;
+        if (x < 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -270);
+        else if (x > 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -90);
     }
 
     // Nothing to change to yet
