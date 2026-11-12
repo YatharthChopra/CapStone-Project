@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Lets Nin throw things to distract enemies.
-//   - Hold the left mouse button to charge a throw. A line of dots shows where it will land.
-//   - Let go to throw. A quick click is a short, quiet throw. Holding longer throws further, and louder.
-//   - The object is thrown toward the mouse. Moving the mouse up or down changes how high the arc is.
+//   - Hold Z (X / Square on a controller) to charge a throw, or hold the left mouse button. A line of dots shows where it will land.
+//   - Let go to throw. A quick tap is a short, quiet throw. Holding longer throws further, and louder.
+//   - With Z she throws the way she faces (R1 / L1 on a controller change the arc). With the mouse she throws toward it.
 // There is no ammo. After a throw she has to wait for a short cooldown before she can throw again.
 public class PlayerThrow : MonoBehaviour
 {
@@ -39,9 +39,12 @@ public class PlayerThrow : MonoBehaviour
     private const float DotSize = 0.18f;             // how big each aiming dot is
     private const float DotTimeGap = 0.08f;          // seconds of flight between one dot and the next
     private const int DotSortingOrder = 20;          // draws on top of everything else
+    private const float AimAdjustSpeed = 50f;        // controller: how fast R1 / L1 change the arc (degrees per second)
 
     private float cooldownLeft;   // seconds until Nin can throw again (0 = ready)
     private bool charging;
+    private bool aimingWithMouse;   // true if this throw was started with the mouse (otherwise the keys / controller)
+    private float keyAimAngle = 45f;   // the arc when throwing with the keys / controller
     private float chargeTimer;
     private float throwableGravityScale = 3f;
 
@@ -103,21 +106,32 @@ public class PlayerThrow : MonoBehaviour
     {
         if (cooldownLeft > 0f) cooldownLeft -= Time.deltaTime;
 
-        Mouse mouse = Mouse.current;
-        if (mouse == null || Time.timeScale == 0f || throwablePrefab == null || Camera.main == null) return;
+        if (Time.timeScale == 0f || throwablePrefab == null) return;
 
-        // Start charging
-        if (mouse.leftButton.wasPressedThisFrame && cooldownLeft <= 0f)
+        Mouse mouse = Mouse.current;
+
+        // Start charging: the throw key / button (Z, or X / Square), or the left mouse button
+        if (!charging && cooldownLeft <= 0f)
         {
-            charging = true;
-            chargeTimer = 0f;
+            if (GameControls.ThrowPressed)
+            {
+                charging = true;
+                chargeTimer = 0f;
+                aimingWithMouse = false;
+                keyAimAngle = tapAngle;
+            }
+            else if (mouse != null && Camera.main != null && mouse.leftButton.wasPressedThisFrame)
+            {
+                charging = true;
+                chargeTimer = 0f;
+                aimingWithMouse = true;
+            }
         }
 
         if (!charging) return;
 
-        // Right-click (or Esc) cancels the throw and you keep the throwable
-        Keyboard keyboard = Keyboard.current;
-        bool cancelPressed = mouse.rightButton.wasPressedThisFrame || (keyboard != null && keyboard.escapeKey.wasPressedThisFrame);
+        // Esc, Select or right-click cancels the throw and you keep the throwable
+        bool cancelPressed = GameControls.ThrowCancelPressed || (mouse != null && mouse.rightButton.wasPressedThisFrame);
         if (cancelPressed)
         {
             charging = false;
@@ -128,16 +142,20 @@ public class PlayerThrow : MonoBehaviour
         chargeTimer += Time.deltaTime;
         float power = Mathf.Clamp01(chargeTimer / chargeTime);
 
+        // On a controller R1 / L1 raise and lower the aim while charging
+        keyAimAngle = Mathf.Clamp(keyAimAngle + GameControls.ThrowAimAdjust * AimAdjustSpeed * Time.deltaTime, minAngle, maxAngle);
+
         Vector2 origin;
         Vector2 velocity = GetLaunchVelocity(power, out origin);
 
-        // A quick click is a short lob just in front of Nin, so we only show the aiming dots once she's held it a bit
+        // A quick tap is a short lob just in front of Nin, so we only show the aiming dots once she's held it a bit
         bool isTap = chargeTimer < tapTime;
         if (isTap) HideDots();
         else ShowDots(origin, velocity);
 
         // Let go to throw
-        if (mouse.leftButton.wasReleasedThisFrame)
+        bool released = aimingWithMouse ? (mouse != null && mouse.leftButton.wasReleasedThisFrame) : GameControls.ThrowReleased;
+        if (released)
         {
             if (isTap) Throw(origin, MakeTapVelocity(velocity.x), tapNoise);
             else Throw(origin, velocity, Mathf.Lerp(quietNoise, loudNoise, power));
@@ -146,7 +164,7 @@ public class PlayerThrow : MonoBehaviour
         }
     }
 
-    // A tap always makes the same small, high lob toward whichever side the mouse is on
+    // A tap always makes the same small, high lob toward whichever side Nin is aiming
     private Vector2 MakeTapVelocity(float sideways)
     {
         float directionX = sideways >= 0f ? 1f : -1f;
@@ -154,21 +172,35 @@ public class PlayerThrow : MonoBehaviour
         return new Vector2(directionX * Mathf.Cos(radians), Mathf.Sin(radians)) * tapSpeed;
     }
 
-    // Works out where the throw starts and how fast it leaves, from the mouse position and how long we've charged
+    // Works out where the throw starts and how fast it leaves, from how long we've charged and where we're aiming.
+    // With the keys / controller she throws the way she is facing (the angle comes from R1 / L1, or 45 degrees).
+    // With the mouse she throws toward the mouse, as before.
     private Vector2 GetLaunchVelocity(float power, out Vector2 origin)
     {
         origin = (Vector2)transform.position + new Vector2(0f, ThrowHeight);
 
-        Camera cam = Camera.main;
-        Vector2 mouseScreen = Mouse.current.position.ReadValue();
-        Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(mouseScreen.x, mouseScreen.y, Mathf.Abs(cam.transform.position.z)));
+        float directionX;
+        float angle;
 
-        float sideways = mouseWorld.x - origin.x;
-        float up = mouseWorld.y - origin.y;
+        if (aimingWithMouse)
+        {
+            Camera cam = Camera.main;
+            Vector2 mouseScreen = Mouse.current.position.ReadValue();
+            Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(mouseScreen.x, mouseScreen.y, Mathf.Abs(cam.transform.position.z)));
 
-        float directionX = sideways >= 0f ? 1f : -1f;                                // throw left or right
-        float angle = Mathf.Atan2(up, Mathf.Abs(sideways)) * Mathf.Rad2Deg;          // how steep the mouse is
-        angle = Mathf.Clamp(angle, minAngle, maxAngle);
+            float sideways = mouseWorld.x - origin.x;
+            float up = mouseWorld.y - origin.y;
+
+            directionX = sideways >= 0f ? 1f : -1f;                                      // throw left or right
+            angle = Mathf.Atan2(up, Mathf.Abs(sideways)) * Mathf.Rad2Deg;                // how steep the mouse is
+            angle = Mathf.Clamp(angle, minAngle, maxAngle);
+        }
+        else
+        {
+            PlayerAnimator animator = GetComponent<PlayerAnimator>();
+            directionX = (animator == null || animator.FacingRight) ? 1f : -1f;
+            angle = keyAimAngle;
+        }
 
         float speed = Mathf.Lerp(minSpeed, maxSpeed, power);
         float radians = angle * Mathf.Deg2Rad;
