@@ -120,6 +120,30 @@ public abstract class EnemyBase : MonoBehaviour
         get { return playerHiding != null && playerHiding.hiding; }
     }
 
+    // ---------------------------------------------------------------- TEMPORARY: why can't it see the player?
+    // (Used while we track down an eye that stays Idle while the player stands in its cone. Safe to delete later.)
+    private float diagnosticTimer;
+
+    protected void LogWhyNotSeen()
+    {
+        diagnosticTimer -= Time.deltaTime;
+        if (diagnosticTimer > 0f) return;
+        diagnosticTimer = 1f;
+
+        if (player == null || visionCone == null || playerCollider == null)
+        {
+            Debug.Log(name + " NOT SEEING: player=" + (player != null) + " cone=" + (visionCone != null) + " playerCollider=" + (playerCollider != null), this);
+            return;
+        }
+
+        ColliderDistance2D distance = visionCone.Distance(playerCollider);
+        string blocker = LineOfSight.DescribeBlocker(transform.position, playerCollider);
+        Debug.Log(name + " NOT SEEING: hidden=" + PlayerIsHidden
+            + "  coneEnabled=" + visionCone.enabled + "/" + visionCone.gameObject.activeInHierarchy
+            + "  overlapsCone=" + distance.isOverlapped + " (distance " + distance.distance.ToString("F2") + ")"
+            + "  lineOfSight=" + blocker, this);
+    }
+
     // True when the player is inside the vision cone, not hiding, and no wall is in the way
     protected bool CanSeePlayer()
     {

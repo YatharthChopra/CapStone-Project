@@ -34,8 +34,13 @@ public class GlaringEyes : EnemyBase
     // How much the meter goes up each second on top of Alice's normal detection.
     // The meter is 100, so 15 means about 7 seconds by itself.
     [SerializeField] private float stareDetectionPerSecond = 15f;
+    // After the player leaves its view it keeps staring this long before it calms down (so it does not lose
+    // them the moment they move an inch)
+    [SerializeField] private float loseSightTime = 1.5f;
 
     private float stateTimer;
+    private float lostSightTimer;                // Staring: how long the player has been out of view
+    private Vector2 lastSeenPlayerPosition;      // Staring: where it last saw the player
 
     private Vector2 lookTowardBoxes;   // the direction to the boxes
     private Vector2 lookAway;          // the same height, but the other side
@@ -142,7 +147,12 @@ public class GlaringEyes : EnemyBase
         {
             case State.Idle:
                 if (CanSeePlayer()) ChangeState(State.Staring);
-                else SwitchGazeOverTime();
+                else
+                {
+                    // TEMPORARY: if the meter is filling but we are not staring, say why (see EnemyBase.LogWhyNotSeen)
+                    if (playerHiding != null && playerHiding.Detection > 2f) LogWhyNotSeen();
+                    SwitchGazeOverTime();
+                }
                 break;
 
             case State.Distracted:
@@ -172,14 +182,19 @@ public class GlaringEyes : EnemyBase
 
     private void UpdateStaring()
     {
-        LookAt(player.transform.position);
-
         if (!CanSeePlayer())
         {
-            // Player walked out of view (or hid)
-            ChangeState(State.Idle);
+            // The player stepped out of view (or hid). Don't drop them the instant they move: keep staring at the
+            // spot where they were last seen for a moment, and only calm down if they stay gone.
+            lostSightTimer += Time.deltaTime;
+            LookAt(lastSeenPlayerPosition);
+            if (lostSightTimer >= loseSightTime) ChangeState(State.Idle);
             return;
         }
+
+        lostSightTimer = 0f;
+        lastSeenPlayerPosition = player.transform.position;
+        LookAt(lastSeenPlayerPosition);
 
         // Keep filling the meter while the player is being stared at
         if (playerHiding != null)
@@ -210,6 +225,8 @@ public class GlaringEyes : EnemyBase
                 ShowQuestion();
                 break;
             case State.Staring:
+                lostSightTimer = 0f;
+                lastSeenPlayerPosition = player.transform.position;   // it just spotted them
                 ShowAlert();
                 break;
         }
