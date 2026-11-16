@@ -40,7 +40,11 @@ public class StaticEnclose : MonoBehaviour
 
     public void inputScale(float detection, float MaxDetection)
     {
-        AdjustStatic(Mathf.Clamp(1 -detection/MaxDetection*0.6f, 0.4f, 1));
+        if (!debugMode)
+        {
+            AdjustStatic(Mathf.Clamp(1 - detection / MaxDetection * 0.6f, 0.4f, 1));
+        }
+        
     }
     private void AdjustStatic(float newScale)
     {
