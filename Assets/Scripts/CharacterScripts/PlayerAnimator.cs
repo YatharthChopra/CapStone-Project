@@ -24,7 +24,7 @@ public class PlayerAnimator : MonoBehaviour
     private const float MovingSpeed = 0.2f;        // slower than this counts as standing still
     private const float AirGraceTime = 0.08f;      // must be off the ground this long to count as "in the air"
     private const float FullJumpSpeed = 12f;       // same as the jump force in PlayerMovement
-    private const float FullWalkSpeed = 5f;        // same as the walk speed in PlayerMovement
+    private const float FullWalkSpeed = 4f;        // same as the walk speed in PlayerMovement
     private const float FullCrouchSpeed = 2f;      // same as the crouch speed in PlayerMovement
     private const float FacingSpeed = 0.05f;       // moving slower than this doesn't change which way she faces
     private const float CrouchTransitionTime = 0.36f;   // the crouch-down / stand-up animation: 5 pictures at 14 per second

@@ -50,7 +50,7 @@ public class HidingScript : MonoBehaviour
         if (NearHidingPlace)
         {
             // this checks if they are near a hiding place
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (GameControls.HidePressed)
             {
                 // when they press e it toggles their hiding state
                 if (hiding)
