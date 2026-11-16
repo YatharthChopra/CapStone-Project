@@ -26,10 +26,13 @@ public class HidingScript : MonoBehaviour
     public float Detection { get { return detection; } }
     public float MaxDetection { get { return maxDetection; } }
 
+    private StaticEnclose StaticScript;
+
     // Added so an enemy can push the meter up by itself (Glaring Eyes use this to fill it faster)
     public void AddDetection(float amount)
     {
         detection = Mathf.Min(detection + amount, maxDetection);
+        StaticScript.inputScale(detection, maxDetection);
     }
 
     private Color defaultColor;
@@ -38,6 +41,7 @@ public class HidingScript : MonoBehaviour
     {
         defaultColor = this.GetComponentInChildren<SpriteRenderer>().color;
         crouching = this.GetComponent<PlayerMovement>().IsCrouching;
+        StaticScript = FindAnyObjectByType<StaticEnclose>();
     }
 
     // Update is called once per frame
@@ -85,7 +89,7 @@ public class HidingScript : MonoBehaviour
         {
             if (detection > 0)
             {
-                detection -= 2 * detectionScaling * Time.deltaTime;
+                AdjustDetection(-2 * detectionScaling * Time.deltaTime);
             }
         }
         else if(InView == true)
@@ -97,26 +101,30 @@ public class HidingScript : MonoBehaviour
                 if (!LineOfSight.CanSeeBody(enemyObject.transform.position, GetComponent<Collider2D>())) continue;
                 seenByAnyone = true;
 
-                detection += (1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling;
+                AdjustDetection((1 / (Vector3.Distance(enemyObject.transform.position, transform.position))) * Time.deltaTime * detectionScaling);
                 //Debug.Log((1/(Vector3.Distance(enemyObject.transform.position, transform.position))) * detectionScaling);
             }
 
             // (added) if nobody can actually see us, the meter goes down like it does out of view
             if (!seenByAnyone && detection > 0)
             {
-                detection -= 1 * Time.deltaTime * detectionScaling;
+                AdjustDetection(-1 * Time.deltaTime * detectionScaling);
             }
         }
         else
         {
             if (detection > 0)
             {
-                detection -= 1 * Time.deltaTime*detectionScaling;
+                AdjustDetection(-1 * Time.deltaTime*detectionScaling);
             }
         }
     }
 
-
+    private void AdjustDetection(float Adjustment)
+    {
+        detection += Adjustment;
+        StaticScript.inputScale(detection, maxDetection);
+    }
     void Hide()
     {
         this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;

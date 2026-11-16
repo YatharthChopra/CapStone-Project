@@ -13,6 +13,9 @@ public class StaticEnclose : MonoBehaviour
     private Vector2 transformAdjustment;
     private RectTransform rect;
     //public int brightness = 255;
+    public bool debugMode = false;
+    [Range(0.4f, 1)]
+    public float DebugScale = 1f;
     void Start()
     {
         rect = this.GetComponent<RectTransform>();
@@ -27,11 +30,22 @@ public class StaticEnclose : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //canvasTrans.poi
-        //canvasTrans.sizeDelta;
+        if (debugMode)
+        {
+            AdjustStatic(DebugScale);
+        }
        
-        rect.sizeDelta = transformAdjustment* (Scale*adjust2+adjust);
-        float inverse = 1f - Scale;
+        
+    }
+
+    public void inputScale(float detection, float MaxDetection)
+    {
+        AdjustStatic(Mathf.Clamp(1 -detection/MaxDetection*0.6f, 0.4f, 1));
+    }
+    private void AdjustStatic(float newScale)
+    {
+        rect.sizeDelta = transformAdjustment * (newScale * adjust2 + adjust);
+        float inverse = 1f - newScale;
         Debug.Log(inverse * 255);
         StaticImage.color = new Color(255, 255, 255, inverse);
         //StaticImage.transform.localScale = Vector3.one * (adjust2- Scale+adjust) * adjust3;
