@@ -6,12 +6,16 @@ public static class LineOfSight
 {
     // Alice's camera-limit colliders are on this layer. They only stop the camera, so they must never block anyone's view.
     private const string CameraLayerName = "CameraColliders";
+    private const string CameraObjectLayerName = "Camera";   // the Main Camera has its own solid collider on this layer
     private static int cameraLayer = -2;
+    private static int cameraObjectLayer = -2;
 
     private static bool IsCameraCollider(Collider2D thing)
     {
         if (cameraLayer == -2) cameraLayer = LayerMask.NameToLayer(CameraLayerName);   // -1 if the layer does not exist
-        return cameraLayer >= 0 && thing.gameObject.layer == cameraLayer;
+        if (cameraObjectLayer == -2) cameraObjectLayer = LayerMask.NameToLayer(CameraObjectLayerName);
+        int layer = thing.gameObject.layer;
+        return (cameraLayer >= 0 && layer == cameraLayer) || (cameraObjectLayer >= 0 && layer == cameraObjectLayer);
     }
 
     // True if nothing solid is between the two points
@@ -28,24 +32,6 @@ public static class LineOfSight
             return false;                                                            // a wall (or other solid thing) is in the way
         }
         return true;
-    }
-
-    // For tracking down problems: says what is blocking the view from here to the player ("clear" if nothing is)
-    public static string DescribeBlocker(Vector2 from, Collider2D body)
-    {
-        if (body == null) return "no body";
-
-        Vector2 middle = body.bounds.center;
-        foreach (RaycastHit2D hit in Physics2D.LinecastAll(from, middle))
-        {
-            Collider2D thing = hit.collider;
-            if (thing == null || thing.isTrigger) continue;
-            if (IsCameraCollider(thing)) continue;
-            if (thing.GetComponentInParent<EnemyBase>() != null) continue;
-            if (thing.GetComponentInParent<PlayerMovement>() != null) continue;
-            return "BLOCKED by " + thing.name + " (layer " + LayerMask.LayerToName(thing.gameObject.layer) + ")";
-        }
-        return "clear (to the middle of the body)";
     }
 
     // True if the enemy can see any part of the player (head, middle or feet).

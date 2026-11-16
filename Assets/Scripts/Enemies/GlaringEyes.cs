@@ -149,8 +149,6 @@ public class GlaringEyes : EnemyBase
                 if (CanSeePlayer()) ChangeState(State.Staring);
                 else
                 {
-                    // TEMPORARY: if the meter is filling but we are not staring, say why (see EnemyBase.LogWhyNotSeen)
-                    if (playerHiding != null && playerHiding.Detection > 2f) LogWhyNotSeen();
                     SwitchGazeOverTime();
                 }
                 break;
