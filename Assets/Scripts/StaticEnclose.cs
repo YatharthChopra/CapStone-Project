@@ -20,6 +20,7 @@ public class StaticEnclose : MonoBehaviour
     {
         rect = this.GetComponent<RectTransform>();
         transformAdjustment = this.GetComponent<RectTransform>().sizeDelta;
+        nin = FindAnyObjectByType<PlayerMovement>().transform;
     }
 
     // Update is called once per frame
