@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Basic side-scroller movement for Nin.
-// Controls: A/D = left/right, W/S = up/down, Space = jump (turned off, see Allow Jump), Left Ctrl = crouch
+// Controls: see GameControls (arrow keys to move, Down or Left Ctrl to crouch). Jumping is turned off (see Allow Jump).
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 4f;   // was 5: slower so shadows can actually catch her
     [SerializeField] private float crouchSpeed = 2f;   // slower while crouching so sneaking feels different
     [SerializeField] private float jumpForce = 12f;
     // Jumping is turned off
@@ -72,29 +72,21 @@ public class PlayerMovement : MonoBehaviour
         // Ignore triggers when checking for ground / ceiling
         filter = new ContactFilter2D();
         filter.useTriggers = false;
+
+        // Only count things Nin can really bump into. Alice's camera colliders (the CameraColliders layer, and the Main Camera on the Camera layer) are solid but only stop the camera,
+        // so they must not count as a ceiling (they were stopping her from standing up) or as the ground.
+        int canHit = Physics2D.GetLayerCollisionMask(gameObject.layer) & ~LayerMask.GetMask("CameraColliders", "Camera");
+        filter.SetLayerMask(canHit);
     }
 
     private void Update()
     {
-        Keyboard kb = Keyboard.current;
-        if (kb == null) return;
+        // The keys and buttons are all set in GameControls (left / right, and up / down in the winding levels)
+        MoveInput = new Vector2(GameControls.MoveX, GameControls.MoveY);
 
-        // Left / right
-        float x = 0f;
-        if (kb.aKey.isPressed) x -= 1f;
-        if (kb.dKey.isPressed) x += 1f;
+        // Jumping is turned off (see Allow Jump). Space is now "swing the weapon", so it no longer jumps.
 
-        // Up / down
-        float y = 0f;
-        if (kb.sKey.isPressed) y -= 1f;
-        if (kb.wKey.isPressed) y += 1f;
-
-        MoveInput = new Vector2(x, y);
-
-        // Jump - we save it here and use it in FixedUpdate so we don't miss a press
-        if (kb.spaceKey.wasPressedThisFrame) jumpPressed = true;
-
-        HandleCrouch(kb.leftCtrlKey.isPressed);
+        HandleCrouch(GameControls.CrouchHeld);
     }
 
     private void FixedUpdate()
@@ -215,7 +207,8 @@ public class PlayerMovement : MonoBehaviour
         float extra = standingSize.y - box.size.y;
         Vector2 center = new Vector2(b.center.x, b.max.y + extra / 2f);
         Vector2 size = new Vector2(b.size.x * 0.9f, extra);
-        return !OverlapsSomethingElse(center, size);
+        bool blocked = OverlapsSomethingElse(center, size);
+        return !blocked;
     }
 
     // True if the box touches any collider that isn't the player
@@ -224,7 +217,10 @@ public class PlayerMovement : MonoBehaviour
         int count = Physics2D.OverlapBox(center, size, 0f, filter, hits);
         for (int i = 0; i < count; i++)
         {
-            if (hits[i] != box) return true;
+            if (hits[i] != box)
+            {
+                return true;
+            }
         }
         return false;
     }

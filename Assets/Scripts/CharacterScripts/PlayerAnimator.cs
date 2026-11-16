@@ -24,7 +24,7 @@ public class PlayerAnimator : MonoBehaviour
     private const float MovingSpeed = 0.2f;        // slower than this counts as standing still
     private const float AirGraceTime = 0.08f;      // must be off the ground this long to count as "in the air"
     private const float FullJumpSpeed = 12f;       // same as the jump force in PlayerMovement
-    private const float FullWalkSpeed = 5f;        // same as the walk speed in PlayerMovement
+    private const float FullWalkSpeed = 4f;        // same as the walk speed in PlayerMovement
     private const float FullCrouchSpeed = 2f;      // same as the crouch speed in PlayerMovement
     private const float FacingSpeed = 0.05f;       // moving slower than this doesn't change which way she faces
     private const float CrouchTransitionTime = 0.36f;   // the crouch-down / stand-up animation: 5 pictures at 14 per second
@@ -46,6 +46,8 @@ public class PlayerAnimator : MonoBehaviour
     private bool dead;               // true once she has been caught
     private float deathTimer;        // counts down while the death animation plays
     private bool gameOverShown;
+
+    private bool isUpsideDown = false; // this tracks if the player is upside down.
 
     // The item she carries (PlayerCarry) reads this to know which side to hold it on
     public bool FacingRight { get { return facingRight; } }
@@ -156,6 +158,14 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool("InAir", inAir);
         animator.SetFloat("WalkRate", Mathf.Clamp(speed / fullSpeed, 0.5f, 1.5f));
         animator.SetFloat("JumpProgress", jumpProgress);
+
+        //Checks if player is rotated.
+        /*
+        int facingModifier;
+        if (this.transform.eulerAngles.z < 90) 
+        else isUpsideDown = false;
+        */
+        
 
         // Face the way we're walking
         if (Mathf.Abs(velocity.x) > FacingSpeed) facingRight = velocity.x > 0f;

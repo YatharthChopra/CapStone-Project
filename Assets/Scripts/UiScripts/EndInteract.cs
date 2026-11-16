@@ -15,8 +15,7 @@ public class EndInteract : MonoBehaviour
 
     private void Update()
     {
-        Keyboard kb = Keyboard.current;
-        if (kb == null || !kb.eKey.wasPressedThisFrame) return;
+        if (!GameControls.InteractPressed) return;
 
         // Find the player the first time we need it
         if (playerCollider == null)
