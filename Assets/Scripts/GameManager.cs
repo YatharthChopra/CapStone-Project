@@ -34,6 +34,57 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    // ---------------------------------------------------------------- pausing
+
+    // The pause key (A, or Options / Start on a controller) freezes the game and shows a "Paused" message
+    public static bool IsPaused { get; private set; }
+
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // A new room or screen always starts un-paused
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        SetPaused(false);
+    }
+
+    private void Update()
+    {
+        if (!GameControls.PausePressed) return;
+
+        if (IsPaused)
+        {
+            SetPaused(false);
+            return;
+        }
+
+        // Only pause when there is a player to play (not on the menu or the Game Over screen, and not while dying)
+        PlayerAnimator animator = PlayerAnimator;
+        bool dying = animator != null && animator.IsDead;
+        if (Player != null && !dying) SetPaused(true);
+    }
+
+    private static void SetPaused(bool paused)
+    {
+        IsPaused = paused;
+        GameControls.Paused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+    }
+
+    private void OnGUI()
+    {
+        if (!IsPaused) return;
+
+        GUI.Box(new Rect(Screen.width / 2f - 120f, Screen.height / 2f - 40f, 240f, 80f), "PAUSED\n\nPress A (or Start) to resume");
+    }
+
     // ---------------------------------------------------------------- finding the player
 
     // The player is looked for once per room, then remembered. (If the room changes, the old player is
