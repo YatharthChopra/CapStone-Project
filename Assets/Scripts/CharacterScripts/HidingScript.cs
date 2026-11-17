@@ -152,6 +152,10 @@ public class HidingScript : MonoBehaviour
 
         if(collision.tag == "EnemyView")
         {
+            // (added) Wandering Shadows don't use the detection meter any more (they just attack up close),
+            // so only the Glaring Eyes' cones fill it
+            if (collision.GetComponentInParent<WanderingShadow>() != null) return;
+
             InView = true;
             EnemiesList.Add(collision.GetComponentInParent<Transform>().gameObject);
         }

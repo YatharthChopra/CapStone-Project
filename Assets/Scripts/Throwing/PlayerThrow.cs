@@ -273,7 +273,7 @@ public class PlayerThrow : MonoBehaviour
     private void OnGUI()
     {
         string status = cooldownLeft > 0f ? "Throw: recharging " + cooldownLeft.ToString("0.0") + "s" : "Throw: ready";
-        GUI.Label(new Rect(10, Screen.height - 32, 450, 25), status + "     (hold left mouse to throw further)");
+        GUI.Label(new Rect(10, Screen.height - 32, 450, 25), status + "     (hold Z to throw further)");
 
         if (charging)
         {

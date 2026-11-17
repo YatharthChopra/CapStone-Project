@@ -13,13 +13,13 @@ using UnityEngine.InputSystem;
 //   X                    flashlight on / off    B / Circle                          flashlight on / off
 //   C                    interact               Y / Triangle                        interact
 //   S                    change flashlight type R2                                  change flashlight type
-//   A                    pause                  Options / Start                     pause
+//   P                    pause                  Options / Start                     pause
 //                                               R1 / L1                             throw aim up / down
 //   Extras that are not on the list: Q = drop the held item (controller: L2), Left Ctrl = crouch
 //   (controller: left stick click), and the left stick moves too.
 //
-// In the winding levels (see GameFlow.FreeMovementScenes) the Up and Down arrows are needed for walking up and
-// down, so there: crouch is Left Ctrl (or the stick click), and hiding in an alcove uses the interact key. (will be changed after we have alice's gravity in)
+// Alice's gravity is in now, so nobody walks up and down with the arrow keys any more. That means Up (hide) and
+// Down (crouch) work the same in every level, winding ones included.
 public static class GameControls
 {
     // GameManager sets this while the game is paused, so nothing reacts to the keys until it is resumed
@@ -76,22 +76,21 @@ public static class GameControls
         }
     }
 
-    // Crouch is held down. (Down arrow, but not in the winding levels, where Down means "walk down")
+    // Crouch is held down (Down arrow or Left Ctrl)
     public static bool CrouchHeld
     {
         get
         {
             if (Paused) return false;
-            bool winding = GameFlow.IsFreeMovementScene;
             if (Kb != null)
             {
                 if (Kb.leftCtrlKey.isPressed) return true;
-                if (!winding && Kb.downArrowKey.isPressed) return true;
+                if (Kb.downArrowKey.isPressed) return true;
             }
             if (Pad != null)
             {
                 if (Pad.leftStickButton.isPressed) return true;
-                if (!winding && Pad.dpad.down.isPressed) return true;
+                if (Pad.dpad.down.isPressed) return true;
             }
             return false;
         }
@@ -105,8 +104,6 @@ public static class GameControls
         get
         {
             if (Paused) return false;
-            if (GameFlow.IsFreeMovementScene) return InteractPressed;   // Up is needed for walking in the winding levels
-
             return (Kb != null && Kb.upArrowKey.wasPressedThisFrame)
                 || (Pad != null && Pad.dpad.up.wasPressedThisFrame);
         }
@@ -216,7 +213,7 @@ public static class GameControls
     {
         get
         {
-            return (Kb != null && Kb.aKey.wasPressedThisFrame)
+            return (Kb != null && Kb.pKey.wasPressedThisFrame)
                 || (Pad != null && Pad.startButton.wasPressedThisFrame);
         }
     }

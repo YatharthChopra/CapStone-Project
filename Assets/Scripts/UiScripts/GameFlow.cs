@@ -71,6 +71,7 @@ public static class GameFlow
 
     public static void GoToMainMenu()
     {
+        if (GameManager.Instance != null) GameManager.Instance.ResetHints();   // a new run shows the how-to-play hints again
         LoadScene(MainMenuScene);
     }
 

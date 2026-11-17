@@ -5,6 +5,8 @@ using UnityEngine;
 //   Idle        -> the "searching" animation, played slowly (the eye looking around)
 //   Distracted  -> the same animation, played faster (it heard something)
 //   Staring     -> the "alert" animation
+// The picture also follows the vision cone: it slides a little toward where the cone points and tilts that way
+// (it is flipped when the cone points left), so it looks like the eye is turning to look.
 public class GlaringEyeAnimator : MonoBehaviour
 {
     private const string Folder = "GlaringEye/";
@@ -14,9 +16,13 @@ public class GlaringEyeAnimator : MonoBehaviour
     private const float IdleFramesPerSecond = 5f;
     private const float DistractedFramesPerSecond = 10f;
     private const float AlertFramesPerSecond = 10f;
+    private const float LookShift = 0.5f;                 // how far the picture slides toward where the eye is looking
+    private const float MaxTilt = 35f;                    // how far the picture can tilt (degrees)
 
     private GlaringEyes eyes;
     private SpriteRenderer eyeRenderer;
+    private Transform visual;
+    private Vector3 restPosition;                         // where the picture sits when looking straight ahead
 
     private Sprite[] searching = new Sprite[FrameCount];
     private Sprite[] alert = new Sprite[FrameCount];
@@ -28,7 +34,7 @@ public class GlaringEyeAnimator : MonoBehaviour
     {
         eyes = GetComponent<GlaringEyes>();
 
-        Transform visual = transform.Find("Visual");
+        visual = transform.Find("Visual");
         if (visual == null) { enabled = false; return; }
         eyeRenderer = visual.GetComponent<SpriteRenderer>();
         if (eyeRenderer == null) { enabled = false; return; }
@@ -49,6 +55,7 @@ public class GlaringEyeAnimator : MonoBehaviour
         // Replace the blue placeholder box
         eyeRenderer.color = Color.white;
         visual.localScale = new Vector3(SpriteScale, SpriteScale, 1f);
+        restPosition = visual.localPosition;
     }
 
     private void LateUpdate()
@@ -57,6 +64,8 @@ public class GlaringEyeAnimator : MonoBehaviour
         if (state != shownState) animationTime = 0f;
         shownState = state;
         animationTime += Time.deltaTime;
+
+        FollowTheCone();
 
         switch (state)
         {
@@ -72,6 +81,23 @@ public class GlaringEyeAnimator : MonoBehaviour
                 eyeRenderer.sprite = Frame(searching, IdleFramesPerSecond);
                 break;
         }
+    }
+
+    // Slides and tilts the picture toward the way the cone is pointing
+    private void FollowTheCone()
+    {
+        float angle = eyes.GazeAngle;
+        float radians = angle * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+
+        // World directions, so it still looks the right way if the eye has been rotated in the scene
+        visual.position = transform.TransformPoint(restPosition) + (Vector3)(direction * LookShift * Mathf.Abs(transform.lossyScale.x));
+
+        // Looking left: flip the picture and measure the tilt from the left side
+        bool lookingLeft = direction.x < 0f;
+        eyeRenderer.flipX = lookingLeft;
+        float tilt = lookingLeft ? -Mathf.DeltaAngle(0f, 180f - angle) : Mathf.DeltaAngle(0f, angle);
+        visual.rotation = Quaternion.Euler(0f, 0f, Mathf.Clamp(tilt, -MaxTilt, MaxTilt));
     }
 
     // The picture for this moment of a looping animation (falls back to the first searching picture if one is missing)

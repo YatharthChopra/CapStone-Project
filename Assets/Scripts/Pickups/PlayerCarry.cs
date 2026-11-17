@@ -3,7 +3,7 @@ using UnityEngine;
 // Lets Nin carry one item at a time (see PickupItem).
 //   E (while standing in an item) = pick it up. If her hands are full she drops what she has and swaps.
 //   Q = put the item down.
-//   Space = swing a weapon. A Wandering Shadow in front of her is stunned for a few seconds.
+//   Space = swing a weapon (SWITCHED OFF for now, see SwingEnabled). A Wandering Shadow in front of her is stunned for a few seconds.
 // She can't swing while crouching. A swing makes a bit of noise, so other enemies may come and look.
 // Tools (wrench...) are used on things in the level with E (see ToolLock).
 // The item stays with her when she goes through a door (the GameManager looks after it). Put this on the Player.
@@ -14,6 +14,9 @@ public class PlayerCarry : MonoBehaviour
     [SerializeField] private float restAngle = 25f;                          // how far it leans forward while she just carries it
 
     // Small numbers, named so it's clear what they are
+    // The swing (hockey stick) is switched off for now. Set this to true to bring it back, nothing else needs changing.
+    private const bool SwingEnabled = false;
+
     private const float SwingTime = 0.25f;         // how long the swing picture takes
     private const float SwingStartAngle = 60f;     // the item starts raised behind her...
     private const float SwingEndAngle = -80f;      // ...and ends pointing forward
@@ -87,7 +90,7 @@ public class PlayerCarry : MonoBehaviour
         if (GameControls.InteractPressed) TryPickUp();
         if (held != null && GameControls.DropPressed) Drop();
 
-        bool canSwing = held != null && held.Kind == ItemKind.Weapon && swingCooldownLeft <= 0f && !movement.IsCrouching;
+        bool canSwing = SwingEnabled && held != null && held.Kind == ItemKind.Weapon && swingCooldownLeft <= 0f && !movement.IsCrouching;
         if (canSwing && GameControls.SwingPressed) Swing();
     }
 

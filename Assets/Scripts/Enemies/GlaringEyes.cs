@@ -38,6 +38,8 @@ public class GlaringEyes : EnemyBase
     // them the moment they move an inch)
     [SerializeField] private float loseSightTime = 1.5f;
 
+    private const float MinGazeSeparation = 60f;   // the two looks are always at least this many degrees apart
+
     private float stateTimer;
     private float lostSightTimer;                // Staring: how long the player has been out of view
     private Vector2 lastSeenPlayerPosition;      // Staring: where it last saw the player
@@ -73,9 +75,17 @@ public class GlaringEyes : EnemyBase
             second = new Vector2(-first.x, first.y);   // flip left/right, keep the same up/down
         }
 
-        // Make sure there is some left/right in each one, so the two directions are really different
-        if (Mathf.Abs(first.x) < 0.3f) first.x = restFacesRight ? 0.3f : -0.3f;
-        if (Mathf.Abs(second.x) < 0.3f) second.x = -Mathf.Sign(first.x) * 0.3f;
+        // If both looks point almost the same way (for example the gap between the boxes is straight above the eye),
+        // the eye would seem stuck. Fan them out so it sweeps to one side and then the other.
+        if (Vector2.Angle(first, second) < MinGazeSeparation)
+        {
+            Vector2 middle = first.normalized + second.normalized;
+            if (middle.sqrMagnitude < 0.01f) middle = first;
+            middle.Normalize();
+
+            first = Quaternion.Euler(0f, 0f, MinGazeSeparation / 2f) * middle;
+            second = Quaternion.Euler(0f, 0f, -MinGazeSeparation / 2f) * middle;
+        }
 
         lookTowardBoxes = first.normalized;
         lookAway = second.normalized;
@@ -140,6 +150,7 @@ public class GlaringEyes : EnemyBase
     private void Update()
     {
         if (player == null) return;
+        if (PlayerIsDead) return;   // Nin has been caught, nothing more to do
 
         stateTimer += Time.deltaTime;
 
