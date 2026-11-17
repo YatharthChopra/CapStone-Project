@@ -36,8 +36,9 @@ public class FlashlightScript : MonoBehaviour
 
         // Point the flashlight the way Nin is walking (left / right)
         float x = GameControls.MoveX;
-        if (x < 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -270);
-        else if (x > 0f) flashlightObject.transform.eulerAngles = new Vector3(0, 0, -90);
+        if (x < 0f) flashlightObject.transform.localEulerAngles = new Vector3(0, 0, -270);
+        else if (x > 0f) flashlightObject.transform.localEulerAngles = new Vector3(0, 0, -90);
+        
     }
 
     // Keeps the light at hand height, also while she crouches

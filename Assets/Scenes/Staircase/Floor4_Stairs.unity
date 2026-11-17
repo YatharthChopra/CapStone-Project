@@ -1547,7 +1547,7 @@ MonoBehaviour:
   doorId: Stairs to Floor 5
   targetScene: Floor5_Stairs
   targetDoorId: Stairs to floor 4
-  isLocked: 0
+  isLocked: 1
   spawnOffsetX: 0
 --- !u!61 &1547993608
 BoxCollider2D:
@@ -1829,7 +1829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1578429035
 MonoBehaviour:
   m_ObjectHideFlags: 0

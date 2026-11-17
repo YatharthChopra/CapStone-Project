@@ -9,11 +9,12 @@ public class RotationScript : MonoBehaviour
     private Vector2 gravity;
     private float gravityScale;
     private Vector2 normalGrav;
-    public int gravityFlipNum = 0;
+    public GravityType gravType = GravityType.Normal;
     RaycastHit2D hit;
     LayerMask mask;
     public GameObject rotationPoint;
     public GameObject rotationPoint2;
+    private bool isInverted = false;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -38,22 +39,14 @@ public class RotationScript : MonoBehaviour
         
         if (GravityFlip)
         {
-            //rb.gravityScale = 0f;
-            //gravity = Vector2.zero;
-            //Physics2D.gravity = -transform.up * 9.8f;
-            //Debug.Log(Physics2D.gravity);
-
-            //hit = Physics2D.Raycast(transform.position, raycastTarget.normalized, distance, mask);
-            if(gravityFlipNum == 1)
+            if(gravType == GravityType.Rotation1)
             {
-                RotateAroundPoint(rotationPoint.transform.position, false);
+                RotateAroundPoint(rotationPoint.transform.position, isInverted);
             }
-            else if (gravityFlipNum == 2)
+            else if (gravType == GravityType.Rotation2)
             {
-                RotateAroundPoint(rotationPoint2.transform.position, false);
+                RotateAroundPoint(rotationPoint2.transform.position, isInverted);
             }
-            
-            
         }
     }
 
@@ -94,17 +87,29 @@ public class RotationScript : MonoBehaviour
     {
         if (collision.tag == "GravityFlipSegment")
         {
-
-            GravityFlipping(!GravityFlip);
-
-            if(collision.gameObject.name == "GravityCollider1")
+            RotationTrigger collVariables = collision.GetComponent<RotationTrigger>();
+            
+            gravType = collVariables.GravType;
+            isInverted = collVariables.isInverted;
+            switch (gravType)
             {
-                gravityFlipNum = 1;
+                case GravityType.UpsideDown: // this will set the players gravity to be upside down.
+                    GravityFlipping(true);
+                    transform.up = Vector3.down.normalized;
+                    break;
+                case GravityType.Normal: // this will set the players gravity to be right side up
+                    GravityFlipping(false);
+                    transform.up = Vector3.up.normalized;
+                    break;
+                case GravityType.Rotation1: //
+                    GravityFlipping(true);
+                    break;
+                case GravityType.Rotation2:
+                    GravityFlipping(true);
+                    break;
+
             }
-            else if(collision.gameObject.name == "GravityCollider3")
-            {
-                gravityFlipNum = 2;
-            }
+
         }
     }
 }

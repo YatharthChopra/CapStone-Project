@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.9
+      value: 17.59
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -438,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -786,6 +786,114 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3768995991906815006, guid: d003c9e015e58b5449a6c32baa23effb, type: 3}
   m_PrefabInstance: {fileID: 396804806}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &489525959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489525961}
+  - component: {fileID: 489525960}
+  m_Layer: 0
+  m_Name: Spot Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &489525960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489525959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
+  m_ComponentVersion: 4
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_Light2DProvider:
+    rid: -2
+  m_SelectionSources:
+    rid: 694825764891131915
+  m_FalloffIntensity: 1
+  m_Color: {r: 1, g: 0.7079148, b: 0, a: 1}
+  m_Intensity: 1.89
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 00000000i
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.53
+  m_PointLightOuterRadius: 8.26
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 694825764891131915
+      type: {class: Light2DProviderSources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_SelectedHashCode: 3
+        m_SelectedSource:
+          rid: -2
+        m_Provider2DCache:
+          rid: 694825764891131916
+    - rid: 694825764891131916
+      type: {class: 'Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]', ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_Cache: []
+--- !u!4 &489525961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489525959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.37, y: 0.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &590573900
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 590573902}
   - component: {fileID: 590573901}
+  - component: {fileID: 590573903}
   m_Layer: 0
   m_Name: BoltCutters
   m_TagString: Untagged
@@ -879,6 +988,43 @@ Transform:
   - {fileID: 2024653665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &590573903
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590573900}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.31, y: 0.29}
+  m_Direction: 0
 --- !u!1 &961678903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,7 +1954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalScale.x
-      value: 11.35097
+      value: 12.693859
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalScale.y
@@ -1816,7 +1962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.9774
+      value: 10.9543
       objectReference: {fileID: 0}
     - target: {fileID: 7152166105393376596, guid: 6eb542021ae3bb64893debb1e2780efa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1925,7 +2071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1276528330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2290,6 +2436,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1580457004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1977200668896066323, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+  m_PrefabInstance: {fileID: 2095474187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580457019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580457004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655a6a72bd89ef44e80b15fc30fb540a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1678085442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2906,7 @@ MonoBehaviour:
   doorId: Door to Boltcutter Balcony 4
   targetScene: BoltCutter Apt_Balcony
   targetDoorId: Door to Boltcutter Living Room 1
-  isLocked: 0
+  isLocked: 1
   spawnOffsetX: 0
 --- !u!61 &1950701792
 BoxCollider2D:
@@ -3010,7 +3173,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1977200668896066323, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1580457019}
   m_SourcePrefab: {fileID: 100100000, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
 --- !u!1 &2096917890
 GameObject:
@@ -3242,3 +3408,4 @@ SceneRoots:
   - {fileID: 1678085443}
   - {fileID: 1275314777}
   - {fileID: 1516645637}
+  - {fileID: 489525961}

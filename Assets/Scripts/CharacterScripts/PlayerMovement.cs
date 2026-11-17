@@ -205,7 +205,11 @@ public class PlayerMovement : MonoBehaviour
         // Box covering the extra space we need to stand back up
         Bounds b = box.bounds;
         float extra = standingSize.y - box.size.y;
+        /*
         Vector2 center = new Vector2(b.center.x, b.max.y + extra / 2f);
+        Vector2 size = new Vector2(b.size.x * 0.9f, extra);
+        */
+        Vector2 center = transform.position + transform.up;
         Vector2 size = new Vector2(b.size.x * 0.9f, extra);
         bool blocked = OverlapsSomethingElse(center, size);
         return !blocked;

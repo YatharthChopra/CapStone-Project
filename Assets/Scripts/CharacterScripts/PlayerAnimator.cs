@@ -47,8 +47,6 @@ public class PlayerAnimator : MonoBehaviour
     private float deathTimer;        // counts down while the death animation plays
     private bool gameOverShown;
 
-    private bool isUpsideDown = false; // this tracks if the player is upside down.
-
     // The item she carries (PlayerCarry) reads this to know which side to hold it on
     public bool FacingRight { get { return facingRight; } }
     public bool IsDead { get { return dead; } }
@@ -160,15 +158,15 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("JumpProgress", jumpProgress);
 
         //Checks if player is rotated.
-        /*
+        
         int facingModifier;
-        if (this.transform.eulerAngles.z < 90) 
-        else isUpsideDown = false;
-        */
+        if (this.transform.eulerAngles.z < 90) facingModifier = 1;
+        else facingModifier = -1;
+        
         
 
         // Face the way we're walking
-        if (Mathf.Abs(velocity.x) > FacingSpeed) facingRight = velocity.x > 0f;
+        if (Mathf.Abs(velocity.x) > FacingSpeed) facingRight = velocity.x * facingModifier > 0f;
         spriteRenderer.flipX = spritesFaceRight ? !facingRight : facingRight;
 
         // See-through while hiding (the hiding script also tints her, but only very slightly)
