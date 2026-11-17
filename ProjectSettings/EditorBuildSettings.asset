@@ -38,7 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Floor 1/Floor1_Corridor.unity
     guid: 6e259b27d3442f549a084d4c612ff144
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Floor1_EyesRoom.unity
     guid: f52e73d43d41c2741acd68e4b78b3e31
   - enabled: 1
@@ -67,10 +67,10 @@ EditorBuildSettings:
     guid: 23a2ca2960852f84cb5c50ce5b0454f4
   - enabled: 1
     path: Assets/Scenes/Floor 5/Floor5_Hall.unity
-    guid: 0c2f5e71c1c30264abd4972fd29a10e3
+    guid: d94371c71a5a0ba44b7ebb078c6150ce
   - enabled: 1
     path: Assets/Scenes/Floor 4/Floor4_Hall.unity
-    guid: deb08eaff36c7cd4097e6b2a4134a897
+    guid: 1a07be1ba3e194d498745258d3d3cadf
   - enabled: 1
     path: Assets/Scenes/Floor 2/Floor2_Hall.unity
     guid: 50b6d06410b2f79498bf09e2675a0c11
