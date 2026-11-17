@@ -34,8 +34,15 @@ public class GlaringEyes : EnemyBase
     // How much the meter goes up each second on top of Alice's normal detection.
     // The meter is 100, so 15 means about 7 seconds by itself.
     [SerializeField] private float stareDetectionPerSecond = 15f;
+    // After the player leaves its view it keeps staring this long before it calms down (so it does not lose
+    // them the moment they move an inch)
+    [SerializeField] private float loseSightTime = 1.5f;
+
+    private const float MinGazeSeparation = 60f;   // the two looks are always at least this many degrees apart
 
     private float stateTimer;
+    private float lostSightTimer;                // Staring: how long the player has been out of view
+    private Vector2 lastSeenPlayerPosition;      // Staring: where it last saw the player
 
     private Vector2 lookTowardBoxes;   // the direction to the boxes
     private Vector2 lookAway;          // the same height, but the other side
@@ -68,9 +75,17 @@ public class GlaringEyes : EnemyBase
             second = new Vector2(-first.x, first.y);   // flip left/right, keep the same up/down
         }
 
-        // Make sure there is some left/right in each one, so the two directions are really different
-        if (Mathf.Abs(first.x) < 0.3f) first.x = restFacesRight ? 0.3f : -0.3f;
-        if (Mathf.Abs(second.x) < 0.3f) second.x = -Mathf.Sign(first.x) * 0.3f;
+        // If both looks point almost the same way (for example the gap between the boxes is straight above the eye),
+        // the eye would seem stuck. Fan them out so it sweeps to one side and then the other.
+        if (Vector2.Angle(first, second) < MinGazeSeparation)
+        {
+            Vector2 middle = first.normalized + second.normalized;
+            if (middle.sqrMagnitude < 0.01f) middle = first;
+            middle.Normalize();
+
+            first = Quaternion.Euler(0f, 0f, MinGazeSeparation / 2f) * middle;
+            second = Quaternion.Euler(0f, 0f, -MinGazeSeparation / 2f) * middle;
+        }
 
         lookTowardBoxes = first.normalized;
         lookAway = second.normalized;
@@ -135,6 +150,7 @@ public class GlaringEyes : EnemyBase
     private void Update()
     {
         if (player == null) return;
+        if (PlayerIsDead) return;   // Nin has been caught, nothing more to do
 
         stateTimer += Time.deltaTime;
 
@@ -142,7 +158,10 @@ public class GlaringEyes : EnemyBase
         {
             case State.Idle:
                 if (CanSeePlayer()) ChangeState(State.Staring);
-                else SwitchGazeOverTime();
+                else
+                {
+                    SwitchGazeOverTime();
+                }
                 break;
 
             case State.Distracted:
@@ -172,14 +191,19 @@ public class GlaringEyes : EnemyBase
 
     private void UpdateStaring()
     {
-        LookAt(player.transform.position);
-
         if (!CanSeePlayer())
         {
-            // Player walked out of view (or hid)
-            ChangeState(State.Idle);
+            // The player stepped out of view (or hid). Don't drop them the instant they move: keep staring at the
+            // spot where they were last seen for a moment, and only calm down if they stay gone.
+            lostSightTimer += Time.deltaTime;
+            LookAt(lastSeenPlayerPosition);
+            if (lostSightTimer >= loseSightTime) ChangeState(State.Idle);
             return;
         }
+
+        lostSightTimer = 0f;
+        lastSeenPlayerPosition = player.transform.position;
+        LookAt(lastSeenPlayerPosition);
 
         // Keep filling the meter while the player is being stared at
         if (playerHiding != null)
@@ -210,6 +234,8 @@ public class GlaringEyes : EnemyBase
                 ShowQuestion();
                 break;
             case State.Staring:
+                lostSightTimer = 0f;
+                lastSeenPlayerPosition = player.transform.position;   // it just spotted them
                 ShowAlert();
                 break;
         }

@@ -4,11 +4,12 @@ using UnityEngine;
 //   Idle    -> stands still, goes to Stalk after 5 seconds
 //   Stalk   -> walks to one end of its wander zone, then back to Idle
 //   Inspect -> walks to a light or noise ("??"), then goes to Idle (or Alert if the player is there)
-//   Alert   -> has seen the player ("!!"), goes to Attack when the detection meter is full.
+//   Alert   -> has seen the player ("!!"). It walks toward them and goes to Attack after a moment, or at once if
+//              they are within arm's reach. (It does not use the detection meter, only the eyes do.)
 //              If the player stays out of sight for 3 seconds it goes to Inspect, at the spot it last saw them
 //   Attack  -> chases the player and swings at them. A hit means game over. If the player hides for
 //              2.5 seconds it stops and goes to Inspect at the last-seen spot (searches, then back to Idle).
-// Needs: Rigidbody2D, a body Collider2D, and a vision cone (set in the Inspector).
+//              Once Nin has been caught it stops completely.
 //
 // On flat levels it only walks left and right. On winding levels (see GameFlow.FreeMovementScenes)
 // there is no gravity and it moves in any direction, so it can follow diagonal corridors.
@@ -52,15 +53,14 @@ public class WanderingShadow : EnemyBase
 
     [Header("Detection")]
     [SerializeField] private float lightRadius = 12f;    // how close a light has to be to catch its attention
+    // Wandering Shadows don't use the detection meter any more. Seeing Nin makes it Alert, and after this long
+    // (or right away if she is within arm's reach) it attacks.
+    [SerializeField] private float alertTime = 1f;
 
     [Header("Attack")]
     [SerializeField] private float attackRange = 1.8f;
     [SerializeField] private float attackWindup = 0.5f;  // warning time before the swing lands
     [SerializeField] private float attackCooldown = 1f;
-    // If the player lets an Alert shadow get this close and stay there, it attacks even if the meter isn't full.
-    // (Otherwise you could just walk past one.) The delay gives the player a moment to back off or hide.
-    [SerializeField] private float closeAttackRange = 4f;
-    [SerializeField] private float closeAttackDelay = 1.5f;
 
     [Header("Searching")]
     [SerializeField] private float searchTime = 3f;           // how long it looks around after reaching a noise or light
@@ -78,7 +78,6 @@ public class WanderingShadow : EnemyBase
     private const float WindingZoneTolerance = 1.5f;    // winding levels: same thing
     private const float LightCooldownTime = 3f;         // after checking out a light, ignore lights for this long
     private const float BackOffTime = 3f;               // after backing away from a crouch spot, ignore the player this long
-    private const float NoMeterAttackDelay = 1.5f;      // if the player has no detection meter, attack this long after spotting them
     private const float VerticalReach = 2.5f;           // flat levels: how far above or below we can still hit the player
     private const float ExtraReachDuringSwing = 0.4f;   // the player may move a little while the swing winds up
     private const float StuckSpeed = 0.2f;              // moving slower than this while trying to move means we're stuck
@@ -96,7 +95,6 @@ public class WanderingShadow : EnemyBase
     private float stateTimer;      // how long we've been in the current state
     private float lostSightTimer;  // Alert: how long the player has been out of sight
     private float lostTrackTimer;  // Attack: how long the player has been hidden or behind a wall
-    private float closeTimer;      // Alert: how long the player has been close by
     private float searchTimer;     // Inspect: how long we've been looking around at the spot
     private float searchTurnTimer;
     private bool isSearching;      // Inspect: true once we've reached the spot
@@ -110,6 +108,8 @@ public class WanderingShadow : EnemyBase
 
     // Targets
     private Vector2 stalkTarget;
+    private Vector2 blockedEnd;       // the end of the zone a crouch box stopped it from reaching last time
+    private bool hasBlockedEnd;
     private Vector2 inspectTarget;
     private bool heardNoise;
     private Vector2 noisePosition;
@@ -119,6 +119,20 @@ public class WanderingShadow : EnemyBase
     private float currentSpeed;
     private bool isBlocked;        // true if we're hitting a crouch spot or a wall
     private bool crouchBlocked;    // true if specifically a crouch spot is in the way (we're too tall to go in)
+
+    // Alice's gravity flips (see RotationScript). Nin can walk on the ceiling and around curves, so a shadow in one
+    // of those zones is pulled toward the same surface. "Surface up" is the direction away from the surface it is
+    // standing on: straight up normally, straight down on the ceiling, away from the centre on a curve.
+    // It only starts when a shadow touches a GravityFlipSegment, so everywhere else it moves exactly as before.
+    private const float SurfacePullSpeed = 4.9f;   // how fast it is pulled onto the surface (the same as Nin's pull)
+    private Vector2 surfaceUp = Vector2.up;
+    private bool onFlippedGravity;                  // true once it has entered an upside-down or curved zone
+    private GravityType gravityType = GravityType.Normal;
+    private bool curveInverted;
+
+    // The shadow animator reads these so the picture can be turned to stand on the ceiling
+    public Vector2 SurfaceUp { get { return surfaceUp; } }
+    public bool UsesFlippedGravity { get { return onFlippedGravity; } }
 
     // Attacking
     private bool isWindingUp;      // true during the warning before a swing lands
@@ -206,6 +220,14 @@ public class WanderingShadow : EnemyBase
     {
         if (player == null) return;
 
+        // Nin has been caught: stop attacking and just stand there (otherwise it keeps swinging at her while she dies)
+        if (PlayerIsDead)
+        {
+            moveDirection = Vector2.zero;
+            if (state != State.Idle) ChangeState(State.Idle);
+            return;
+        }
+
         stateTimer += Time.deltaTime;
         moveDirection = Vector2.zero;   // each state sets this again if it wants to walk
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
@@ -250,6 +272,12 @@ public class WanderingShadow : EnemyBase
         float distanceOutside = freeMovement
             ? Vector2.Distance(transform.position, nearest)
             : Mathf.Abs(transform.position.x - nearest.x);
+        if (freeMovement && onFlippedGravity)
+        {
+            // on a ceiling or curve only the distance along the surface counts (see MoveToward)
+            Vector2 along = new Vector2(surfaceUp.y, -surfaceUp.x);
+            distanceOutside = Mathf.Abs(Vector2.Dot((Vector2)transform.position - nearest, along));
+        }
         float tolerance = freeMovement ? WindingZoneTolerance : FlatZoneTolerance;
 
         if (distanceOutside > tolerance)
@@ -273,6 +301,10 @@ public class WanderingShadow : EnemyBase
         bool arrived = MoveToward(stalkTarget, walkSpeed);
         if (arrived || isBlocked)
         {
+            // A crouch box stopped it before the end: remember that end, so the next walk goes the other way
+            // instead of walking into the same box again
+            hasBlockedEnd = !arrived;
+            blockedEnd = stalkTarget;
             ChangeState(State.Idle);
         }
     }
@@ -327,22 +359,16 @@ public class WanderingShadow : EnemyBase
         lostSightTimer = 0f;
         lastSeenPlayerPosition = player.transform.position;
 
-        // Alice's detection meter decides when it turns into an Attack
-        // (if the player has no meter, just attack after a short delay)
-        // It also attacks if the player stays close to it for a moment, whatever the meter says
+        // No detection meter for shadows: it attacks after a short moment of seeing Nin, or at once if she is
+        // within arm's reach
         Vector2 toPlayer = (Vector2)player.transform.position - (Vector2)transform.position;
-        if (IsWithinReach(toPlayer, closeAttackRange - attackRange)) closeTimer += Time.deltaTime;
-        else closeTimer = 0f;
-
-        bool readyToAttack = DetectionMeterFull() || closeTimer >= closeAttackDelay
-            || (playerHiding == null && stateTimer >= NoMeterAttackDelay);
-        if (readyToAttack)
+        if (IsWithinReach(toPlayer, 0f) || stateTimer >= alertTime)
         {
             ChangeState(State.Attack);
             return;
         }
 
-        // Not just standing and staring: it closes in on the player while the meter fills
+        // Not just standing and staring: it closes in on the player
         MoveToward(player.transform.position, alertApproachSpeed);
     }
 
@@ -485,7 +511,6 @@ public class WanderingShadow : EnemyBase
         lostSightTimer = 0f;
         lostTrackTimer = 0f;
         stuckTimer = 0f;
-        closeTimer = 0f;
         searchTimer = 0f;
         searchTurnTimer = 0f;
         isSearching = false;
@@ -525,6 +550,7 @@ public class WanderingShadow : EnemyBase
         {
             // Pick one end of the wander zone to walk to
             stalkTarget = (Random.value < 0.5f) ? zoneA : zoneB;
+            if (hasBlockedEnd && stalkTarget == blockedEnd) stalkTarget = (stalkTarget == zoneA) ? zoneB : zoneA;
         }
     }
 
@@ -547,6 +573,14 @@ public class WanderingShadow : EnemyBase
         Vector2 difference = target - (Vector2)transform.position;
         if (!freeMovement) difference.y = 0f;
 
+        // On a ceiling or curve (Alice's gravity zones) only the way along the surface counts. Otherwise the shadow
+        // wants to "walk down" to its zone line, which is under it, and its cone ends up pointing at the floor.
+        if (freeMovement && onFlippedGravity)
+        {
+            Vector2 along = new Vector2(surfaceUp.y, -surfaceUp.x);
+            difference = along * Vector2.Dot(difference, along);
+        }
+
         if (difference.magnitude < ArriveDistance) return true;
 
         moveDirection = difference.normalized;
@@ -565,6 +599,51 @@ public class WanderingShadow : EnemyBase
         return zoneA + line * t;
     }
 
+    // ---------------------------------------------------------------- Alice's gravity zones
+
+    // Copies what Nin does when she enters a gravity zone (RotationScript.OnTriggerEnter2D)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!freeMovement || !other.CompareTag("GravityFlipSegment")) return;
+
+        RotationTrigger zone = other.GetComponent<RotationTrigger>();
+        if (zone == null) return;
+
+        gravityType = zone.GravType;
+        curveInverted = zone.isInverted;
+
+        switch (zone.GravType)
+        {
+            case GravityType.Normal:
+                onFlippedGravity = false;
+                surfaceUp = Vector2.up;
+                break;
+            case GravityType.UpsideDown:
+                onFlippedGravity = true;
+                surfaceUp = Vector2.down;
+                break;
+            default:   // the two curved zones
+                onFlippedGravity = true;
+                break;
+        }
+    }
+
+    // In a curved zone "up" points away from (or toward) a centre point, so it changes as the shadow walks round
+    private void UpdateSurfaceUpOnCurve()
+    {
+        if (player == null) return;
+        if (gravityType != GravityType.Rotation1 && gravityType != GravityType.Rotation2) return;
+
+        RotationScript nin = player.GetComponent<RotationScript>();
+        if (nin == null) return;
+
+        GameObject centre = (gravityType == GravityType.Rotation1) ? nin.rotationPoint : nin.rotationPoint2;
+        if (centre == null) return;
+
+        Vector2 toCentre = ((Vector2)centre.transform.position - (Vector2)transform.position).normalized;
+        surfaceUp = curveInverted ? toCentre : -toCentre;
+    }
+
     // Movement is done here (not in Update) because it uses physics
     private void FixedUpdate()
     {
@@ -572,12 +651,15 @@ public class WanderingShadow : EnemyBase
 
         isBlocked = false;
         crouchBlocked = false;
+        UpdateSurfaceUpOnCurve();
         Vector2 wanted = Vector2.zero;
 
         if (moveDirection != Vector2.zero)
         {
-            bool canWalkThroughSpots = wanderThroughCrouchSpots
-                && (state == State.Idle || state == State.Stalk || state == State.Inspect);
+            // An Idle shadow only moves to walk back into its zone. If a crouch box is in the way it just walks
+            // through it, otherwise it stood against the box forever and never got home.
+            bool canWalkThroughSpots = state == State.Idle
+                || (wanderThroughCrouchSpots && (state == State.Stalk || state == State.Inspect));
 
             if (!canWalkThroughSpots && CrouchSpotAhead())
             {
@@ -591,14 +673,21 @@ public class WanderingShadow : EnemyBase
             }
         }
 
+        // In a gravity zone (ceiling or curve) it walks along the surface and is pulled onto it
+        bool onSurface = freeMovement && onFlippedGravity;
+        Vector2 alongSurface = new Vector2(surfaceUp.y, -surfaceUp.x);   // the way "right" points on this surface
+
         // If we want to move but aren't getting anywhere, we've hit a wall. Give up so we don't freeze there.
-        float actualSpeed = freeMovement ? rb.linearVelocity.magnitude : Mathf.Abs(rb.linearVelocity.x);
+        float actualSpeed;
+        if (onSurface) actualSpeed = Mathf.Abs(Vector2.Dot(rb.linearVelocity, alongSurface));
+        else actualSpeed = freeMovement ? rb.linearVelocity.magnitude : Mathf.Abs(rb.linearVelocity.x);
         if (wanted != Vector2.zero && actualSpeed < StuckSpeed) stuckTimer += Time.fixedDeltaTime;
         else stuckTimer = 0f;
         if (stuckTimer > StuckTime) isBlocked = true;
 
         // On flat levels gravity handles up/down. In winding levels we set both ourselves.
-        if (freeMovement) rb.linearVelocity = wanted;
+        if (onSurface) rb.linearVelocity = alongSurface * Vector2.Dot(wanted, alongSurface) - surfaceUp * SurfacePullSpeed;
+        else if (freeMovement) rb.linearVelocity = wanted;
         else rb.linearVelocity = new Vector2(wanted.x, rb.linearVelocity.y);
     }
 

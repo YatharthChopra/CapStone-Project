@@ -17,6 +17,12 @@ public class Door : MonoBehaviour
 
     public string DoorId { get { return doorId; } }
 
+    // True if the door goes somewhere right now (the on-screen hint only shows for doors that work)
+    public bool IsUsable { get { return !isLocked && !string.IsNullOrEmpty(targetScene); } }
+
+    // Nin's apartment rooms are all named Apt_Something
+    private const string ApartmentScenePrefix = "Apt_";
+
     // A ToolLock calls this when the right tool has been used (e.g. the wrench on the panel)
     public void Unlock()
     {
@@ -39,6 +45,11 @@ public class Door : MonoBehaviour
     private void Awake()
     {
         doorCollider = GetComponent<Collider2D>();
+
+        // In Nin's apartment the doors teach the player how to use them (until they have left the apartment once)
+        bool inApartment = gameObject.scene.name.StartsWith(ApartmentScenePrefix);
+        bool hintAlreadyDone = GameManager.Instance != null && GameManager.Instance.DoorHintDone;
+        if (inApartment && !hintAlreadyDone && GetComponent<DoorHint>() == null) gameObject.AddComponent<DoorHint>();
     }
 
     private void Update()
@@ -63,6 +74,9 @@ public class Door : MonoBehaviour
         }
 
         AudioManager.Play(SoundId.DoorOpen);
+        // Going out of the apartment: the "press C" hint has done its job, so it never comes back this run
+        if (!targetScene.StartsWith(ApartmentScenePrefix) && GameManager.Instance != null) GameManager.Instance.DoorHintDone = true;
+
         GameFlow.GoToRoom(targetScene, targetDoorId);
     }
 }

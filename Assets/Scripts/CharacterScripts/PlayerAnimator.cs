@@ -157,8 +157,16 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("WalkRate", Mathf.Clamp(speed / fullSpeed, 0.5f, 1.5f));
         animator.SetFloat("JumpProgress", jumpProgress);
 
+        //Checks if player is rotated.
+        
+        int facingModifier;
+        if (this.transform.eulerAngles.z < 90) facingModifier = 1;
+        else facingModifier = -1;
+        
+        
+
         // Face the way we're walking
-        if (Mathf.Abs(velocity.x) > FacingSpeed) facingRight = velocity.x > 0f;
+        if (Mathf.Abs(velocity.x) > FacingSpeed) facingRight = velocity.x * facingModifier > 0f;
         spriteRenderer.flipX = spritesFaceRight ? !facingRight : facingRight;
 
         // See-through while hiding (the hiding script also tints her, but only very slightly)

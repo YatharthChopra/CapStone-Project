@@ -2,31 +2,28 @@ using UnityEngine;
 
 // Gives the Glaring Eyes their drawings. The pictures are loaded from Assets/Resources/GlaringEye, so nothing has
 // to be set up in the prefab (GlaringEyes adds this script to itself).
-//   Idle        -> the blank eye, with a pupil that looks the way the eye is watching
-//   Distracted  -> the "searching" animation
+//   Idle        -> the "searching" animation, played slowly (the eye looking around)
+//   Distracted  -> the same animation, played faster (it heard something)
 //   Staring     -> the "alert" animation
+// The picture also follows the vision cone: it slides a little toward where the cone points and tilts that way
+// (it is flipped when the cone points left), so it looks like the eye is turning to look.
 public class GlaringEyeAnimator : MonoBehaviour
 {
     private const string Folder = "GlaringEye/";
     private const int FrameCount = 5;
 
-    private const float SpriteScale = 3f;          // the pictures are 64 pixels, so they are scaled up
-    private const float SearchingFramesPerSecond = 6f;
+    private const float SpriteScale = 3f;                 // the pictures are 64 pixels, so they are scaled up
+    private const float IdleFramesPerSecond = 5f;
+    private const float DistractedFramesPerSecond = 10f;
     private const float AlertFramesPerSecond = 10f;
-    // How far the pupil can move from the middle of the eye. These are in the picture's own size (the eye is
-    // scaled up by SpriteScale after), so they are small: the white of the eye is about 0.4 wide and 0.15 tall.
-    private const float PupilReachX = 0.1f;        // sideways
-    private const float PupilReachY = 0.015f;      // up/down (the pupil is nearly as tall as the eye, so only a little)
-
-    // The pupil drawing isn't centred in its own picture (it's about 6 pixels left and 4 pixels low),
-    // so this puts it back in the middle of the white of the eye
-    private static readonly Vector3 PupilCentre = new Vector3(0.06f, 0.04f, 0f);
+    private const float LookShift = 0.5f;                 // how far the picture slides toward where the eye is looking
+    private const float MaxTilt = 35f;                    // how far the picture can tilt (degrees)
 
     private GlaringEyes eyes;
     private SpriteRenderer eyeRenderer;
-    private SpriteRenderer pupilRenderer;
+    private Transform visual;
+    private Vector3 restPosition;                         // where the picture sits when looking straight ahead
 
-    private Sprite blank;
     private Sprite[] searching = new Sprite[FrameCount];
     private Sprite[] alert = new Sprite[FrameCount];
 
@@ -37,19 +34,18 @@ public class GlaringEyeAnimator : MonoBehaviour
     {
         eyes = GetComponent<GlaringEyes>();
 
-        Transform visual = transform.Find("Visual");
+        visual = transform.Find("Visual");
         if (visual == null) { enabled = false; return; }
         eyeRenderer = visual.GetComponent<SpriteRenderer>();
         if (eyeRenderer == null) { enabled = false; return; }
 
-        blank = Resources.Load<Sprite>(Folder + "Glaring_Eye_Blank");
         for (int i = 0; i < FrameCount; i++)
         {
             searching[i] = Resources.Load<Sprite>(Folder + "Glaring_Eye_Searching" + (i + 1));
             alert[i] = Resources.Load<Sprite>(Folder + "Glaring_Eye_Alert" + (i + 1));
         }
 
-        if (blank == null)
+        if (searching[0] == null)
         {
             // The pictures are missing, so leave the old placeholder as it was
             enabled = false;
@@ -59,15 +55,7 @@ public class GlaringEyeAnimator : MonoBehaviour
         // Replace the blue placeholder box
         eyeRenderer.color = Color.white;
         visual.localScale = new Vector3(SpriteScale, SpriteScale, 1f);
-
-        // The pupil is its own little picture on top of the eye
-        GameObject pupil = new GameObject("Pupil");
-        pupil.transform.SetParent(visual, false);
-        pupilRenderer = pupil.AddComponent<SpriteRenderer>();
-        pupilRenderer.sprite = Resources.Load<Sprite>(Folder + "Glaring_Eye_Pupil");
-        pupilRenderer.sharedMaterial = eyeRenderer.sharedMaterial;
-        pupilRenderer.sortingLayerID = eyeRenderer.sortingLayerID;
-        pupilRenderer.sortingOrder = eyeRenderer.sortingOrder + 1;
+        restPosition = visual.localPosition;
     }
 
     private void LateUpdate()
@@ -77,31 +65,45 @@ public class GlaringEyeAnimator : MonoBehaviour
         shownState = state;
         animationTime += Time.deltaTime;
 
+        FollowTheCone();
+
         switch (state)
         {
             case GlaringEyes.State.Distracted:
-                eyeRenderer.sprite = Frame(searching, SearchingFramesPerSecond);
-                pupilRenderer.enabled = false;
+                eyeRenderer.sprite = Frame(searching, DistractedFramesPerSecond);
                 break;
 
             case GlaringEyes.State.Staring:
                 eyeRenderer.sprite = Frame(alert, AlertFramesPerSecond);
-                pupilRenderer.enabled = false;
                 break;
 
             default:
-                eyeRenderer.sprite = blank;
-                pupilRenderer.enabled = pupilRenderer.sprite != null;
-                float radians = eyes.GazeAngle * Mathf.Deg2Rad;
-                pupilRenderer.transform.localPosition = PupilCentre + new Vector3(Mathf.Cos(radians) * PupilReachX, Mathf.Sin(radians) * PupilReachY, 0f);
+                eyeRenderer.sprite = Frame(searching, IdleFramesPerSecond);
                 break;
         }
     }
 
-    // The picture for this moment of a looping animation (falls back to the blank eye if a picture is missing)
+    // Slides and tilts the picture toward the way the cone is pointing
+    private void FollowTheCone()
+    {
+        float angle = eyes.GazeAngle;
+        float radians = angle * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+
+        // World directions, so it still looks the right way if the eye has been rotated in the scene
+        visual.position = transform.TransformPoint(restPosition) + (Vector3)(direction * LookShift * Mathf.Abs(transform.lossyScale.x));
+
+        // Looking left: flip the picture and measure the tilt from the left side
+        bool lookingLeft = direction.x < 0f;
+        eyeRenderer.flipX = lookingLeft;
+        float tilt = lookingLeft ? -Mathf.DeltaAngle(0f, 180f - angle) : Mathf.DeltaAngle(0f, angle);
+        visual.rotation = Quaternion.Euler(0f, 0f, Mathf.Clamp(tilt, -MaxTilt, MaxTilt));
+    }
+
+    // The picture for this moment of a looping animation (falls back to the first searching picture if one is missing)
     private Sprite Frame(Sprite[] frames, float framesPerSecond)
     {
         Sprite sprite = frames[(int)(animationTime * framesPerSecond) % FrameCount];
-        return sprite != null ? sprite : blank;
+        return sprite != null ? sprite : searching[0];
     }
 }

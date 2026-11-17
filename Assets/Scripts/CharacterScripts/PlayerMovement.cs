@@ -72,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         // Ignore triggers when checking for ground / ceiling
         filter = new ContactFilter2D();
         filter.useTriggers = false;
+
+        // Only count things Nin can really bump into. Alice's camera colliders (the CameraColliders layer, and the Main Camera on the Camera layer) are solid but only stop the camera,
+        // so they must not count as a ceiling (they were stopping her from standing up) or as the ground.
+        int canHit = Physics2D.GetLayerCollisionMask(gameObject.layer) & ~LayerMask.GetMask("CameraColliders", "Camera");
+        filter.SetLayerMask(canHit);
     }
 
     private void Update()
@@ -200,9 +205,14 @@ public class PlayerMovement : MonoBehaviour
         // Box covering the extra space we need to stand back up
         Bounds b = box.bounds;
         float extra = standingSize.y - box.size.y;
+        /*
         Vector2 center = new Vector2(b.center.x, b.max.y + extra / 2f);
         Vector2 size = new Vector2(b.size.x * 0.9f, extra);
-        return !OverlapsSomethingElse(center, size);
+        */
+        Vector2 center = transform.position + transform.up;
+        Vector2 size = new Vector2(b.size.x * 0.9f, extra);
+        bool blocked = OverlapsSomethingElse(center, size);
+        return !blocked;
     }
 
     // True if the box touches any collider that isn't the player
@@ -211,7 +221,10 @@ public class PlayerMovement : MonoBehaviour
         int count = Physics2D.OverlapBox(center, size, 0f, filter, hits);
         for (int i = 0; i < count; i++)
         {
-            if (hits[i] != box) return true;
+            if (hits[i] != box)
+            {
+                return true;
+            }
         }
         return false;
     }

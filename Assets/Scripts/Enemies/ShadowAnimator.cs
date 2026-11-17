@@ -33,6 +33,7 @@ public class ShadowAnimator : MonoBehaviour
     private WanderingShadow shadow;
     private Rigidbody2D body;
     private float swingTimer;
+    private Vector3 restPicturePosition;   // where the picture sits when the shadow is the right way up
     private bool wasWindingUp;
 
     private void Awake()
@@ -57,6 +58,7 @@ public class ShadowAnimator : MonoBehaviour
         Transform picture = spriteRenderer.transform;
         picture.localScale = new Vector3(spriteScale, spriteScale, 1f);
         picture.localPosition = new Vector3(0f, feetY + feetNudgeY, 0f);
+        restPicturePosition = picture.localPosition;
     }
 
     private void LateUpdate()
@@ -69,9 +71,34 @@ public class ShadowAnimator : MonoBehaviour
         animator.SetBool("Swinging", IsSwinging());
         animator.SetFloat("WalkRate", Mathf.Clamp(speed / NormalWalkSpeed, 0.8f, 2f));
 
-        // Face the way the shadow is looking
-        bool facingRight = shadow.Facing > 0;
-        spriteRenderer.flipX = spritesFaceRight ? !facingRight : facingRight;
+        TurnToStandOnSurface();
+    }
+
+    // Faces the way the shadow is looking. In one of Alice's gravity zones (ceiling or curve) the picture is also
+    // turned so its feet are on the surface and it stands the right way round for it.
+    private void TurnToStandOnSurface()
+    {
+        Vector2 up = shadow.UsesFlippedGravity ? shadow.SurfaceUp : Vector2.up;
+        Vector2 right = new Vector2(up.y, -up.x);   // which way "right" points once the picture is turned
+
+        Transform picture = spriteRenderer.transform;
+        if (shadow.UsesFlippedGravity)
+        {
+            BoxCollider2D box = GetComponent<BoxCollider2D>();
+            Vector2 feet = box.offset - up * (box.size.y / 2f) + up * feetNudgeY;   // the feet are on the surface side of the body
+            picture.localPosition = new Vector3(feet.x, feet.y, 0f);
+            picture.localRotation = Quaternion.FromToRotation(Vector3.up, up);
+        }
+        else
+        {
+            picture.localPosition = restPicturePosition;
+            picture.localRotation = Quaternion.identity;
+        }
+
+        // Turning the picture upside down also swaps its left and right, so work out which way it has to face
+        bool lookingRight = shadow.Facing > 0;
+        bool facesLocalRight = lookingRight == (right.x >= 0f);
+        spriteRenderer.flipX = spritesFaceRight ? !facesLocalRight : facesLocalRight;
     }
 
     private int LookForState(WanderingShadow.State state)

@@ -35,7 +35,7 @@ public class PlayerThrow : MonoBehaviour
     [SerializeField] private int dotCount = 16;
 
     // Small numbers used below, named so it's clear what they are
-    private const float ThrowHeight = 0.6f;          // how far above her middle the throw starts (around hand height)
+    private const float HandHeight = 0.6f;           // where the throw starts: this fraction of Nin's height up from her feet (hand height)
     private const float DotSize = 0.18f;             // how big each aiming dot is
     private const float DotTimeGap = 0.08f;          // seconds of flight between one dot and the next
     private const int DotSortingOrder = 20;          // draws on top of everything else
@@ -177,7 +177,10 @@ public class PlayerThrow : MonoBehaviour
     // With the mouse she throws toward the mouse, as before.
     private Vector2 GetLaunchVelocity(float power, out Vector2 origin)
     {
-        origin = (Vector2)transform.position + new Vector2(0f, ThrowHeight);
+        // The throw starts at hand height. This is worked out from her collider, so it stays right when she is
+        // resized (the art changed her size) or crouches.
+        Bounds body = myCollider.bounds;
+        origin = new Vector2(body.center.x, body.min.y + body.size.y * HandHeight);
 
         float directionX;
         float angle;
@@ -270,7 +273,7 @@ public class PlayerThrow : MonoBehaviour
     private void OnGUI()
     {
         string status = cooldownLeft > 0f ? "Throw: recharging " + cooldownLeft.ToString("0.0") + "s" : "Throw: ready";
-        GUI.Label(new Rect(10, Screen.height - 32, 450, 25), status + "     (hold left mouse to throw further)");
+        GUI.Label(new Rect(10, Screen.height - 32, 450, 25), status + "     (hold Z to throw further)");
 
         if (charging)
         {

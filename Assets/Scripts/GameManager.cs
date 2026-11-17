@@ -123,6 +123,22 @@ public class GameManager : MonoBehaviour
     // ---------------------------------------------------------------- what the game remembers
 
     // The last checkpoint Nin reached (an empty scene name means none yet). Retry after dying comes back here.
+    // The "press C to open the door" tag in Nin's apartment. Once she has left the apartment it never shows again this run.
+    // (Not cleared by ForgetEverything, so dying and retrying does not bring it back. Going to the main menu clears it.)
+    public bool DoorHintDone { get; set; }
+
+    // The other "how to play" tags (walk, throw, hide, crouch) that Nin has already learned this run. See ControlHints.
+    private HashSet<string> hintsDone = new HashSet<string>();
+    public bool IsHintDone(string hintName) { return hintsDone.Contains(hintName); }
+    public void MarkHintDone(string hintName) { hintsDone.Add(hintName); }
+
+    // A new run (main menu) shows every hint again
+    public void ResetHints()
+    {
+        DoorHintDone = false;
+        hintsDone.Clear();
+    }
+
     public string CheckpointScene { get; private set; } = "";
     public string CheckpointSpawnId { get; private set; } = "";
 

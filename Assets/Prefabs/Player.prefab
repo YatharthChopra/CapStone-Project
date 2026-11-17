@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1091763419428012756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,7 +53,7 @@ MonoBehaviour:
     rid: 7843736022002172024
   m_FalloffIntensity: 0.881
   m_Color: {r: 1, g: 0.95, b: 0.8, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000i
@@ -79,7 +79,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 29.848679
   m_PointLightOuterAngle: 149.19363
-  m_PointLightInnerRadius: 1.35
+  m_PointLightInnerRadius: 3.15
   m_PointLightOuterRadius: 18.3
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -202,21 +202,21 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09473801, y: 0.99492264}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -226,7 +226,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.3445435, y: 4.0023375}
   m_EdgeRadius: 0
 --- !u!114 &4870097148572864798
 MonoBehaviour:
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
   spriteRenderer: {fileID: 4712044968708432868}
   animator: {fileID: 306039627260783586}
-  spriteScale: 3.6
+  spriteScale: 7.9
   feetNudgeY: 0
   spritesFaceRight: 1
   hiddenAlpha: 0.45
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotationScript
   GravityFlip: 0
-  gravityFlipNum: 0
+  gravType: 0
   rotationPoint: {fileID: 0}
   rotationPoint2: {fileID: 0}
 --- !u!1 &2826765978873674810
@@ -435,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 2826765978873674810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -460,9 +460,9 @@ MonoBehaviour:
     rid: -2
   m_SelectionSources:
     rid: 694825621489451034
-  m_FalloffIntensity: 0.617
+  m_FalloffIntensity: 0.89
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.77
+  m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000i
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.45
-  m_PointLightOuterRadius: 3.05
+  m_PointLightOuterRadius: 12
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -544,8 +544,8 @@ Transform:
   m_GameObject: {fileID: 6436484500461715606}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: -0.75, z: 0}
+  m_LocalScale: {x: 7.950415, y: 7.950415, z: 1.9876038}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325118365801138785}

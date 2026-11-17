@@ -4,6 +4,20 @@ using UnityEngine;
 // Enemies use this so they can't see the player through walls.
 public static class LineOfSight
 {
+    // Alice's camera-limit colliders are on this layer. They only stop the camera, so they must never block anyone's view.
+    private const string CameraLayerName = "CameraColliders";
+    private const string CameraObjectLayerName = "Camera";   // the Main Camera has its own solid collider on this layer
+    private static int cameraLayer = -2;
+    private static int cameraObjectLayer = -2;
+
+    private static bool IsCameraCollider(Collider2D thing)
+    {
+        if (cameraLayer == -2) cameraLayer = LayerMask.NameToLayer(CameraLayerName);   // -1 if the layer does not exist
+        if (cameraObjectLayer == -2) cameraObjectLayer = LayerMask.NameToLayer(CameraObjectLayerName);
+        int layer = thing.gameObject.layer;
+        return (cameraLayer >= 0 && layer == cameraLayer) || (cameraObjectLayer >= 0 && layer == cameraObjectLayer);
+    }
+
     // True if nothing solid is between the two points
     public static bool IsClear(Vector2 from, Vector2 to)
     {
@@ -12,6 +26,7 @@ public static class LineOfSight
         {
             Collider2D thing = hit.collider;
             if (thing == null || thing.isTrigger) continue;                          // see-through things (doors, hiding spots, cones)
+            if (IsCameraCollider(thing)) continue;                                   // camera limits are not walls
             if (thing.GetComponentInParent<EnemyBase>() != null) continue;           // other enemies don't block sight
             if (thing.GetComponentInParent<PlayerMovement>() != null) continue;      // the player isn't a wall
             return false;                                                            // a wall (or other solid thing) is in the way

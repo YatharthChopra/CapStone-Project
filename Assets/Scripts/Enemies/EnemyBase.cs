@@ -115,6 +115,16 @@ public abstract class EnemyBase : MonoBehaviour
 
     // ---------------------------------------------------------------- seeing
 
+    // True while Nin is playing her death animation. Enemies stop doing anything once she has been caught.
+    protected bool PlayerIsDead
+    {
+        get
+        {
+            PlayerAnimator animator = GameManager.PlayerAnimator;
+            return animator != null && animator.IsDead;
+        }
+    }
+
     protected bool PlayerIsHidden
     {
         get { return playerHiding != null && playerHiding.hiding; }
@@ -220,10 +230,11 @@ public abstract class EnemyBase : MonoBehaviour
         if (visionCone == null) return;
         Transform cone = visionCone.transform;
 
-        cone.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
+        // World directions, so it points the right way even if the enemy itself has been rotated in the scene
+        cone.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
         float radians = currentAngle * Mathf.Deg2Rad;
-        cone.localPosition = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0f) * coneStartOffset;
+        cone.position = transform.position + new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0f) * coneStartOffset * Mathf.Abs(transform.lossyScale.x);
     }
 
     // Applies the "Cone Visibility" setting to the cone's picture
