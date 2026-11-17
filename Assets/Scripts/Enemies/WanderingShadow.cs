@@ -10,7 +10,6 @@ using UnityEngine;
 //   Attack  -> chases the player and swings at them. A hit means game over. If the player hides for
 //              2.5 seconds it stops and goes to Inspect at the last-seen spot (searches, then back to Idle).
 //              Once Nin has been caught it stops completely.
-// Needs: Rigidbody2D, a body Collider2D, and a vision cone (set in the Inspector).
 //
 // On flat levels it only walks left and right. On winding levels (see GameFlow.FreeMovementScenes)
 // there is no gravity and it moves in any direction, so it can follow diagonal corridors.

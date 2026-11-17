@@ -4,7 +4,6 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 // Draws the little "how to play" tags (the door one and the walk / hide / throw ones) so they all look the same:
-// a dark wood plaque with a brass edge, one or more key caps that press themselves now and then, and a few words.
 // A tag floats a bit, and has a small pointer under it aimed at what it is about.
 //
 // Keys are written as text: "C", "Z"... or an arrow: "<" ">" "^" "v" (those are drawn as arrow shapes, so we do not
@@ -16,8 +15,6 @@ public static class HintTag
     private const float PressLength = 0.3f;        // how long a key cap stays down (seconds)
     private const float SecondsPerKey = 0.9f;      // with several keys, each one gets pressed in turn for this long
 
-    // Worn brass and dark wood, like the doors and brick in the apartment. (Every colour is also tinted by the
-    // room's own light, see RoomLook, so the tag sits in the room instead of looking stuck on top.)
     private static readonly Color Brass = new Color(0.66f, 0.48f, 0.24f);
     private static readonly Color PillColor = new Color(0.14f, 0.09f, 0.06f);
     private static readonly Color CapTop = new Color(0.9f, 0.82f, 0.64f);
@@ -114,8 +111,7 @@ public static class HintTag
             DrawKeyCap(cap, keys[i], sink, s, alpha);
         }
 
-        // The words. GUI.color has to be white here, because it is multiplied into the text colour (it was the
-        // dark colour of the box drawn just before, which made the words almost invisible).
+        // The words. GUI.color has to be white here, because it is multiplied into the text colour 
         float wordsX = pill.x + padding + keys.Length * capSize + (keys.Length - 1) * gap + wordsGap;
         Rect wordsRect = new Rect(wordsX, pill.y, wordsWidth + 4f, pill.height);
 
