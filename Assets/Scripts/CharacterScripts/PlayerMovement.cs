@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 4f;   // was 5: slower so shadows can actually catch her
     [SerializeField] private float crouchSpeed = 2f;   // slower while crouching so sneaking feels different
+    [SerializeField] private float alcoveSpeed = 3f;
     [SerializeField] private float jumpForce = 12f;
     // Jumping is turned off
     // Tick this to bring it back.
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
     public Vector2 MoveInput { get; private set; }   // x = A/D, y = S/W
+
+    public bool InAlcove = false; // this tracks weather the player is in an alcove
 
     // PlayerAnimator turns the squashing off, because it plays a crawl animation instead
     public void SetSquashVisualWhenCrouching(bool squash)
@@ -93,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     {
         IsGrounded = CheckGrounded();
 
-        float speed = IsCrouching ? crouchSpeed : walkSpeed;
+        float speed = IsCrouching ? crouchSpeed : InAlcove ? alcoveSpeed : walkSpeed; // if the player is crouching is sets the speed to crouchspeed, otherwise if they are in an alcove it becomes the alcove speed.
         if (GravityFlip)
         {
             Vector2 verticalDir = transform.up;

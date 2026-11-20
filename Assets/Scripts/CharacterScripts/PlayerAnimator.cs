@@ -47,6 +47,10 @@ public class PlayerAnimator : MonoBehaviour
     private float deathTimer;        // counts down while the death animation plays
     private bool gameOverShown;
 
+    public bool inAlcove;
+    private float alcoveTimer;
+    public int alcoveProgress;
+
     // The item she carries (PlayerCarry) reads this to know which side to hold it on
     public bool FacingRight { get { return facingRight; } }
     public bool IsDead { get { return dead; } }
@@ -124,6 +128,50 @@ public class PlayerAnimator : MonoBehaviour
         if (transitionTimer <= 0f) transition = NoTransition;
     }
 
+    private void UpdateAlcoveTransition(bool InAlcove)
+    {
+        if (alcoveTimer <= 0f)
+        {
+            if (alcoveProgress == 0)
+            {
+                alcoveTimer = 0.20f;
+            }
+            else if(alcoveProgress == 2)
+            {
+                alcoveTimer = 0.30f;
+            }
+
+        }
+        
+        if (alcoveTimer < 0f) return;
+
+        alcoveTimer -= Time.deltaTime;
+        if (alcoveTimer <= 0f)
+        {
+            if (alcoveProgress == 0) alcoveProgress = 1;
+            else if (alcoveProgress == 2)
+            {
+                alcoveProgress = 0;
+                inAlcove = false;
+                
+                animator.SetBool("InAlcove", false);
+            }
+                    
+        }
+           
+        animator.SetInteger("AlcoveProgress", alcoveProgress);
+    }
+
+    public void EnterAlcove(bool enteringAlcove)
+    {
+        animator.SetBool("InAlcove", enteringAlcove);
+        inAlcove = true;
+        if (!enteringAlcove)
+        {
+            alcoveProgress = 2;
+        }
+    }
+
     private void LateUpdate()
     {
         if (dead)
@@ -149,6 +197,8 @@ public class PlayerAnimator : MonoBehaviour
         float jumpProgress = Mathf.InverseLerp(FullJumpSpeed, -FullJumpSpeed, velocity.y);   // 0 = going up, 1 = coming down
 
         UpdateCrouchTransition(crouching);
+        if (inAlcove) UpdateAlcoveTransition(inAlcove);
+
 
         animator.SetBool("Moving", moving);
         animator.SetInteger("Transition", transition);

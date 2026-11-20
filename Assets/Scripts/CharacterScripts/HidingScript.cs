@@ -127,11 +127,21 @@ public class HidingScript : MonoBehaviour
     }
     void Hide()
     {
+        if (!crouchHiding)
+        {
+            this.GetComponent<PlayerAnimator>().EnterAlcove(true);
+            this.GetComponent<PlayerMovement>().InAlcove = true;
+        }
         this.GetComponentInChildren<SpriteRenderer>().color = Color.ghostWhite;
         hiding = true;
     }
     void Unhide()
     {
+        if (!crouchHiding)
+        {
+            this.GetComponent<PlayerAnimator>().EnterAlcove(false);
+            this.GetComponent<PlayerMovement>().InAlcove = false;
+        }
         this.GetComponentInChildren<SpriteRenderer>().color = defaultColor;
         hiding = false;
     }
