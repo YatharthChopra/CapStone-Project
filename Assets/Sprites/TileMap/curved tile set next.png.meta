@@ -1,0 +1,1407 @@
+fileFormatVersion: 2
+guid: 62aaf693e2bb5df4e9dc9fafb3752eaa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6356587168948728305
+    second: curved tile set next_0
+  - first:
+      213: -2844927962621092101
+    second: curved tile set next_1
+  - first:
+      213: -1594202311077103075
+    second: curved tile set next_2
+  - first:
+      213: 1366413643804221864
+    second: curved tile set next_3
+  - first:
+      213: 322884123847132334
+    second: curved tile set next_4
+  - first:
+      213: -3898870777235530947
+    second: curved tile set next_5
+  - first:
+      213: 8078452847852614341
+    second: curved tile set next_6
+  - first:
+      213: -1924682834341549126
+    second: curved tile set next_7
+  - first:
+      213: 5692617445913477626
+    second: curved tile set next_8
+  - first:
+      213: 7239928398330461525
+    second: curved tile set next_9
+  - first:
+      213: -8820285549686063458
+    second: curved tile set next_10
+  - first:
+      213: 2262323066582303125
+    second: curved tile set next_11
+  - first:
+      213: -841985148937171338
+    second: curved tile set next_12
+  - first:
+      213: 3823497447486171838
+    second: curved tile set next_13
+  - first:
+      213: -1220072023493817009
+    second: curved tile set next_14
+  - first:
+      213: 991993260443025611
+    second: curved tile set next_15
+  - first:
+      213: 7811979770371983663
+    second: curved tile set next_16
+  - first:
+      213: -6110980450835501587
+    second: curved tile set next_17
+  - first:
+      213: -3649444197193054710
+    second: curved tile set next_18
+  - first:
+      213: -2931334641290323366
+    second: curved tile set next_19
+  - first:
+      213: 7173209559020216107
+    second: curved tile set next_20
+  - first:
+      213: 15853371094909210
+    second: curved tile set next_21
+  - first:
+      213: -1281200276344602289
+    second: curved tile set next_22
+  - first:
+      213: 2006895314976871048
+    second: curved tile set next_23
+  - first:
+      213: -4016188882610609540
+    second: curved tile set next_24
+  - first:
+      213: 5558362548756208990
+    second: curved tile set next_25
+  - first:
+      213: -1801554204071999974
+    second: curved tile set next_26
+  - first:
+      213: 38496783502117059
+    second: curved tile set next_27
+  - first:
+      213: 6829271354629664480
+    second: curved tile set next_28
+  - first:
+      213: -473579131706407991
+    second: curved tile set next_29
+  - first:
+      213: -2985507460509426064
+    second: curved tile set next_30
+  - first:
+      213: -2187797607338815578
+    second: curved tile set next_31
+  - first:
+      213: 8675031307585348276
+    second: curved tile set next_32
+  - first:
+      213: 5282680202831748777
+    second: curved tile set next_33
+  - first:
+      213: 7228948967187776251
+    second: curved tile set next_34
+  - first:
+      213: 8134542361472789625
+    second: curved tile set next_35
+  - first:
+      213: 3210643307301338396
+    second: curved tile set next_36
+  - first:
+      213: -3103208048983829856
+    second: curved tile set next_37
+  - first:
+      213: 9075211086489284703
+    second: curved tile set next_38
+  - first:
+      213: -3095251891066469681
+    second: curved tile set next_39
+  - first:
+      213: 2884131876232098524
+    second: curved tile set next_40
+  - first:
+      213: 6137825613520310071
+    second: curved tile set next_41
+  - first:
+      213: 4667754602755784018
+    second: curved tile set next_42
+  - first:
+      213: -3936396286000220479
+    second: curved tile set next_43
+  - first:
+      213: 2311805543333261534
+    second: curved tile set next_44
+  - first:
+      213: 4993459701628467985
+    second: curved tile set next_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: curved tile set next_0
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e410306add8c7a0800000000000000
+      internalID: -6356587168948728305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfed4605719c488d0800000000000000
+      internalID: -2844927962621092101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_2
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1a742cc17140e9e0800000000000000
+      internalID: -1594202311077103075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_3
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1a23f28f976f210800000000000000
+      internalID: 1366413643804221864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_4
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea48581666d1b7400800000000000000
+      internalID: 322884123847132334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_5
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 920
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b99b96fad64e9c0800000000000000
+      internalID: -3898870777235530947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_6
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 920
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c27ffa401e6c1070800000000000000
+      internalID: 8078452847852614341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_7
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 920
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abba7c9d8272a45e0800000000000000
+      internalID: -1924682834341549126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 872
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af14dd1086d300f40800000000000000
+      internalID: 5692617445913477626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_9
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 872
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55dffbdf484697460800000000000000
+      internalID: 7239928398330461525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_10
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 824
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9e7371460d089580800000000000000
+      internalID: -8820285549686063458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_11
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 824
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5918fceb7d2656f10800000000000000
+      internalID: 2262323066582303125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_12
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 776
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67e0273d7faa054f0800000000000000
+      internalID: -841985148937171338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_13
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 776
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebaa605bbaacf0530800000000000000
+      internalID: 3823497447486171838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_14
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 776
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d424775fe611fe0800000000000000
+      internalID: -1220072023493817009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_15
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 776
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0c9445d9444cd00800000000000000
+      internalID: 991993260443025611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_16
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 728
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f294f85263ab96c60800000000000000
+      internalID: 7811979770371983663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_17
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 728
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.50811195, y: 0.5243416}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dede79648af613ba0800000000000000
+      internalID: -6110980450835501587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_18
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 728
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0682b696d19a5dc0800000000000000
+      internalID: -3649444197193054710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_19
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 680
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5ad714bcaec157d0800000000000000
+      internalID: -2931334641290323366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_20
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 680
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2f16d0b61c5c8360800000000000000
+      internalID: 7173209559020216107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_21
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 680
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a11ca989e82583000800000000000000
+      internalID: 15853371094909210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_22
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 632
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4109520323483ee0800000000000000
+      internalID: -1281200276344602289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_23
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 632
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 882979ee7ace9db10800000000000000
+      internalID: 2006895314976871048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_24
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 584
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c722f1d6d71a348c0800000000000000
+      internalID: -4016188882610609540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_25
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 584
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5dd273e945432d40800000000000000
+      internalID: 5558362548756208990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_26
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 584
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a164da61ff79ff6e0800000000000000
+      internalID: -1801554204071999974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_27
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 488
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c883a1ee94c88000800000000000000
+      internalID: 38496783502117059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_28
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 536
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eea37f2d1276ce50800000000000000
+      internalID: 6829271354629664480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_29
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 536
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c30a91f9428d69f0800000000000000
+      internalID: -473579131706407991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_30
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 536
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07e9e0658c85196d0800000000000000
+      internalID: -2985507460509426064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_31
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 488
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6afce16eaa163a1e0800000000000000
+      internalID: -2187797607338815578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_32
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 488
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b264001307e36870800000000000000
+      internalID: 8675031307585348276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_33
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 488
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ae56c7d7a9df4940800000000000000
+      internalID: 5282680202831748777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_34
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 440
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf287a8f8c2625460800000000000000
+      internalID: 7228948967187776251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_35
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 440
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ce3f9dd23b3e070800000000000000
+      internalID: 8134542361472789625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_36
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 392
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1d7e28c31f7e8c20800000000000000
+      internalID: 3210643307301338396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_37
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 392
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a29f2098b03fe4d0800000000000000
+      internalID: -3103208048983829856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_38
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 344
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5071ef8660a1fd70800000000000000
+      internalID: 9075211086489284703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_39
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 344
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc280aeedc47b05d0800000000000000
+      internalID: -3095251891066469681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_40
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 344
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd2f13029ae760820800000000000000
+      internalID: 2884131876232098524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_41
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f0c2b30efed2550800000000000000
+      internalID: 6137825613520310071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_42
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25df3f3941237c040800000000000000
+      internalID: 4667754602755784018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_43
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c63acd0f6c1f59c0800000000000000
+      internalID: -3936396286000220479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_44
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed07828a4ee251020800000000000000
+      internalID: 2311805543333261534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_45
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11bfac364255c4540800000000000000
+      internalID: 4993459701628467985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_46
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 728
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b631580cc1dce4042b9df0b07df37d51
+      internalID: -882358410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_47
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 536
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ae00cc8fce3af42add8a2c06d4446f
+      internalID: 1438942610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_48
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 968
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2d829093e85fce4cb1e26d1c97e3c3a
+      internalID: 1543503039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: curved tile set next_49
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 296
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03452a95497e59242a5edeed2b4ce892
+      internalID: -1752871412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2db7e9a045c305e40badc3e628522ce8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      curved tile set next_0: -6356587168948728305
+      curved tile set next_1: -2844927962621092101
+      curved tile set next_10: -8820285549686063458
+      curved tile set next_11: 2262323066582303125
+      curved tile set next_12: -841985148937171338
+      curved tile set next_13: 3823497447486171838
+      curved tile set next_14: -1220072023493817009
+      curved tile set next_15: 991993260443025611
+      curved tile set next_16: 7811979770371983663
+      curved tile set next_17: -6110980450835501587
+      curved tile set next_18: -3649444197193054710
+      curved tile set next_19: -2931334641290323366
+      curved tile set next_2: -1594202311077103075
+      curved tile set next_20: 7173209559020216107
+      curved tile set next_21: 15853371094909210
+      curved tile set next_22: -1281200276344602289
+      curved tile set next_23: 2006895314976871048
+      curved tile set next_24: -4016188882610609540
+      curved tile set next_25: 5558362548756208990
+      curved tile set next_26: -1801554204071999974
+      curved tile set next_27: 38496783502117059
+      curved tile set next_28: 6829271354629664480
+      curved tile set next_29: -473579131706407991
+      curved tile set next_3: 1366413643804221864
+      curved tile set next_30: -2985507460509426064
+      curved tile set next_31: -2187797607338815578
+      curved tile set next_32: 8675031307585348276
+      curved tile set next_33: 5282680202831748777
+      curved tile set next_34: 7228948967187776251
+      curved tile set next_35: 8134542361472789625
+      curved tile set next_36: 3210643307301338396
+      curved tile set next_37: -3103208048983829856
+      curved tile set next_38: 9075211086489284703
+      curved tile set next_39: -3095251891066469681
+      curved tile set next_4: 322884123847132334
+      curved tile set next_40: 2884131876232098524
+      curved tile set next_41: 6137825613520310071
+      curved tile set next_42: 4667754602755784018
+      curved tile set next_43: -3936396286000220479
+      curved tile set next_44: 2311805543333261534
+      curved tile set next_45: 4993459701628467985
+      curved tile set next_46: -882358410
+      curved tile set next_47: 1438942610
+      curved tile set next_48: 1543503039
+      curved tile set next_49: -1752871412
+      curved tile set next_5: -3898870777235530947
+      curved tile set next_6: 8078452847852614341
+      curved tile set next_7: -1924682834341549126
+      curved tile set next_8: 5692617445913477626
+      curved tile set next_9: 7239928398330461525
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
