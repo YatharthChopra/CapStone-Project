@@ -4780,7 +4780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800171794255024120, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_Size.y
-      value: 2.2640762
+      value: 4.313208
       objectReference: {fileID: 0}
     - target: {fileID: 8800171794255024120, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_Offset.x
@@ -4788,7 +4788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800171794255024120, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_Offset.y
-      value: 1.1154349
+      value: 2.3606765
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4961,6 +4961,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2999752907958990103, guid: 9e404f39cf92e3b4a95076b444f66140, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7184546464793032867, guid: 9e404f39cf92e3b4a95076b444f66140, type: 3}
       propertyPath: m_Name
       value: Main Camera

@@ -2354,6 +2354,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2999752907958990103, guid: 9e404f39cf92e3b4a95076b444f66140, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7184546464793032867, guid: 9e404f39cf92e3b4a95076b444f66140, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -3189,6 +3193,14 @@ PrefabInstance:
     - target: {fileID: 1977200668896066323, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800171794255024120, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+      propertyPath: m_Size.y
+      value: 3.8131878
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800171794255024120, guid: 46bcb443974c8a1408aa85621e14c5b7, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.0894974
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
