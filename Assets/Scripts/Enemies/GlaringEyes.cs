@@ -40,8 +40,11 @@ public class GlaringEyes : EnemyBase
 
     private const float MinGazeSeparation = 60f;   // the two looks are always at least this many degrees apart
 
+    // A closed eye is blind and deaf. GlaringEyeAnimator opens and closes it (it stays open if there is no animator).
+    private bool eyeOpen = true;
+
     private float stateTimer;
-    private float lostSightTimer;                // Staring: how long the player has been out of view
+    private float lostSightTimer;               // Staring: how long the player has been out of view
     private Vector2 lastSeenPlayerPosition;      // Staring: where it last saw the player
 
     private Vector2 lookTowardBoxes;   // the direction to the boxes
@@ -138,8 +141,21 @@ public class GlaringEyes : EnemyBase
         LookInDirection(lookingAtBoxes ? lookTowardBoxes : lookAway);
     }
 
+    // Called by the animator when the eye finishes opening or starts closing.
+    // While closed, the cone is switched off so the eye sees nothing.
+    public void SetEyeOpen(bool open)
+    {
+        if (open == eyeOpen) return;
+
+        eyeOpen = open;
+        SetConeActive(open);
+    }
+
     protected override void HearNoise(Vector2 position)
     {
+        // A closed eye can't hear
+        if (!eyeOpen) return;
+
         // Already staring at the player, so it ignores noises
         if (state == State.Staring) return;
 
@@ -151,6 +167,7 @@ public class GlaringEyes : EnemyBase
     {
         if (player == null) return;
         if (PlayerIsDead) return;   // Nin has been caught, nothing more to do
+        if (!eyeOpen) return;       // closed eye, nothing to do
 
         stateTimer += Time.deltaTime;
 
