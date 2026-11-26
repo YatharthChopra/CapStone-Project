@@ -257,6 +257,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlaringEyes
   visionCone: {fileID: 5562090499248062684}
+  turnSpeedDegrees: 0
+  coneStartOffset: 0.5
+  coneVisibility: 0.5
+  debugSightLine: 0
+  sightLineThickness: 0.08
+  sightLineColor: {r: 1, g: 0.25, b: 0.25, a: 0.75}
   hearingRadius: 12
   signalText: {fileID: 997200635297449879}
   stateText: {fileID: 5986444088961001800}
@@ -267,9 +273,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   state: 0
+  lookAtBoxesTime: 4
+  lookAwayTime: 3
+  turnSpeed: 360
+  boxSearchRadius: 25
   restFacesRight: 0
+  restLookDirection: {x: 0, y: 0}
   distractedTime: 5
   stareDetectionPerSecond: 15
+  loseSightTime: 1.5
 --- !u!1 &4192120697858528974
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +361,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: -5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2868101353237766674, guid: 8fd91a35ea7a3ca418fa47f464d3a90d, type: 3}
   m_Color: {r: 0.2, g: 0.35, b: 0.9, a: 1}
@@ -442,7 +454,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4642207838141654007, guid: 67e4eef52da17c04a8fb4a13f18a4538, type: 3}
   m_Color: {r: 0.3, g: 0.4, b: 1, a: 0.25}
@@ -492,7 +504,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5

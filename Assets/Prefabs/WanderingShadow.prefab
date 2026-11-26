@@ -393,12 +393,12 @@ MonoBehaviour:
   chaseSpeed: 5
   alertApproachSpeed: 3
   wanderHalfWidth: 5
-  useZoneEdges: 0
-  zoneLeftEdge: 0
-  zoneRightEdge: 0
-  useZoneEnds: 0
-  zoneEndA: {x: 0, y: 0}
-  zoneEndB: {x: 0, y: 0}
+  useZoneEdges: 1
+  zoneLeftEdge: 45.55007
+  zoneRightEdge: 53.337532
+  useZoneEnds: 1
+  zoneEndA: {x: 47.5305, y: -2.4623733}
+  zoneEndB: {x: 51.357105, y: -6.751227}
   idleTime: 5
   loseSightTime: 3
   giveUpTime: 2.5
@@ -614,7 +614,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: -5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2067493603494893952, guid: 5eea444416dd4f24dbaa8cf5a30aa87b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
