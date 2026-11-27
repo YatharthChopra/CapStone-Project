@@ -106,9 +106,12 @@ public class PlayerCarry : MonoBehaviour
         PickupItem item = FindItemHere();
         if (item == null) return;
 
+        Vector3 itemPosition = item.transform.position;   // noted before she picks it up
+
         if (held != null) Drop();   // swap: the old one goes on the floor
         Hold(item);
         AudioManager.Play(SoundId.ItemPickup);
+        NinActions.Interact(itemPosition);
     }
 
     // The closest item Nin is standing in (null if there isn't one)

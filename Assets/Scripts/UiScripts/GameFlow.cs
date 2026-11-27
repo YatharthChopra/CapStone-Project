@@ -38,6 +38,7 @@ public static class GameFlow
     {
         GameManager.Instance.ForgetEverything();   // no checkpoint, and Nin starts empty-handed
         NextSpawnId = "Start";
+        NinActions.WakeInBedNextRoom();
         LoadScene(GameScene);
     }
 
@@ -59,6 +60,7 @@ public static class GameFlow
 
         manager.RestoreCheckpoint();   // she gets back what she was carrying at the checkpoint
         NextSpawnId = manager.CheckpointSpawnId;
+        NinActions.WakeOnFloorNextRoom();
         LoadScene(manager.CheckpointScene);
     }
 

@@ -27,6 +27,7 @@ public class PlayerAnimator : MonoBehaviour
     private const float FullWalkSpeed = 4f;        // same as the walk speed in PlayerMovement
     private const float FullCrouchSpeed = 2f;      // same as the crouch speed in PlayerMovement
     private const float FacingSpeed = 0.05f;       // moving slower than this doesn't change which way she faces
+    private const float FacingDeadZone = 0.2f;     // closer than this to something counts as standing right on it
     private const float CrouchTransitionTime = 0.36f;   // the crouch-down / stand-up animation: 5 pictures at 14 per second
 
     private const float DeathScreenDelay = 1.6f;   // how long the death animation gets before the Game Over screen
@@ -54,6 +55,18 @@ public class PlayerAnimator : MonoBehaviour
     // The item she carries (PlayerCarry) reads this to know which side to hold it on
     public bool FacingRight { get { return facingRight; } }
     public bool IsDead { get { return dead; } }
+    // NinActions draws its one-off animations on this
+    public SpriteRenderer Picture { get { return spriteRenderer; } }
+
+    // Turns Nin toward a spot, like the door she is opening. Right on top of it, she keeps facing the way she was.
+    public void FaceToward(float targetX)
+    {
+        float distance = targetX - transform.position.x;
+        if (Mathf.Abs(distance) < FacingDeadZone) return;
+
+        facingRight = distance > 0f;
+        spriteRenderer.flipX = spritesFaceRight ? !facingRight : facingRight;
+    }
 
     // Called by GameFlow when Nin is caught. She freezes and plays her death animation (the crawling one if she
     // was crouching), and the Game Over screen comes up a moment later.
@@ -97,6 +110,9 @@ public class PlayerAnimator : MonoBehaviour
         movement.SetSquashVisualWhenCrouching(false);
 
         PlaceThePicture();
+
+        // The one-off animations (waking up, stairs...). Added here so the prefab doesn't need changing.
+        if (GetComponent<NinActions>() == null) gameObject.AddComponent<NinActions>();
     }
 
     // Scales the picture up and stands it on the bottom of the collider.

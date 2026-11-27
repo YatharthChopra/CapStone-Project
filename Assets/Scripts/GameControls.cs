@@ -25,6 +25,9 @@ public static class GameControls
     // GameManager sets this while the game is paused, so nothing reacts to the keys until it is resumed
     public static bool Paused;
 
+    // The keys do nothing while paused, or while Nin is in an animation the player has to wait for
+    private static bool Blocked { get { return Paused || NinActions.Busy; } }
+
     private const float StickDeadZone = 0.5f;
 
     private static Keyboard Kb { get { return Keyboard.current; } }
@@ -37,7 +40,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return 0f;
+            if (Blocked) return 0f;
             float x = 0f;
             if (Kb != null)
             {
@@ -59,7 +62,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return 0f;
+            if (Blocked) return 0f;
             float y = 0f;
             if (Kb != null)
             {
@@ -81,7 +84,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             if (Kb != null)
             {
                 if (Kb.leftCtrlKey.isPressed) return true;
@@ -103,7 +106,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.upArrowKey.wasPressedThisFrame)
                 || (Pad != null && Pad.dpad.up.wasPressedThisFrame);
         }
@@ -114,7 +117,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.cKey.wasPressedThisFrame)
                 || (Pad != null && Pad.buttonNorth.wasPressedThisFrame);
         }
@@ -127,7 +130,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.spaceKey.wasPressedThisFrame)
                 || (Pad != null && Pad.buttonSouth.wasPressedThisFrame);
         }
@@ -138,7 +141,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.qKey.wasPressedThisFrame)
                 || (Pad != null && Pad.leftTrigger.wasPressedThisFrame);
         }
@@ -149,7 +152,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.zKey.wasPressedThisFrame)
                 || (Pad != null && Pad.buttonWest.wasPressedThisFrame);
         }
@@ -193,7 +196,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.xKey.wasPressedThisFrame)
                 || (Pad != null && Pad.buttonEast.wasPressedThisFrame);
         }
@@ -203,7 +206,7 @@ public static class GameControls
     {
         get
         {
-            if (Paused) return false;
+            if (Blocked) return false;
             return (Kb != null && Kb.sKey.wasPressedThisFrame)
                 || (Pad != null && Pad.rightTrigger.wasPressedThisFrame);
         }

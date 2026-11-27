@@ -27,7 +27,7 @@ public class EndInteract : MonoBehaviour
 
         if (myCollider.IsTouching(playerCollider))
         {
-            GameFlow.LevelComplete();
+            NinActions.Interact(transform.position, GameFlow.LevelComplete);
         }
     }
 }

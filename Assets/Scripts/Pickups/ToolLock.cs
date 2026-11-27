@@ -42,6 +42,7 @@ public class ToolLock : MonoBehaviour
 
         done = true;
         AudioManager.Play(SoundId.ToolUse);
+        NinActions.Interact(transform.position);
         if (useUpItem) carry.UseUpHeldItem();
         if (doorToUnlock != null) doorToUnlock.Unlock();
         onUnlocked.Invoke();

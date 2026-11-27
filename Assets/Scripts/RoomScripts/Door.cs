@@ -77,6 +77,8 @@ public class Door : MonoBehaviour
         // Going out of the apartment: the "press C" hint has done its job, so it never comes back this run
         if (!targetScene.StartsWith(ApartmentScenePrefix) && GameManager.Instance != null) GameManager.Instance.DoorHintDone = true;
 
-        GameFlow.GoToRoom(targetScene, targetDoorId);
+        // Nin plays her door or stairs animation first, then the room loads
+        NinActions.UseDoor(gameObject.scene.name, targetScene, transform.position,
+                           () => GameFlow.GoToRoom(targetScene, targetDoorId));
     }
 }
